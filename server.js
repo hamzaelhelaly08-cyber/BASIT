@@ -575,10 +575,89 @@ function createInitialSecurityState() {
       entries: [],
       receivables: [],
       payables: [],
+      bolRows: [
+        {
+          rowId: "BOL-INIT-1",
+          docType: "owners_balances",
+          docNumber: "BL-OWN-1001",
+          partyName: "\u0631\u0623\u0633 \u0645\u0627\u0644 \u0627\u0644\u062A\u0634\u063A\u064A\u0644 \u2014 \u0627\u0644\u0645\u0627\u0644\u0643",
+          statement: "\u062A\u0642\u0631\u064A\u0631 \u0623\u0631\u0635\u062F\u0629 \u0627\u0644\u0645\u0644\u0627\u0643 \u0648\u0627\u0644\u0633\u064A\u0648\u0644\u0629 \u0627\u0644\u0627\u0641\u062A\u062A\u0627\u062D\u064A\u0629",
+          originLabel: "\u062A\u0645\u0648\u064A\u0644 \u0645\u0627\u0644\u0643 \u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u062A\u0634\u063A\u064A\u0644\u064A",
+          debitEGP: 0,
+          creditEGP: 0,
+          remainingEGP: 0,
+          urgency: "normal",
+          entryDate: "2026-11-01",
+          updatedAt: "2026-11-01T08:00:00.000Z"
+        },
+        {
+          rowId: "BOL-INIT-2",
+          docType: "rents",
+          docNumber: "BL-RNT-2001",
+          partyName: "\u0645\u0637\u0628\u062E \u0645\u062F\u064A\u0646\u0629 \u0628\u062F\u0631 \u0627\u0644\u0645\u0631\u0643\u0632\u064A",
+          statement: "\u0643\u0634\u0641 \u0625\u064A\u062C\u0627\u0631 \u0648\u0645\u0631\u0627\u0641\u0642 \u0627\u0644\u0645\u0637\u0628\u062E \u0627\u0644\u0645\u0631\u0643\u0632\u064A",
+          originLabel: "\u0645\u0635\u0631\u0648\u0641 \u062A\u0634\u063A\u064A\u0644\u064A \u062B\u0627\u0628\u062A \u2014 \u0625\u064A\u062C\u0627\u0631 \u0645\u0637\u0628\u062E",
+          debitEGP: 0,
+          creditEGP: 0,
+          remainingEGP: 0,
+          urgency: "urgent",
+          entryDate: "2026-11-01",
+          updatedAt: "2026-11-01T08:00:00.000Z"
+        }
+      ],
+      inventoryItems: [
+        {
+          itemId: "INV-101",
+          sku: "RAW-BEEF-01",
+          nameAr: "\u0644\u062D\u0645 \u0628\u0642\u0631\u064A \u0637\u0627\u0632\u062C \u0644\u0644\u062A\u0634\u063A\u064A\u0644",
+          unitAr: "\u0643\u062C\u0645",
+          quantityOnHand: 120,
+          avgUnitCostEGP: 360,
+          minStockAlert: 30,
+          updatedAt: "2026-11-01T08:00:00.000Z"
+        },
+        {
+          itemId: "INV-102",
+          sku: "RAW-RICE-02",
+          nameAr: "\u0623\u0631\u0632 \u0628\u0633\u0645\u062A\u064A \u0630\u0647\u0628\u064A \u062F\u0631\u062C\u0629 \u0623\u0648\u0644\u0649",
+          unitAr: "\u0643\u062C\u0645",
+          quantityOnHand: 250,
+          avgUnitCostEGP: 78,
+          minStockAlert: 50,
+          updatedAt: "2026-11-01T08:00:00.000Z"
+        },
+        {
+          itemId: "INV-103",
+          sku: "PKG-THERM-03",
+          nameAr: "\u0639\u0628\u0648\u0627\u062A \u0645\u064A\u0643\u0631\u0648\u064A\u0641 \u062D\u0631\u0627\u0631\u064A\u0629 \u0645\u062D\u0643\u0645\u0629 \u0627\u0644\u063A\u0644\u0642",
+          unitAr: "\u0643\u0631\u062A\u0648\u0646\u0629",
+          quantityOnHand: 45,
+          avgUnitCostEGP: 420,
+          minStockAlert: 15,
+          updatedAt: "2026-11-01T08:00:00.000Z"
+        }
+      ],
+      purchaseInvoices: [],
+      purchaseReturns: [],
+      partyPayments: [],
+      lockedTreasury: {
+        balanceEGP: 0,
+        deductionRatePct: 10,
+        transfers: []
+      },
+      totalFundsAuthMethod: "fingerprint",
+      financeManagers: [],
+      managerSubTreasuryEntries: [],
+      archivedManagerRecords: [],
+      aiManagerAuditReports: [],
+      ownerAuditAlerts: [],
+      lastManagerAuditAt: null,
       auditLogs: [],
       webauthnCredentials: [],
       ingestedOrderRefs: []
-    }
+    },
+    basetCards: {},
+    basetOfferRedemptions: []
   };
 }
 function loadSecurityState() {
@@ -633,10 +712,29 @@ function loadSecurityState() {
           entries: Array.isArray(parsed.ownerFinance?.entries) ? parsed.ownerFinance.entries : [],
           receivables: Array.isArray(parsed.ownerFinance?.receivables) ? parsed.ownerFinance.receivables : [],
           payables: Array.isArray(parsed.ownerFinance?.payables) ? parsed.ownerFinance.payables : [],
+          bolRows: Array.isArray(parsed.ownerFinance?.bolRows) ? parsed.ownerFinance.bolRows : base.ownerFinance.bolRows,
+          inventoryItems: Array.isArray(parsed.ownerFinance?.inventoryItems) ? parsed.ownerFinance.inventoryItems : base.ownerFinance.inventoryItems,
+          purchaseInvoices: Array.isArray(parsed.ownerFinance?.purchaseInvoices) ? parsed.ownerFinance.purchaseInvoices : [],
+          purchaseReturns: Array.isArray(parsed.ownerFinance?.purchaseReturns) ? parsed.ownerFinance.purchaseReturns : [],
+          partyPayments: Array.isArray(parsed.ownerFinance?.partyPayments) ? parsed.ownerFinance.partyPayments : [],
+          lockedTreasury: {
+            balanceEGP: Number(parsed.ownerFinance?.lockedTreasury?.balanceEGP || 0),
+            deductionRatePct: 10,
+            transfers: Array.isArray(parsed.ownerFinance?.lockedTreasury?.transfers) ? parsed.ownerFinance.lockedTreasury.transfers : []
+          },
+          totalFundsAuthMethod: parsed.ownerFinance?.totalFundsAuthMethod === "iris" || parsed.ownerFinance?.totalFundsAuthMethod === "camera_face" ? parsed.ownerFinance.totalFundsAuthMethod : "fingerprint",
+          financeManagers: Array.isArray(parsed.ownerFinance?.financeManagers) ? parsed.ownerFinance.financeManagers : [],
+          managerSubTreasuryEntries: Array.isArray(parsed.ownerFinance?.managerSubTreasuryEntries) ? parsed.ownerFinance.managerSubTreasuryEntries : [],
+          archivedManagerRecords: Array.isArray(parsed.ownerFinance?.archivedManagerRecords) ? parsed.ownerFinance.archivedManagerRecords : [],
+          aiManagerAuditReports: Array.isArray(parsed.ownerFinance?.aiManagerAuditReports) ? parsed.ownerFinance.aiManagerAuditReports : [],
+          ownerAuditAlerts: Array.isArray(parsed.ownerFinance?.ownerAuditAlerts) ? parsed.ownerFinance.ownerAuditAlerts : [],
+          lastManagerAuditAt: parsed.ownerFinance?.lastManagerAuditAt || null,
           auditLogs: Array.isArray(parsed.ownerFinance?.auditLogs) ? parsed.ownerFinance.auditLogs : [],
           webauthnCredentials: Array.isArray(parsed.ownerFinance?.webauthnCredentials) ? parsed.ownerFinance.webauthnCredentials : [],
           ingestedOrderRefs: Array.isArray(parsed.ownerFinance?.ingestedOrderRefs) ? parsed.ownerFinance.ingestedOrderRefs : []
-        }
+        },
+        basetCards: parsed.basetCards && typeof parsed.basetCards === "object" ? parsed.basetCards : {},
+        basetOfferRedemptions: Array.isArray(parsed.basetOfferRedemptions) ? parsed.basetOfferRedemptions : []
       };
     }
   } catch {
@@ -719,6 +817,8 @@ function appendAuditEntry(entry) {
   return rec;
 }
 var sessionStore = /* @__PURE__ */ new Map();
+var FM_SESSION_COOKIE_NAME = "basit_fm_session";
+var financeManagerSessionStore = /* @__PURE__ */ new Map();
 var otpChallengeStore = /* @__PURE__ */ new Map();
 var otpEmailRateStore = /* @__PURE__ */ new Map();
 var otpIpRateStore = /* @__PURE__ */ new Map();
@@ -1126,7 +1226,7 @@ function maskEmail(email) {
 async function createConfiguredApp() {
   const app = express();
   app.set("trust proxy", 1);
-  app.use(express.json({ limit: "1mb" }));
+  app.use(express.json({ limit: "8mb" }));
   app.use("/api", (req, res, next) => {
     const method = req.method.toUpperCase();
     if (method === "GET" || method === "HEAD" || method === "OPTIONS") {
@@ -2255,9 +2355,79 @@ async function createConfiguredApp() {
       ownerPinVerified: Boolean(session?.ownerPinVerified)
     });
   });
-  app.post("/api/owner/setup", (req, res) => {
+  async function resolveSessionOrFirebaseBearer(req) {
+    const cookieResult = resolveSessionFromRequest(req);
+    if (cookieResult.session || cookieResult.revoked) {
+      return cookieResult;
+    }
+    const authHeader = String(req.headers.authorization || "").trim();
+    if (!authHeader.toLowerCase().startsWith("bearer ")) {
+      return { session: null, revoked: false };
+    }
+    const idToken = authHeader.slice(7).trim();
+    if (!idToken || idToken.length < 20) {
+      return { session: null, revoked: false };
+    }
+    const apiKey = readFirebaseWebApiKey();
+    if (!apiKey) {
+      return { session: null, revoked: false };
+    }
+    try {
+      const lookupRes = await fetch(
+        `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${encodeURIComponent(apiKey)}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken })
+        }
+      );
+      if (!lookupRes.ok) {
+        return { session: null, revoked: false };
+      }
+      const lookupJson = await lookupRes.json();
+      const verifiedUser = lookupJson.users?.[0];
+      if (!verifiedUser || !verifiedUser.email || verifiedUser.disabled) {
+        return { session: null, revoked: false };
+      }
+      const email = verifiedUser.email.toLowerCase();
+      const uid = String(verifiedUser.localId || "");
+      if (isSubjectRevoked(email, uid)) {
+        return { session: null, revoked: true };
+      }
+      const sessionKey = `fb:${uid || email}`;
+      let sess = sessionStore.get(sessionKey);
+      const isOwner = email === BOOTSTRAPPED_OWNER_EMAIL;
+      if (!sess) {
+        sess = {
+          sessionId: sessionKey,
+          uid: uid || email,
+          email,
+          canApproveHabe: isOwner,
+          fullName: verifiedUser.displayName || email,
+          role: isOwner ? "owner" : "customer",
+          canonicalRole: isOwner ? "super_admin" : "customer",
+          tenantId: "",
+          tenantName: "",
+          contractedKitchenIds: [],
+          customPermissions: isOwner ? [...DEFAULT_ROLE_PERMISSION_MATRIX.super_admin] : [...DEFAULT_ROLE_PERMISSION_MATRIX.customer],
+          approvalStatus: "approved",
+          authKind: "google_firebase",
+          ownerPinVerified: false,
+          createdAtMs: Date.now(),
+          expiresAtMs: Date.now() + 24 * 60 * 60 * 1e3
+        };
+        sessionStore.set(sessionKey, sess);
+      } else {
+        sess.expiresAtMs = Date.now() + 24 * 60 * 60 * 1e3;
+      }
+      return { session: sess, revoked: false };
+    } catch {
+      return { session: null, revoked: false };
+    }
+  }
+  app.post("/api/owner/setup", async (req, res) => {
     const body = req.body;
-    const { session } = resolveSessionFromRequest(req);
+    const { session } = await resolveSessionOrFirebaseBearer(req);
     if (session?.role === "finance_admin" || session?.role === "basit_admin" || session?.role === "customer") {
       res.status(403).json({
         ok: false,
@@ -2296,8 +2466,8 @@ async function createConfiguredApp() {
         res.status(401).json({
           ok: false,
           code: "OWNER_AUTH_OR_SECRET_REQUIRED",
-          messageAr: "\u064A\u0644\u0632\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0628\u062D\u0633\u0627\u0628 \u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u0645\u0648\u062B\u0642 \u0639\u0628\u0631 Google \u0623\u0648 \u0625\u062F\u062E\u0627\u0644 \u0645\u0641\u062A\u0627\u062D \u062A\u0647\u064A\u0626\u0629 \u0627\u0644\u0645\u0627\u0644\u0643 \u0644\u0625\u0639\u062F\u0627\u062F \u0631\u0645\u0632 \u0627\u0644\u0623\u0645\u0627\u0646 \u0627\u0644\u0645\u0633\u062A\u0642\u0644.",
-          messageEn: "Verify Owner Google session or provide OWNER_SETUP_SECRET to initialize Owner security."
+          messageAr: "\u064A\u0644\u0632\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0628\u062D\u0633\u0627\u0628 \u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u0645\u0648\u062B\u0642 \u0639\u0628\u0631 Firebase \u0623\u0648 \u0625\u062F\u062E\u0627\u0644 \u0645\u0641\u062A\u0627\u062D \u062A\u0647\u064A\u0626\u0629 \u0627\u0644\u0645\u0627\u0644\u0643 \u0644\u0625\u0639\u062F\u0627\u062F \u0631\u0645\u0632 \u0627\u0644\u0623\u0645\u0627\u0646 \u0627\u0644\u0645\u0633\u062A\u0642\u0644.",
+          messageEn: "Verify Owner Firebase session or provide OWNER_SETUP_SECRET to initialize Owner security."
         });
         return;
       }
@@ -2344,9 +2514,9 @@ async function createConfiguredApp() {
       messageEn: "Independent owner security passphrase configured and salted-scrypt hashed."
     });
   });
-  app.post("/api/owner/verify", (req, res) => {
+  app.post("/api/owner/verify", async (req, res) => {
     const body = req.body;
-    const { session, revoked } = resolveSessionFromRequest(req);
+    const { session, revoked } = await resolveSessionOrFirebaseBearer(req);
     if (revoked || !session || session.role !== "owner") {
       res.status(403).json({
         ok: false,
@@ -4175,6 +4345,18 @@ async function createConfiguredApp() {
     saveSecurityState(securityState);
     return rec;
   }
+  function syncBolRowFromMutation(row) {
+    const newRow = {
+      ...row,
+      rowId: `BOL-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    securityState.ownerFinance.bolRows.unshift(newRow);
+    if (securityState.ownerFinance.bolRows.length > 800) {
+      securityState.ownerFinance.bolRows = securityState.ownerFinance.bolRows.slice(0, 800);
+    }
+    return newRow;
+  }
   function recordOwnerFinancialInflow(params) {
     const gross = round2(Number(params.grossEGP || 0));
     if (!Number.isFinite(gross) || gross <= 0 || gross > 5e8) return null;
@@ -4188,11 +4370,15 @@ async function createConfiguredApp() {
     const channel = params.channel === "bank" || params.channel === "e_wallet" || params.channel === "treasury" ? params.channel : "e_wallet";
     const nowIso = (/* @__PURE__ */ new Date()).toISOString();
     const entryDate = /^\d{4}-\d{2}-\d{2}$/.test(String(params.entryDate || "")) ? String(params.entryDate) : nowIso.slice(0, 10);
+    const originLabel = String(params.originLabel || params.purpose || "\u0645\u062A\u062D\u0635\u0644\u0627\u062A \u0646\u0634\u0627\u0637 \u0628\u0627\u0633\u0637").trim().slice(0, 180);
+    const urgency = params.urgency === "urgent" || params.urgency === "emergency" ? params.urgency : "normal";
     const entry = {
       entryId: `OFE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
       direction: "inflow",
       sourceOrBeneficiary: String(params.source || "\u0645\u0628\u064A\u0639\u0627\u062A \u0628\u0627\u0633\u0637").trim().slice(0, 160),
       purpose: String(params.purpose || "\u062A\u062D\u0635\u064A\u0644 \u0637\u0644\u0628").trim().slice(0, 280),
+      originLabel,
+      urgency,
       expenseCategory: "none",
       channel,
       grossEGP: gross,
@@ -4205,9 +4391,41 @@ async function createConfiguredApp() {
       createdAt: nowIso
     };
     securityState.ownerFinance.entries.unshift(entry);
+    const ratePct = 10;
+    const lockedSlice = !params.skipLockedSweep && netEGP > 0 ? round2(netEGP * ratePct / 100) : 0;
+    const liquidNet = round2(netEGP - lockedSlice);
     securityState.ownerFinance.accounts[channel] = round2(
-      (securityState.ownerFinance.accounts[channel] || 0) + netEGP
+      (securityState.ownerFinance.accounts[channel] || 0) + liquidNet
     );
+    if (lockedSlice > 0) {
+      securityState.ownerFinance.lockedTreasury.balanceEGP = round2(
+        (securityState.ownerFinance.lockedTreasury.balanceEGP || 0) + lockedSlice
+      );
+      securityState.ownerFinance.lockedTreasury.transfers.unshift({
+        transferId: `LKT-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+        sourceEntryId: entry.entryId,
+        sourceLabel: `${entry.sourceOrBeneficiary} \u2014 ${originLabel}`,
+        netProfitBaseEGP: netEGP,
+        deductedAmountEGP: lockedSlice,
+        noteAr: `\u0627\u0633\u062A\u0642\u0637\u0627\u0639 \u062A\u0644\u0642\u0627\u0626\u064A 10% \u0644\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 \u0645\u0646 \u0635\u0627\u0641\u064A \u0627\u0644\u062F\u062E\u0644 (${netEGP.toLocaleString()} \u062C.\u0645)`,
+        createdAt: nowIso
+      });
+      if (securityState.ownerFinance.lockedTreasury.transfers.length > 400) {
+        securityState.ownerFinance.lockedTreasury.transfers = securityState.ownerFinance.lockedTreasury.transfers.slice(0, 400);
+      }
+    }
+    syncBolRowFromMutation({
+      docType: "invoices",
+      docNumber: orderRef || `BL-IN-${entry.entryId.slice(-6)}`,
+      partyName: entry.sourceOrBeneficiary,
+      statement: entry.purpose,
+      originLabel,
+      debitEGP: computedCommission,
+      creditEGP: netEGP,
+      remainingEGP: round2(netEGP - computedCommission),
+      urgency,
+      entryDate
+    });
     if (orderRef) {
       securityState.ownerFinance.ingestedOrderRefs.unshift(orderRef);
       if (securityState.ownerFinance.ingestedOrderRefs.length > 1e3) {
@@ -4217,39 +4435,57 @@ async function createConfiguredApp() {
     saveSecurityState(securityState);
     appendOwnerFinanceAudit({
       actorEmail: entry.createdByEmail,
-      actionAr: `\u062A\u062D\u0635\u064A\u0644 \u062A\u0644\u0642\u0627\u0626\u064A \u0648\u0627\u0631\u062F (${entry.sourceOrBeneficiary}) \u2014 \u0635\u0627\u0641\u064A ${netEGP.toLocaleString()} \u062C.\u0645 (\u0639\u0645\u0648\u0644\u0629 \u0645\u062E\u0635\u0648\u0645\u0629 ${computedCommission.toLocaleString()} \u062C.\u0645)`,
+      actionAr: `\u062A\u062D\u0635\u064A\u0644 \u0648\u0627\u0631\u062F (${entry.sourceOrBeneficiary}) \u2014 \u0635\u0627\u0641\u064A ${netEGP.toLocaleString()} \u062C.\u0645 (\u062A\u062D\u0648\u064A\u0644 ${lockedSlice.toLocaleString()} \u062C.\u0645 \u0644\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 10%)`,
       category: "inflow",
       amountEGP: netEGP,
-      details: `${entry.purpose} \xB7 \u0642\u0646\u0627\u0629: ${channel}${orderRef ? ` \xB7 \u0645\u0631\u062C\u0639: ${orderRef}` : ""}`
+      details: `${entry.purpose} \xB7 \u0647\u0630\u0627 \u062F\u062E\u0644 \u0645\u0646 \u0625\u064A\u0647: ${originLabel} \xB7 \u0642\u0646\u0627\u0629: ${channel}${orderRef ? ` \xB7 \u0645\u0631\u062C\u0639: ${orderRef}` : ""}`
     });
     return entry;
   }
-  function requireStrictAppOwnerSession(req, res, next) {
-    requireAuthenticatedSession(req, res, () => {
-      const sess = req.authSession;
-      const emailOk = sess.email.toLowerCase() === BOOTSTRAPPED_OWNER_EMAIL;
-      const roleOk = sess.role === "owner" || sess.canonicalRole === "super_admin";
-      if (!emailOk || !roleOk) {
-        appendAuditEntry({
-          actorUid: sess.uid,
-          actorEmail: sess.email,
-          actorRole: sess.canonicalRole,
-          action: "\u0645\u062D\u0627\u0648\u0644\u0629 \u063A\u064A\u0631 \u0645\u0635\u0631\u062D \u0628\u0647\u0627 \u0644\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u0645\u0627\u0644\u064A\u0629 \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0627\u0644\u0645\u0627\u0644\u0643",
-          targetType: "owner_finance_isolation",
-          targetId: req.path,
-          severity: "security_alert",
-          details: `Blocked ${sess.email} (${sess.role}/${sess.canonicalRole}) from ${req.path}`
-        });
-        res.status(403).json({
-          ok: false,
-          code: "OWNER_ONLY_FINANCIAL_PLATFORM",
-          messageAr: "\u0639\u0630\u0631\u0627\u064B: \u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u0645\u0627\u0644\u064A\u0629 \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0627\u0644\u0645\u0627\u0644\u0643 \u0633\u0631\u064A\u0629 \u0648\u0645\u0642\u0635\u0648\u0631\u0629 \u062D\u0635\u0631\u064A\u0627\u064B \u0639\u0644\u0649 \u0645\u0627\u0644\u0643 \u0627\u0644\u062A\u0637\u0628\u064A\u0642 \u0641\u0642\u0637.",
-          messageEn: "Access denied: Exclusive to Verified App Owner."
-        });
-        return;
-      }
-      next();
-    });
+  async function requireStrictAppOwnerSession(req, res, next) {
+    const { session, revoked } = await resolveSessionOrFirebaseBearer(req);
+    if (revoked) {
+      clearSessionCookie(req, res);
+      res.status(401).json({
+        ok: false,
+        code: "SESSION_REVOKED",
+        messageAr: "\u062A\u0645 \u0633\u062D\u0628 \u0635\u0644\u0627\u062D\u064A\u0629 \u0647\u0630\u0627 \u0627\u0644\u062D\u0633\u0627\u0628 \u0648\u0625\u0644\u063A\u0627\u0621 \u0627\u0644\u062C\u0644\u0633\u0629 \u0641\u0648\u0631\u0627\u064B \u0645\u0646 \u0645\u0627\u0644\u0643 \u0627\u0644\u0645\u0646\u0635\u0629.",
+        messageEn: "Access revoked immediately by platform owner."
+      });
+      return;
+    }
+    if (!session) {
+      res.status(401).json({
+        ok: false,
+        code: "AUTH_REQUIRED",
+        messageAr: "\u064A\u0644\u0632\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0628\u062C\u0644\u0633\u0629 \u0622\u0645\u0646\u0629 \u0645\u0648\u062B\u0642\u0629 \u0644\u0625\u062A\u0645\u0627\u0645 \u0647\u0630\u0627 \u0627\u0644\u0625\u062C\u0631\u0627\u0621.",
+        messageEn: "Valid authenticated session required."
+      });
+      return;
+    }
+    const emailOk = session.email.toLowerCase() === BOOTSTRAPPED_OWNER_EMAIL;
+    const roleOk = session.role === "owner" || session.canonicalRole === "super_admin";
+    if (!emailOk || !roleOk) {
+      appendAuditEntry({
+        actorUid: session.uid,
+        actorEmail: session.email,
+        actorRole: session.canonicalRole,
+        action: "\u0645\u062D\u0627\u0648\u0644\u0629 \u063A\u064A\u0631 \u0645\u0635\u0631\u062D \u0628\u0647\u0627 \u0644\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u0645\u0627\u0644\u064A\u0629 \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0627\u0644\u0645\u0627\u0644\u0643",
+        targetType: "owner_finance_isolation",
+        targetId: req.path,
+        severity: "security_alert",
+        details: `Blocked ${session.email} (${session.role}/${session.canonicalRole}) from ${req.path}`
+      });
+      res.status(403).json({
+        ok: false,
+        code: "OWNER_ONLY_FINANCIAL_PLATFORM",
+        messageAr: "\u0639\u0630\u0631\u0627\u064B: \u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u0645\u0627\u0644\u064A\u0629 \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0627\u0644\u0645\u0627\u0644\u0643 \u0633\u0631\u064A\u0629 \u0648\u0645\u0642\u0635\u0648\u0631\u0629 \u062D\u0635\u0631\u064A\u0627\u064B \u0639\u0644\u0649 \u0645\u0627\u0644\u0643 \u0627\u0644\u062A\u0637\u0628\u064A\u0642 \u0641\u0642\u0637.",
+        messageEn: "Access denied: Exclusive to Verified App Owner."
+      });
+      return;
+    }
+    req.authSession = session;
+    next();
   }
   function requireVerifiedOwner2FA(req, res, next) {
     requireStrictAppOwnerSession(req, res, () => {
@@ -4267,6 +4503,151 @@ async function createConfiguredApp() {
       }
       next();
     });
+  }
+  function setFinanceManagerCookie(req, res, token) {
+    const maxAgeSec = Math.floor(SESSION_TTL_MS / 1e3);
+    const sameSite = isSecureRequest(req) ? "SameSite=None; Secure; Partitioned" : "SameSite=Lax";
+    res.setHeader(
+      "Set-Cookie",
+      `${FM_SESSION_COOKIE_NAME}=${encodeURIComponent(token)}; HttpOnly; Path=/; ${sameSite}; Max-Age=${maxAgeSec}`
+    );
+  }
+  function clearFinanceManagerCookie(req, res) {
+    const sameSite = isSecureRequest(req) ? "SameSite=None; Secure; Partitioned" : "SameSite=Lax";
+    res.setHeader(
+      "Set-Cookie",
+      `${FM_SESSION_COOKIE_NAME}=; HttpOnly; Path=/; ${sameSite}; Max-Age=0`
+    );
+  }
+  function resolveFinanceManagerSession(req) {
+    const cookies = parseCookies(req);
+    const headerToken = String(req.headers["x-finance-manager-token"] || "").trim();
+    const authBearer = String(req.headers.authorization || "").trim();
+    const bearerToken = authBearer.startsWith("Bearer fm:") ? authBearer.slice(10).trim() : "";
+    const token = headerToken || bearerToken || cookies[FM_SESSION_COOKIE_NAME] || "";
+    if (!token) return null;
+    const sess = financeManagerSessionStore.get(token);
+    if (!sess) return null;
+    if (Date.now() > sess.expiresAtMs) {
+      financeManagerSessionStore.delete(token);
+      return null;
+    }
+    const acct = securityState.ownerFinance.financeManagers.find((m) => m.managerId === sess.managerId);
+    if (!acct || acct.status !== "active") {
+      financeManagerSessionStore.delete(token);
+      return null;
+    }
+    return sess;
+  }
+  function verifySameOriginOrTokenHeader(req) {
+    if (req.headers["x-finance-manager-token"] || req.headers["x-requested-with"]) {
+      return true;
+    }
+    const origin = String(req.headers.origin || "").trim();
+    const host = String(req.headers["x-forwarded-host"] || req.headers.host || "").trim();
+    if (!origin || !host) return false;
+    try {
+      const originHost = new URL(origin).host;
+      return originHost === host;
+    } catch {
+      return false;
+    }
+  }
+  function terminateFinanceManagerSessions(managerId) {
+    let count = 0;
+    for (const [tok, sess] of financeManagerSessionStore.entries()) {
+      if (sess.managerId === managerId) {
+        financeManagerSessionStore.delete(tok);
+        count += 1;
+      }
+    }
+    return count;
+  }
+  function sanitizeFinanceManagerPublic(m) {
+    return {
+      managerId: m.managerId,
+      slotNumber: m.slotNumber,
+      username: m.username,
+      fullName: m.fullName,
+      status: m.status,
+      mustChangePassword: m.mustChangePassword,
+      lastLoginAt: m.lastLoginAt,
+      createdAt: m.createdAt,
+      updatedAt: m.updatedAt
+    };
+  }
+  function runDeterministicManagerAudit(autoTriggered) {
+    const entries = securityState.ownerFinance.managerSubTreasuryEntries;
+    const pending = entries.filter((e) => e.aiAuditStatus === "pending");
+    if (entries.length === 0) return null;
+    const scopeEntries = pending.length > 0 ? pending : entries.slice(0, 60);
+    const byManager = /* @__PURE__ */ new Map();
+    let flaggedCount = 0;
+    let totalVolumeEGP = 0;
+    for (const item of scopeEntries) {
+      totalVolumeEGP = round2(totalVolumeEGP + (Number(item.amountEGP) || 0));
+      const stat = byManager.get(item.managerUsername) || { totalAmountEGP: 0, count: 0, alertsAr: [] };
+      stat.totalAmountEGP = round2(stat.totalAmountEGP + (Number(item.amountEGP) || 0));
+      stat.count += 1;
+      const isHighTicket = item.amountEGP >= 25e3;
+      const isUnsharedQuote = item.actionType === "quotation" && item.sharedVia === "none";
+      if (isHighTicket || isUnsharedQuote) {
+        item.aiAuditStatus = "flagged";
+        item.aiAuditNoteAr = isHighTicket ? `\u0639\u0645\u0644\u064A\u0629 \u0630\u0627\u062A \u0642\u064A\u0645\u0629 \u0645\u0631\u062A\u0641\u0639\u0629 (${item.amountEGP.toLocaleString()} \u062C.\u0645) \u062A\u0633\u062A\u0648\u062C\u0628 \u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u0643.` : "\u0639\u0631\u0636 \u0633\u0639\u0631 \u0645\u0633\u062C\u0644 \u062F\u0648\u0646 \u062A\u0648\u062B\u064A\u0642 \u0625\u0631\u0633\u0627\u0644 \u0639\u0628\u0631 \u0627\u0644\u0625\u064A\u0645\u064A\u0644 \u0623\u0648 \u0648\u0627\u062A\u0633\u0627\u0628.";
+        stat.alertsAr.push(item.aiAuditNoteAr);
+        flaggedCount += 1;
+      } else {
+        item.aiAuditStatus = "reviewed_ok";
+        item.aiAuditNoteAr = "\u062A\u0645\u062A \u0627\u0644\u0645\u0637\u0627\u0628\u0642\u0629 \u0627\u0644\u0645\u062D\u0627\u0633\u0628\u064A\u0629 \u0627\u0644\u062F\u0648\u0631\u064A\u0629 (45 \u064A\u0648\u0645\u0627\u064B) \u0628\u0646\u062C\u0627\u062D.";
+      }
+      byManager.set(item.managerUsername, stat);
+    }
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    const report = {
+      reportId: `AMA-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      generatedAt: nowIso,
+      cycleDays: 45,
+      totalEntriesReviewed: scopeEntries.length,
+      totalVolumeEGP,
+      flaggedCount,
+      summaryAr: flaggedCount > 0 ? `\u062A\u0645 \u0641\u062D\u0635 ${scopeEntries.length} \u062D\u0631\u0643\u0629 \u0641\u064A \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0641\u0631\u0639\u064A\u0629 \u0644\u0644\u0645\u062F\u0631\u0627\u0621 \u0627\u0644\u0645\u0627\u0644\u064A\u064A\u0646 \u0628\u0625\u062C\u0645\u0627\u0644\u064A ${totalVolumeEGP.toLocaleString()} \u062C.\u0645\u060C \u0648\u062A\u0645 \u0631\u0635\u062F ${flaggedCount} \u0645\u0644\u0627\u062D\u0638\u0629 \u062A\u0633\u062A\u062F\u0639\u064A \u062A\u0646\u0628\u064A\u0647 \u0627\u0644\u0645\u0627\u0644\u0643.` : `\u0641\u062D\u0635 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u062F\u0648\u0631\u064A\u0629 (\u0643\u0644 45 \u064A\u0648\u0645\u0627\u064B): \u062A\u0645\u062A \u0645\u0631\u0627\u062C\u0639\u0629 ${scopeEntries.length} \u062D\u0631\u0643\u0629 \u0628\u0625\u062C\u0645\u0627\u0644\u064A ${totalVolumeEGP.toLocaleString()} \u062C.\u0645 \u062F\u0648\u0646 \u0623\u064A \u0645\u062E\u0627\u0644\u0641\u0627\u062A \u062C\u0648\u0647\u0631\u064A\u0629.`,
+      managerHighlights: Array.from(byManager.entries()).map(([managerUsername, data]) => ({
+        managerUsername,
+        totalAmountEGP: data.totalAmountEGP,
+        count: data.count,
+        statusAr: data.alertsAr.length > 0 ? "\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0644\u0644\u0645\u0631\u0627\u062C\u0639\u0629" : "\u0645\u0637\u0627\u0628\u0642 \u0648\u0633\u0644\u064A\u0645",
+        alertsAr: data.alertsAr
+      })),
+      autoTriggered
+    };
+    securityState.ownerFinance.aiManagerAuditReports.unshift(report);
+    if (securityState.ownerFinance.aiManagerAuditReports.length > 50) {
+      securityState.ownerFinance.aiManagerAuditReports = securityState.ownerFinance.aiManagerAuditReports.slice(0, 50);
+    }
+    securityState.ownerFinance.ownerAuditAlerts.unshift({
+      alertId: `OAL-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      titleAr: autoTriggered ? "\u062A\u0642\u0631\u064A\u0631 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0630\u0643\u064A\u0629 \u0627\u0644\u062A\u0644\u0642\u0627\u0626\u064A (\u062F\u0648\u0631\u0629 45 \u064A\u0648\u0645\u0627\u064B)" : "\u062A\u0642\u0631\u064A\u0631 \u0641\u062D\u0635 \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u062F\u0631\u0627\u0621 \u0627\u0644\u0645\u0627\u0644\u064A\u064A\u0646",
+      bodyAr: report.summaryAr,
+      severity: flaggedCount > 0 ? "warning" : "info",
+      reportId: report.reportId,
+      readByOwner: false,
+      createdAt: nowIso
+    });
+    if (securityState.ownerFinance.ownerAuditAlerts.length > 100) {
+      securityState.ownerFinance.ownerAuditAlerts = securityState.ownerFinance.ownerAuditAlerts.slice(0, 100);
+    }
+    securityState.ownerFinance.lastManagerAuditAt = nowIso;
+    saveSecurityState(securityState);
+    return report;
+  }
+  function maybeRunAuto45DayAudit() {
+    const pending = securityState.ownerFinance.managerSubTreasuryEntries.some((e) => e.aiAuditStatus === "pending");
+    if (!pending) return;
+    const lastMs = securityState.ownerFinance.lastManagerAuditAt ? Date.parse(securityState.ownerFinance.lastManagerAuditAt) : 0;
+    const fortyFiveDaysMs = 45 * 24 * 60 * 60 * 1e3;
+    if (!lastMs || Date.now() - lastMs >= fortyFiveDaysMs) {
+      runDeterministicManagerAudit(true);
+    }
   }
   app.post("/api/owner-finance/inflow-ingest", (req, res) => {
     const body = req.body || {};
@@ -4301,6 +4682,7 @@ async function createConfiguredApp() {
     const created = recordOwnerFinancialInflow({
       source: typeof body.source === "string" && body.source.trim() ? body.source.trim() : "\u0637\u0644\u0628 \u0645\u0628\u0627\u0634\u0631 \u2014 \u0628\u0627\u0633\u0637",
       purpose: typeof body.purpose === "string" && body.purpose.trim() ? body.purpose.trim() : "\u0645\u0628\u064A\u0639\u0627\u062A \u0648\u062A\u0639\u0627\u0642\u062F\u0627\u062A",
+      originLabel: typeof body.originLabel === "string" && body.originLabel.trim() ? body.originLabel.trim() : "\u0637\u0644\u0628 \u0648\u062C\u0628\u0627\u062A/\u062A\u0645\u0648\u064A\u0646 \u0639\u0645\u0644\u0627\u0621 \u0639\u0628\u0631 \u0627\u0644\u0645\u0646\u0635\u0629",
       grossEGP,
       commissionPct,
       commissionEGP: typeof body.commissionEGP === "number" ? body.commissionEGP : void 0,
@@ -4422,12 +4804,37 @@ async function createConfiguredApp() {
     });
     res.json({ ok: true, owner2faVerified: true, messageAr: "\u062A\u0645 \u0641\u062A\u062D \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0627\u0644\u064A\u0629 \u0644\u0644\u0645\u0627\u0644\u0643 \u0628\u0628\u0635\u0645\u0629 \u0627\u0644\u0623\u0645\u0627\u0646 \u0628\u0646\u062C\u0627\u062D." });
   });
-  function buildOwnerFinanceSummaryPayload() {
-    const { accounts, entries, receivables, payables, auditLogs } = securityState.ownerFinance;
+  function buildOwnerFinanceSummaryPayload(sess) {
+    maybeRunAuto45DayAudit();
+    const nowMs = Date.now();
+    const totalFundsUnlocked = Boolean(sess?.totalFundsUnlockedUntilMs && sess.totalFundsUnlockedUntilMs > nowMs);
+    const lockedTreasuryUnlocked = Boolean(sess?.lockedTreasuryUnlockedUntilMs && sess.lockedTreasuryUnlockedUntilMs > nowMs);
+    const {
+      accounts,
+      entries,
+      receivables,
+      payables,
+      bolRows,
+      inventoryItems,
+      purchaseInvoices,
+      purchaseReturns,
+      partyPayments,
+      lockedTreasury,
+      totalFundsAuthMethod,
+      financeManagers,
+      managerSubTreasuryEntries,
+      archivedManagerRecords,
+      aiManagerAuditReports,
+      ownerAuditAlerts,
+      lastManagerAuditAt,
+      auditLogs
+    } = securityState.ownerFinance;
     const bank = round2(accounts.bank || 0);
     const e_wallet = round2(accounts.e_wallet || 0);
     const treasury = round2(accounts.treasury || 0);
     const totalNetBalance = round2(bank + e_wallet + treasury);
+    const lockedBalance = round2(lockedTreasury?.balanceEGP || 0);
+    const combinedFunds = round2(totalNetBalance + lockedBalance);
     const inflows = entries.filter((e) => e.direction === "inflow");
     const outflows = entries.filter((e) => e.direction === "outflow");
     const totalInflowsGross = round2(inflows.reduce((s, e) => s + (Number(e.grossEGP) || 0), 0));
@@ -4462,6 +4869,31 @@ async function createConfiguredApp() {
       labelAr: categoryLabels[key] || "\u0623\u062E\u0631\u0649",
       totalEGP
     }));
+    const commissionsAndExpenses = [
+      ...inflows.filter((e) => (Number(e.commissionEGP) || 0) > 0).map((e) => ({
+        id: `COMM-${e.entryId}`,
+        kind: "commission",
+        labelAr: `\u0639\u0645\u0648\u0644\u0629 \u062A\u062D\u0635\u064A\u0644 (${e.sourceOrBeneficiary})`,
+        originLabel: e.originLabel || e.purpose,
+        amountEGP: round2(e.commissionEGP || 0),
+        channel: e.channel,
+        entryDate: e.entryDate,
+        urgency: e.urgency || "normal"
+      })),
+      ...outflows.map((e) => ({
+        id: e.entryId,
+        kind: e.expenseCategory === "commissions" ? "commission" : "expense",
+        labelAr: `${e.sourceOrBeneficiary} \u2014 ${e.purpose}`,
+        originLabel: e.originLabel || categoryLabels[e.expenseCategory] || "\u0645\u0635\u0631\u0648\u0641 \u062A\u0634\u063A\u064A\u0644\u064A",
+        amountEGP: round2(e.netEGP || 0),
+        channel: e.channel,
+        entryDate: e.entryDate,
+        urgency: e.urgency || "normal"
+      }))
+    ].slice(0, 200);
+    const lastAuditMs = lastManagerAuditAt ? Date.parse(lastManagerAuditAt) : 0;
+    const daysSinceLastManagerAudit = lastAuditMs ? Math.max(0, Math.floor((nowMs - lastAuditMs) / (24 * 60 * 60 * 1e3))) : 0;
+    const daysUntilNextAudit = Math.max(0, 45 - daysSinceLastManagerAudit);
     return {
       accounts: { bank, e_wallet, treasury, totalNetBalance },
       totals: {
@@ -4473,17 +4905,47 @@ async function createConfiguredApp() {
         totalPayablesOpen,
         netCashflowPosition: round2(totalNetBalance + totalReceivablesOpen - totalPayablesOpen)
       },
+      totalFundsGate: {
+        unlocked: totalFundsUnlocked,
+        authMethod: totalFundsAuthMethod || "fingerprint",
+        availableFundsEGP: totalFundsUnlocked ? combinedFunds : null,
+        liquidFundsEGP: totalFundsUnlocked ? totalNetBalance : null,
+        lockedFundsEGP: totalFundsUnlocked ? lockedBalance : null,
+        unlockedUntilMs: sess?.totalFundsUnlockedUntilMs || null
+      },
+      lockedTreasury: {
+        unlocked: lockedTreasuryUnlocked,
+        deductionRatePct: 10,
+        balanceEGP: lockedTreasuryUnlocked ? lockedBalance : null,
+        transfersCount: (lockedTreasury?.transfers || []).length,
+        transfers: lockedTreasuryUnlocked ? lockedTreasury?.transfers || [] : [],
+        unlockedUntilMs: sess?.lockedTreasuryUnlockedUntilMs || null
+      },
       expenseAnalytics,
+      commissionsAndExpenses,
       entries,
       receivables,
       payables,
+      bolRows,
+      inventoryItems,
+      purchaseInvoices,
+      purchaseReturns,
+      partyPayments,
+      financeManagers: financeManagers.map(sanitizeFinanceManagerPublic),
+      managerSubTreasuryEntries,
+      archivedManagerRecords,
+      aiManagerAuditReports,
+      ownerAuditAlerts,
+      lastManagerAuditAt,
+      daysSinceLastManagerAudit,
+      daysUntilNextAudit,
       auditLogs
     };
   }
-  app.get("/api/owner-finance/dashboard", requireVerifiedOwner2FA, (_req, res) => {
+  app.get("/api/owner-finance/dashboard", requireVerifiedOwner2FA, (req, res) => {
     res.json({
       ok: true,
-      ...buildOwnerFinanceSummaryPayload()
+      ...buildOwnerFinanceSummaryPayload(req.authSession)
     });
   });
   app.post("/api/owner-finance/account-adjust", requireVerifiedOwner2FA, (req, res) => {
@@ -4516,7 +4978,7 @@ async function createConfiguredApp() {
       amountEGP: amount,
       details: String(body.reason || "\u062A\u0633\u0648\u064A\u0629 \u0631\u0635\u064A\u062F \u064A\u062F\u0648\u064A\u0629 \u0645\u0646 \u0627\u0644\u0645\u0627\u0644\u0643").slice(0, 240)
     });
-    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload() });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
   });
   app.post("/api/owner-finance/entries", requireVerifiedOwner2FA, (req, res) => {
     const sess = req.authSession;
@@ -4524,6 +4986,8 @@ async function createConfiguredApp() {
     const direction = body.direction === "outflow" ? "outflow" : "inflow";
     const sourceOrBeneficiary = String(body.sourceOrBeneficiary || "").trim().slice(0, 160);
     const purpose = String(body.purpose || "").trim().slice(0, 280);
+    const originLabel = String(body.originLabel || purpose).trim().slice(0, 180);
+    const urgency = body.urgency === "urgent" || body.urgency === "emergency" ? body.urgency : "normal";
     const channel = body.channel === "bank" || body.channel === "e_wallet" || body.channel === "treasury" ? body.channel : "bank";
     const grossEGP = round2(Number(body.grossEGP || 0));
     if (sourceOrBeneficiary.length < 2 || purpose.length < 2 || !Number.isFinite(grossEGP) || grossEGP <= 0 || grossEGP > 5e8) {
@@ -4532,34 +4996,16 @@ async function createConfiguredApp() {
     }
     const entryDate = /^\d{4}-\d{2}-\d{2}$/.test(String(body.entryDate || "")) ? String(body.entryDate) : (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
     if (direction === "inflow") {
-      const commissionPct = Math.min(50, Math.max(0, round2(Number(body.commissionPct || 0))));
-      const commissionEGP = round2(grossEGP * commissionPct / 100);
-      const netEGP = Math.max(0, round2(grossEGP - commissionEGP));
-      const entry = {
-        entryId: `OFE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
-        direction: "inflow",
-        sourceOrBeneficiary,
+      recordOwnerFinancialInflow({
+        source: sourceOrBeneficiary,
         purpose,
-        expenseCategory: "none",
-        channel,
+        originLabel,
+        urgency,
         grossEGP,
-        commissionPct,
-        commissionEGP,
-        netEGP,
+        commissionPct: Number(body.commissionPct || 0),
+        channel,
         entryDate,
-        orderRef: "",
-        createdByEmail: sess.email,
-        createdAt: (/* @__PURE__ */ new Date()).toISOString()
-      };
-      securityState.ownerFinance.entries.unshift(entry);
-      securityState.ownerFinance.accounts[channel] = round2((securityState.ownerFinance.accounts[channel] || 0) + netEGP);
-      saveSecurityState(securityState);
-      appendOwnerFinanceAudit({
-        actorEmail: sess.email,
-        actionAr: `\u062A\u0633\u062C\u064A\u0644 \u0645\u062A\u062D\u0635\u0644\u0627\u062A \u064A\u062F\u0648\u064A\u0629 \u0645\u0646 (${sourceOrBeneficiary}) \u2014 \u0635\u0627\u0641\u064A ${netEGP.toLocaleString()} \u062C.\u0645`,
-        category: "inflow",
-        amountEGP: netEGP,
-        details: `${purpose} \xB7 \u0639\u0645\u0648\u0644\u0629 \u0645\u062E\u0635\u0648\u0645\u0629: ${commissionEGP.toLocaleString()} \u062C.\u0645 (${commissionPct}%)`
+        actorEmail: sess.email
       });
     } else {
       const allowedCats = /* @__PURE__ */ new Set(["salaries", "raw_materials", "marketing", "commissions", "logistics", "other"]);
@@ -4569,6 +5015,8 @@ async function createConfiguredApp() {
         direction: "outflow",
         sourceOrBeneficiary,
         purpose,
+        originLabel,
+        urgency,
         expenseCategory,
         channel,
         grossEGP,
@@ -4582,16 +5030,828 @@ async function createConfiguredApp() {
       };
       securityState.ownerFinance.entries.unshift(entry);
       securityState.ownerFinance.accounts[channel] = round2((securityState.ownerFinance.accounts[channel] || 0) - grossEGP);
+      syncBolRowFromMutation({
+        docType: expenseCategory === "other" && originLabel.includes("\u0625\u064A\u062C\u0627\u0631") ? "rents" : "expenses",
+        docNumber: `BL-OUT-${entry.entryId.slice(-6)}`,
+        partyName: sourceOrBeneficiary,
+        statement: purpose,
+        originLabel,
+        debitEGP: grossEGP,
+        creditEGP: 0,
+        remainingEGP: 0,
+        urgency,
+        entryDate
+      });
       saveSecurityState(securityState);
       appendOwnerFinanceAudit({
         actorEmail: sess.email,
         actionAr: `\u062A\u0633\u062C\u064A\u0644 \u0645\u0635\u0631\u0648\u0641 \u062E\u0627\u0631\u062C \u0625\u0644\u0649 (${sourceOrBeneficiary}) \u0628\u0645\u0628\u0644\u063A ${grossEGP.toLocaleString()} \u062C.\u0645`,
         category: "outflow",
         amountEGP: grossEGP,
-        details: `${purpose} \xB7 \u0627\u0644\u062A\u0635\u0646\u064A\u0641: ${expenseCategory} \xB7 \u0627\u0644\u0642\u0646\u0627\u0629: ${channel}`
+        details: `${purpose} \xB7 \u0647\u0630\u0627 \u0645\u0635\u0631\u0648\u0641 \u0628\u062A\u0627\u0639 \u0625\u064A\u0647: ${originLabel} \xB7 \u0627\u0644\u062A\u0635\u0646\u064A\u0641: ${expenseCategory} \xB7 \u0627\u0644\u0623\u0648\u0644\u0648\u064A\u0629: ${urgency}`
       });
     }
-    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload() });
+    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/bol-rows", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    const allowedDocTypes = /* @__PURE__ */ new Set(["owners_balances", "expenses", "rents", "invoices"]);
+    const docType = body.docType && allowedDocTypes.has(body.docType) ? body.docType : "owners_balances";
+    const partyName = String(body.partyName || "").trim().slice(0, 160);
+    const statement = String(body.statement || "").trim().slice(0, 260);
+    if (partyName.length < 2 || statement.length < 2) {
+      res.status(400).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u0625\u062F\u062E\u0627\u0644 \u0627\u0644\u0637\u0631\u0641/\u0627\u0644\u062C\u0647\u0629 \u0648\u0627\u0644\u0628\u064A\u0627\u0646 \u062F\u0627\u062E\u0644 \u0628\u0648\u0644\u064A\u0635\u0629 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A." });
+      return;
+    }
+    const debitEGP = Math.max(0, round2(Number(body.debitEGP || 0)));
+    const creditEGP = Math.max(0, round2(Number(body.creditEGP || 0)));
+    const remainingEGP = typeof body.remainingEGP === "number" && Number.isFinite(body.remainingEGP) ? round2(body.remainingEGP) : round2(creditEGP - debitEGP);
+    const urgency = body.urgency === "urgent" || body.urgency === "emergency" ? body.urgency : "normal";
+    const entryDate = /^\d{4}-\d{2}-\d{2}$/.test(String(body.entryDate || "")) ? String(body.entryDate) : (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+    const created = syncBolRowFromMutation({
+      docType,
+      docNumber: String(body.docNumber || `BL-${Date.now().toString().slice(-5)}`).trim().slice(0, 40),
+      partyName,
+      statement,
+      originLabel: String(body.originLabel || statement).trim().slice(0, 180),
+      debitEGP,
+      creditEGP,
+      remainingEGP,
+      urgency,
+      entryDate
+    });
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0625\u0636\u0627\u0641\u0629 \u0633\u0637\u0631 \u0628\u0648\u0644\u064A\u0635\u0629 \u0645\u0627\u0644\u064A\u0629 (${created.docNumber}) \u2014 ${partyName}`,
+      category: "bol_edit",
+      amountEGP: Math.max(debitEGP, creditEGP),
+      details: `${docType} \xB7 \u0645\u062F\u064A\u0646 ${debitEGP} / \u062F\u0627\u0626\u0646 ${creditEGP} / \u0628\u0627\u0642\u064A ${remainingEGP}`
+    });
+    res.status(201).json({ ok: true, row: created, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.patch("/api/owner-finance/bol-rows/:rowId", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const rowId = String(req.params.rowId || "").trim();
+    const row = securityState.ownerFinance.bolRows.find((r) => r.rowId === rowId);
+    if (!row) {
+      res.status(404).json({ ok: false, messageAr: "\u0633\u0637\u0631 \u0627\u0644\u0628\u0648\u0644\u064A\u0635\u0629 \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F." });
+      return;
+    }
+    const body = req.body || {};
+    if (typeof body.partyName === "string" && body.partyName.trim().length >= 2) {
+      row.partyName = body.partyName.trim().slice(0, 160);
+    }
+    if (typeof body.statement === "string" && body.statement.trim().length >= 2) {
+      row.statement = body.statement.trim().slice(0, 260);
+    }
+    if (typeof body.originLabel === "string" && body.originLabel.trim().length >= 2) {
+      row.originLabel = body.originLabel.trim().slice(0, 180);
+    }
+    if (typeof body.debitEGP === "number" && Number.isFinite(body.debitEGP) && body.debitEGP >= 0) {
+      row.debitEGP = round2(body.debitEGP);
+    }
+    if (typeof body.creditEGP === "number" && Number.isFinite(body.creditEGP) && body.creditEGP >= 0) {
+      row.creditEGP = round2(body.creditEGP);
+    }
+    if (typeof body.remainingEGP === "number" && Number.isFinite(body.remainingEGP)) {
+      row.remainingEGP = round2(body.remainingEGP);
+    } else if (typeof body.debitEGP === "number" || typeof body.creditEGP === "number") {
+      row.remainingEGP = round2(row.creditEGP - row.debitEGP);
+    }
+    if (body.urgency === "normal" || body.urgency === "urgent" || body.urgency === "emergency") {
+      row.urgency = body.urgency;
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(String(body.entryDate || ""))) {
+      row.entryDate = String(body.entryDate);
+    }
+    row.updatedAt = (/* @__PURE__ */ new Date()).toISOString();
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u062A\u0639\u062F\u064A\u0644 \u0645\u0628\u0627\u0634\u0631 \u0641\u064A \u062A\u0631\u0648\u064A\u0633\u0629 \u0627\u0644\u0628\u0648\u0644\u064A\u0635\u0629 (${row.docNumber})`,
+      category: "bol_edit",
+      amountEGP: row.remainingEGP,
+      details: `${row.partyName} \xB7 \u0645\u062F\u064A\u0646 ${row.debitEGP} / \u062F\u0627\u0626\u0646 ${row.creditEGP} / \u0628\u0627\u0642\u064A ${row.remainingEGP}`
+    });
+    res.json({ ok: true, row, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/purchases/invoices", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    const supplierName = String(body.supplierName || "").trim().slice(0, 160);
+    const itemNameInput = String(body.itemName || "").trim().slice(0, 160);
+    const qty = round2(Number(body.qty || 0));
+    const unitCostEGP = round2(Number(body.unitCostEGP || 0));
+    if (supplierName.length < 2 || !itemNameInput && !body.itemId || qty <= 0 || unitCostEGP <= 0) {
+      res.status(400).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u0625\u062F\u062E\u0627\u0644 \u0627\u0644\u0645\u0648\u0631\u062F \u0648\u0627\u0644\u0635\u0646\u0641 \u0648\u0627\u0644\u0643\u0645\u064A\u0629 \u0648\u0633\u0639\u0631 \u0627\u0644\u0648\u062D\u062F\u0629 \u0628\u0634\u0643\u0644 \u0635\u062D\u064A\u062D." });
+      return;
+    }
+    const totalEGP = round2(qty * unitCostEGP);
+    const paidEGP = Math.min(totalEGP, Math.max(0, round2(Number(body.paidEGP || 0))));
+    const remainingEGP = round2(totalEGP - paidEGP);
+    const channel = body.channel === "bank" || body.channel === "e_wallet" || body.channel === "treasury" ? body.channel : "bank";
+    const supplierScope = body.supplierScope === "internal_platform" ? "internal_platform" : "external_supplier";
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    const entryDate = /^\d{4}-\d{2}-\d{2}$/.test(String(body.entryDate || "")) ? String(body.entryDate) : nowIso.slice(0, 10);
+    let stockItem = body.itemId ? securityState.ownerFinance.inventoryItems.find((i) => i.itemId === body.itemId) : securityState.ownerFinance.inventoryItems.find((i) => i.nameAr.toLowerCase() === itemNameInput.toLowerCase());
+    if (!stockItem) {
+      stockItem = {
+        itemId: `INV-${Date.now().toString(36).toUpperCase()}`,
+        sku: `SKU-${Math.floor(1e3 + Math.random() * 8999)}`,
+        nameAr: itemNameInput || "\u0635\u0646\u0641 \u0645\u062E\u0632\u0646\u064A \u062C\u062F\u064A\u062F",
+        unitAr: String(body.unitAr || "\u0648\u062D\u062F\u0629").trim().slice(0, 30),
+        quantityOnHand: qty,
+        avgUnitCostEGP: unitCostEGP,
+        minStockAlert: Math.max(5, Math.round(qty * 0.2)),
+        updatedAt: nowIso
+      };
+      securityState.ownerFinance.inventoryItems.unshift(stockItem);
+    } else {
+      const prevValue = stockItem.quantityOnHand * stockItem.avgUnitCostEGP;
+      const nextQty = round2(stockItem.quantityOnHand + qty);
+      stockItem.avgUnitCostEGP = nextQty > 0 ? round2((prevValue + totalEGP) / nextQty) : unitCostEGP;
+      stockItem.quantityOnHand = nextQty;
+      stockItem.updatedAt = nowIso;
+    }
+    const invoiceNumber = `PUR-${Date.now().toString().slice(-6)}`;
+    const invoice = {
+      invoiceId: `PINV-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      invoiceNumber,
+      supplierName,
+      supplierScope,
+      entryDate,
+      items: [
+        {
+          itemId: stockItem.itemId,
+          itemName: stockItem.nameAr,
+          qty,
+          unitCostEGP,
+          lineTotalEGP: totalEGP
+        }
+      ],
+      totalEGP,
+      paidEGP,
+      remainingEGP,
+      channel,
+      notes: String(body.notes || "").trim().slice(0, 260),
+      status: paidEGP >= totalEGP ? "paid" : paidEGP > 0 ? "partial" : "unpaid",
+      createdAt: nowIso
+    };
+    securityState.ownerFinance.purchaseInvoices.unshift(invoice);
+    if (paidEGP > 0) {
+      securityState.ownerFinance.accounts[channel] = round2((securityState.ownerFinance.accounts[channel] || 0) - paidEGP);
+      securityState.ownerFinance.entries.unshift({
+        entryId: `OFE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+        direction: "outflow",
+        sourceOrBeneficiary: supplierName,
+        purpose: `\u0633\u062F\u0627\u062F \u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u0634\u062A\u0631\u064A\u0627\u062A (${invoiceNumber}) \u2014 ${stockItem.nameAr}`,
+        originLabel: `\u0645\u0634\u062A\u0631\u064A\u0627\u062A \u062E\u0627\u0645\u0627\u062A \u0648\u0645\u062E\u0632\u0648\u0646 (${stockItem.nameAr} \xD7 ${qty})`,
+        urgency: remainingEGP > 0 ? "urgent" : "normal",
+        expenseCategory: "raw_materials",
+        channel,
+        grossEGP: paidEGP,
+        commissionPct: 0,
+        commissionEGP: 0,
+        netEGP: paidEGP,
+        entryDate,
+        orderRef: invoiceNumber,
+        createdByEmail: sess.email,
+        createdAt: nowIso
+      });
+    }
+    if (remainingEGP > 0) {
+      securityState.ownerFinance.payables.unshift({
+        payableId: `PAY-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+        supplierName,
+        purpose: `\u0645\u062A\u0628\u0642\u064A \u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u0634\u062A\u0631\u064A\u0627\u062A ${invoiceNumber} (${stockItem.nameAr})`,
+        supplierScope,
+        urgency: "urgent",
+        totalAmountEGP: remainingEGP,
+        paidAmountEGP: 0,
+        scheduledPaymentDate: entryDate,
+        status: "scheduled",
+        createdAt: nowIso,
+        updatedAt: nowIso
+      });
+    }
+    syncBolRowFromMutation({
+      docType: "invoices",
+      docNumber: invoiceNumber,
+      partyName: supplierName,
+      statement: `\u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u0634\u062A\u0631\u064A\u0627\u062A: ${stockItem.nameAr} (${qty} ${stockItem.unitAr})`,
+      originLabel: "\u0645\u0634\u062A\u0631\u064A\u0627\u062A \u062A\u0648\u0631\u064A\u062F \u0648\u0645\u062E\u0632\u0648\u0646",
+      debitEGP: totalEGP,
+      creditEGP: paidEGP,
+      remainingEGP,
+      urgency: remainingEGP > 0 ? "urgent" : "normal",
+      entryDate
+    });
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0625\u0635\u062F\u0627\u0631 \u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u0634\u062A\u0631\u064A\u0627\u062A (${invoiceNumber}) \u0648\u062A\u062D\u062F\u064A\u062B \u0627\u0644\u0645\u062E\u0632\u0648\u0646 \u2014 \u0625\u062C\u0645\u0627\u0644\u064A ${totalEGP.toLocaleString()} \u062C.\u0645`,
+      category: "purchase",
+      amountEGP: totalEGP,
+      details: `\u0627\u0644\u0645\u0648\u0631\u062F: ${supplierName} \xB7 \u0627\u0644\u0635\u0646\u0641: ${stockItem.nameAr} (+${qty}) \xB7 \u0645\u062F\u0641\u0648\u0639: ${paidEGP} / \u0645\u062A\u0628\u0642\u064A: ${remainingEGP}`
+    });
+    res.status(201).json({ ok: true, invoice, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/purchases/returns", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    const invoice = securityState.ownerFinance.purchaseInvoices.find((inv) => inv.invoiceId === body.invoiceId);
+    if (!invoice || !invoice.items[0]) {
+      res.status(404).json({ ok: false, messageAr: "\u0641\u0627\u062A\u0648\u0631\u0629 \u0627\u0644\u0645\u0634\u062A\u0631\u064A\u0627\u062A \u0627\u0644\u0645\u0637\u0644\u0648\u0628\u0629 \u0644\u0644\u0645\u0631\u062A\u062C\u0639 \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F\u0629." });
+      return;
+    }
+    const line = invoice.items[0];
+    const qtyReturned = round2(Number(body.qtyReturned || 0));
+    if (!Number.isFinite(qtyReturned) || qtyReturned <= 0 || qtyReturned > line.qty) {
+      res.status(400).json({ ok: false, messageAr: `\u0643\u0645\u064A\u0629 \u0627\u0644\u0645\u0631\u062A\u062C\u0639 \u064A\u062C\u0628 \u0623\u0646 \u062A\u0643\u0648\u0646 \u0628\u064A\u0646 1 \u0648 ${line.qty}.` });
+      return;
+    }
+    const refundAmountEGP = round2(qtyReturned * line.unitCostEGP);
+    const settlementMode = body.settlementMode === "cash_refund" ? "cash_refund" : "reduce_payable";
+    const channel = body.channel === "bank" || body.channel === "e_wallet" || body.channel === "treasury" ? body.channel : invoice.channel;
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    const returnDate = /^\d{4}-\d{2}-\d{2}$/.test(String(body.returnDate || "")) ? String(body.returnDate) : nowIso.slice(0, 10);
+    const stockItem = securityState.ownerFinance.inventoryItems.find((i) => i.itemId === line.itemId);
+    if (stockItem) {
+      stockItem.quantityOnHand = Math.max(0, round2(stockItem.quantityOnHand - qtyReturned));
+      stockItem.updatedAt = nowIso;
+    }
+    if (settlementMode === "reduce_payable") {
+      invoice.remainingEGP = Math.max(0, round2(invoice.remainingEGP - refundAmountEGP));
+      invoice.totalEGP = Math.max(0, round2(invoice.totalEGP - refundAmountEGP));
+      invoice.status = invoice.remainingEGP <= 0 ? "paid" : invoice.paidEGP > 0 ? "partial" : "unpaid";
+      const linkedPayable = securityState.ownerFinance.payables.find(
+        (p) => p.supplierName === invoice.supplierName && p.purpose.includes(invoice.invoiceNumber) && p.status !== "paid"
+      );
+      if (linkedPayable) {
+        linkedPayable.paidAmountEGP = Math.min(linkedPayable.totalAmountEGP, round2(linkedPayable.paidAmountEGP + refundAmountEGP));
+        linkedPayable.status = linkedPayable.paidAmountEGP >= linkedPayable.totalAmountEGP ? "paid" : "partial";
+        linkedPayable.updatedAt = nowIso;
+      }
+    } else {
+      securityState.ownerFinance.accounts[channel] = round2((securityState.ownerFinance.accounts[channel] || 0) + refundAmountEGP);
+      securityState.ownerFinance.entries.unshift({
+        entryId: `OFE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+        direction: "inflow",
+        sourceOrBeneficiary: invoice.supplierName,
+        purpose: `\u0627\u0633\u062A\u0631\u062F\u0627\u062F \u0646\u0642\u062F\u064A \u0644\u0645\u0631\u062A\u062C\u0639 \u0645\u0634\u062A\u0631\u064A\u0627\u062A (${invoice.invoiceNumber})`,
+        originLabel: `\u0645\u0631\u062A\u062C\u0639 \u0645\u0634\u062A\u0631\u064A\u0627\u062A (${line.itemName} \xD7 ${qtyReturned})`,
+        urgency: "normal",
+        expenseCategory: "none",
+        channel,
+        grossEGP: refundAmountEGP,
+        commissionPct: 0,
+        commissionEGP: 0,
+        netEGP: refundAmountEGP,
+        entryDate: returnDate,
+        orderRef: `RET-${invoice.invoiceNumber}`,
+        createdByEmail: sess.email,
+        createdAt: nowIso
+      });
+    }
+    const retRecord = {
+      returnId: `PRET-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      invoiceId: invoice.invoiceId,
+      invoiceNumber: invoice.invoiceNumber,
+      supplierName: invoice.supplierName,
+      itemName: line.itemName,
+      qtyReturned,
+      unitCostEGP: line.unitCostEGP,
+      refundAmountEGP,
+      reason: String(body.reason || "\u0645\u0631\u062A\u062C\u0639 \u062C\u0648\u062F\u0629 / \u062A\u0633\u0648\u064A\u0629 \u0643\u0645\u064A\u0627\u062A").trim().slice(0, 220),
+      settlementMode,
+      channel,
+      returnDate,
+      createdAt: nowIso
+    };
+    securityState.ownerFinance.purchaseReturns.unshift(retRecord);
+    syncBolRowFromMutation({
+      docType: "invoices",
+      docNumber: `RET-${invoice.invoiceNumber}`,
+      partyName: invoice.supplierName,
+      statement: `\u0645\u0631\u062A\u062C\u0639 \u0645\u0634\u062A\u0631\u064A\u0627\u062A: ${line.itemName} (${qtyReturned})`,
+      originLabel: retRecord.reason,
+      debitEGP: 0,
+      creditEGP: refundAmountEGP,
+      remainingEGP: invoice.remainingEGP,
+      urgency: "normal",
+      entryDate: returnDate
+    });
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u062A\u0633\u062C\u064A\u0644 \u0645\u0631\u062A\u062C\u0639 \u0645\u0634\u062A\u0631\u064A\u0627\u062A \u0639\u0644\u0649 (${invoice.invoiceNumber}) \u0628\u0642\u064A\u0645\u0629 ${refundAmountEGP.toLocaleString()} \u062C.\u0645`,
+      category: "return",
+      amountEGP: refundAmountEGP,
+      details: `\u0627\u0644\u0635\u0646\u0641: ${line.itemName} (-${qtyReturned}) \xB7 \u0627\u0644\u062A\u0633\u0648\u064A\u0629: ${settlementMode}`
+    });
+    res.status(201).json({ ok: true, returnRecord: retRecord, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/purchases/payments", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    const partyType = body.partyType === "customer" ? "customer" : "supplier";
+    const partyName = String(body.partyName || "").trim().slice(0, 160);
+    const direction = body.direction === "credit" ? "credit" : "debit";
+    const amountEGP = round2(Number(body.amountEGP || 0));
+    const channel = body.channel === "bank" || body.channel === "e_wallet" || body.channel === "treasury" ? body.channel : "bank";
+    if (partyName.length < 2 || !Number.isFinite(amountEGP) || amountEGP <= 0) {
+      res.status(400).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u0625\u062F\u062E\u0627\u0644 \u0627\u0633\u0645 \u0627\u0644\u0637\u0631\u0641 \u0648\u0645\u0628\u0644\u063A \u0635\u062D\u064A\u062D." });
+      return;
+    }
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    const paymentDate = /^\d{4}-\d{2}-\d{2}$/.test(String(body.paymentDate || "")) ? String(body.paymentDate) : nowIso.slice(0, 10);
+    const glAccountCode = partyType === "supplier" ? `2100-AP -> ${channel === "treasury" ? "1010-CASH" : "1020-BANK"}` : `${channel === "treasury" ? "1010-CASH" : "1020-BANK"} -> 1200-AR`;
+    const refCode = `PMT-${Date.now().toString().slice(-6)}`;
+    const payment = {
+      paymentId: `PAYREC-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      partyType,
+      partyName,
+      direction,
+      amountEGP,
+      channel,
+      glAccountCode,
+      reference: refCode,
+      notes: String(body.notes || "").trim().slice(0, 240),
+      paymentDate,
+      createdAt: nowIso
+    };
+    securityState.ownerFinance.partyPayments.unshift(payment);
+    if (partyType === "supplier") {
+      securityState.ownerFinance.accounts[channel] = round2((securityState.ownerFinance.accounts[channel] || 0) - amountEGP);
+      securityState.ownerFinance.entries.unshift({
+        entryId: `OFE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+        direction: "outflow",
+        sourceOrBeneficiary: partyName,
+        purpose: payment.notes || `\u0633\u062F\u0627\u062F \u062F\u0641\u0639\u0629 \u0645\u0648\u0631\u062F (${refCode})`,
+        originLabel: `\u062D\u0631\u0643\u0629 \u0645\u062F\u064A\u0646/\u062F\u0627\u0626\u0646 \u0644\u0644\u0645\u0648\u0631\u062F (${glAccountCode})`,
+        urgency: "normal",
+        expenseCategory: "raw_materials",
+        channel,
+        grossEGP: amountEGP,
+        commissionPct: 0,
+        commissionEGP: 0,
+        netEGP: amountEGP,
+        entryDate: paymentDate,
+        orderRef: refCode,
+        createdByEmail: sess.email,
+        createdAt: nowIso
+      });
+      let rem = amountEGP;
+      for (const p of securityState.ownerFinance.payables) {
+        if (rem <= 0) break;
+        if (p.supplierName.toLowerCase() === partyName.toLowerCase() && p.status !== "paid") {
+          const open = round2(p.totalAmountEGP - p.paidAmountEGP);
+          const applyAmt = Math.min(open, rem);
+          p.paidAmountEGP = round2(p.paidAmountEGP + applyAmt);
+          p.status = p.paidAmountEGP >= p.totalAmountEGP ? "paid" : "partial";
+          p.updatedAt = nowIso;
+          rem = round2(rem - applyAmt);
+        }
+      }
+    } else {
+      recordOwnerFinancialInflow({
+        source: partyName,
+        purpose: payment.notes || `\u062A\u062D\u0635\u064A\u0644 \u062F\u0641\u0639\u0629 \u0639\u0645\u064A\u0644 (${refCode})`,
+        originLabel: `\u062A\u062D\u0635\u064A\u0644 \u0639\u0645\u064A\u0644 \u0645\u0631\u062A\u0628\u0637 \u0628\u062F\u0641\u062A\u0631 \u0627\u0644\u0623\u0633\u062A\u0627\u0630 (${glAccountCode})`,
+        grossEGP: amountEGP,
+        commissionPct: 0,
+        channel,
+        orderRef: refCode,
+        entryDate: paymentDate,
+        actorEmail: sess.email
+      });
+      let rem = amountEGP;
+      for (const r of securityState.ownerFinance.receivables) {
+        if (rem <= 0) break;
+        if (r.clientName.toLowerCase() === partyName.toLowerCase() && r.status !== "collected") {
+          const open = round2(r.totalAmountEGP - r.collectedAmountEGP);
+          const applyAmt = Math.min(open, rem);
+          r.collectedAmountEGP = round2(r.collectedAmountEGP + applyAmt);
+          r.status = r.collectedAmountEGP >= r.totalAmountEGP ? "collected" : "partial";
+          r.updatedAt = nowIso;
+          rem = round2(rem - applyAmt);
+        }
+      }
+    }
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u062A\u0633\u062C\u064A\u0644 \u062D\u0631\u0643\u0629 ${partyType === "supplier" ? "\u0633\u062F\u0627\u062F \u0645\u0648\u0631\u062F" : "\u062A\u062D\u0635\u064A\u0644 \u0639\u0645\u064A\u0644"} (${partyName}) \u0628\u0645\u0628\u0644\u063A ${amountEGP.toLocaleString()} \u062C.\u0645`,
+      category: "purchase",
+      amountEGP,
+      details: `GL: ${glAccountCode} \xB7 \u0646\u0648\u0639 \u0627\u0644\u062D\u0631\u0643\u0629: ${direction}`
+    });
+    res.status(201).json({ ok: true, payment, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.patch("/api/owner-finance/total-funds/policy", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const method = req.body?.authMethod;
+    if (method !== "fingerprint" && method !== "iris" && method !== "camera_face") {
+      res.status(400).json({ ok: false, messageAr: "\u0637\u0631\u064A\u0642\u0629 \u0627\u0644\u062D\u0645\u0627\u064A\u0629 \u063A\u064A\u0631 \u0635\u0627\u0644\u062D\u0629 (fingerprint / iris / camera_face)." });
+      return;
+    }
+    securityState.ownerFinance.totalFundsAuthMethod = method;
+    sess.totalFundsUnlockedUntilMs = 0;
+    sessionStore.set(sess.sessionId, sess);
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0636\u0628\u0637 \u0648\u0633\u064A\u0644\u0629 \u062D\u0645\u0627\u064A\u0629 \u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0645\u0627\u0644 \u0627\u0644\u0645\u062A\u0627\u062D \u0625\u0644\u0649 (${method})`,
+      category: "total_funds_gate",
+      amountEGP: 0,
+      details: `Selected auth method: ${method}`
+    });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/total-funds/unlock", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    const requiredMethod = securityState.ownerFinance.totalFundsAuthMethod || "fingerprint";
+    const methodUsed = body.method || requiredMethod;
+    if (methodUsed !== requiredMethod) {
+      res.status(400).json({
+        ok: false,
+        messageAr: `\u0627\u0644\u0646\u0638\u0627\u0645 \u0645\u0636\u0628\u0648\u0637 \u062D\u0627\u0644\u064A\u0627\u064B \u0639\u0644\u0649 \u0627\u0644\u062A\u062D\u0642\u0642 \u0639\u0628\u0631 (${requiredMethod}). \u064A\u0631\u062C\u0649 \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u0627\u0644\u0648\u0633\u064A\u0644\u0629 \u0627\u0644\u0645\u062E\u062A\u0627\u0631\u0629.`
+      });
+      return;
+    }
+    let verified = false;
+    if (methodUsed === "camera_face") {
+      const snap = String(body.cameraSnapshotBase64 || "").trim();
+      if (snap.startsWith("data:image/") && snap.length >= 600) {
+        verified = true;
+      }
+    } else {
+      if (body.credentialId && body.clientDataJSON && sess.webauthnChallenge) {
+        const isReg = securityState.ownerFinance.webauthnCredentials.some((c) => c.credentialId === body.credentialId);
+        if (isReg) {
+          try {
+            const parsed = JSON.parse(Buffer.from(body.clientDataJSON, "base64url").toString("utf8"));
+            if (parsed.type === "webauthn.get" && parsed.challenge === sess.webauthnChallenge) {
+              verified = true;
+              sess.webauthnChallenge = void 0;
+            }
+          } catch {
+            verified = false;
+          }
+        }
+      }
+      if (!verified && body.pin && securityState.ownerPin) {
+        const candidate = hashOwnerPin(String(body.pin), securityState.ownerPin.salt);
+        verified = timingSafeHexEquals(candidate, securityState.ownerPin.hash);
+      }
+    }
+    if (!verified) {
+      res.status(401).json({
+        ok: false,
+        messageAr: methodUsed === "camera_face" ? "\u064A\u0631\u062C\u0649 \u0627\u0644\u062A\u0642\u0627\u0637 \u0635\u0648\u0631\u0629 \u062D\u064A\u0629 \u0648\u0627\u0636\u062D\u0629 \u0645\u0646 \u0627\u0644\u0643\u0627\u0645\u064A\u0631\u0627 \u0644\u0641\u062A\u062D \u0634\u0627\u0634\u0629 \u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0645\u0627\u0644 \u0627\u0644\u0645\u062A\u0627\u062D." : "\u062A\u0639\u0630\u0631 \u0627\u0644\u062A\u062D\u0642\u0642 \u0627\u0644\u062D\u064A\u0648\u064A (\u0627\u0644\u0628\u0635\u0645\u0629/\u0627\u0644\u0642\u0632\u062D\u064A\u0629) \u0623\u0648 \u0631\u0645\u0632 \u0627\u0644\u062A\u0623\u0643\u064A\u062F \u0644\u0641\u062A\u062D \u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0645\u0627\u0644 \u0627\u0644\u0645\u062A\u0627\u062D."
+      });
+      return;
+    }
+    sess.totalFundsUnlockedUntilMs = Date.now() + 10 * 60 * 1e3;
+    sessionStore.set(sess.sessionId, sess);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0641\u062A\u062D \u0634\u0627\u0634\u0629 \u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0645\u0627\u0644 \u0627\u0644\u0645\u062A\u0627\u062D \u0628\u0646\u062C\u0627\u062D (${methodUsed})`,
+      category: "total_funds_gate",
+      amountEGP: 0,
+      details: "Verified multi-modal biometric/camera access"
+    });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/total-funds/lock", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    sess.totalFundsUnlockedUntilMs = 0;
+    sessionStore.set(sess.sessionId, sess);
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/locked-treasury/unlock", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    let ok = false;
+    if (body.credentialId && body.clientDataJSON && sess.webauthnChallenge) {
+      const isReg = securityState.ownerFinance.webauthnCredentials.some((c) => c.credentialId === body.credentialId);
+      if (isReg) {
+        try {
+          const parsed = JSON.parse(Buffer.from(body.clientDataJSON, "base64url").toString("utf8"));
+          if (parsed.type === "webauthn.get" && parsed.challenge === sess.webauthnChallenge) {
+            ok = true;
+            sess.webauthnChallenge = void 0;
+          }
+        } catch {
+          ok = false;
+        }
+      }
+    }
+    if (!ok && body.pin && securityState.ownerPin) {
+      const candidate = hashOwnerPin(String(body.pin), securityState.ownerPin.salt);
+      ok = timingSafeHexEquals(candidate, securityState.ownerPin.hash);
+    }
+    if (!ok) {
+      res.status(401).json({ ok: false, messageAr: "\u0631\u0645\u0632 PIN \u0623\u0648 \u0627\u0644\u0628\u0635\u0645\u0629 \u0627\u0644\u0645\u0633\u062C\u0644\u0629 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D \u0644\u0641\u062A\u062D \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629." });
+      return;
+    }
+    sess.lockedTreasuryUnlockedUntilMs = Date.now() + 10 * 60 * 1e3;
+    sessionStore.set(sess.sessionId, sess);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: "\u0641\u062A\u062D \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 (10% \u0645\u0646 \u0627\u0644\u0623\u0631\u0628\u0627\u062D) \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0627\u0644\u0643",
+      category: "locked_treasury",
+      amountEGP: securityState.ownerFinance.lockedTreasury.balanceEGP,
+      details: "Unlocked via Owner PIN/WebAuthn"
+    });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/locked-treasury/withdraw", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    if (!sess.lockedTreasuryUnlockedUntilMs || Date.now() > sess.lockedTreasuryUnlockedUntilMs) {
+      res.status(423).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u0641\u0643 \u0642\u0641\u0644 \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 \u0623\u0648\u0644\u0627\u064B \u0642\u0628\u0644 \u0627\u0644\u0633\u062D\u0628." });
+      return;
+    }
+    const body = req.body || {};
+    const amountEGP = round2(Number(body.amountEGP || 0));
+    const currentLocked = round2(securityState.ownerFinance.lockedTreasury.balanceEGP || 0);
+    const targetChannel = body.targetChannel === "bank" || body.targetChannel === "e_wallet" || body.targetChannel === "treasury" ? body.targetChannel : "bank";
+    if (!Number.isFinite(amountEGP) || amountEGP <= 0 || amountEGP > currentLocked) {
+      res.status(400).json({ ok: false, messageAr: "\u0627\u0644\u0645\u0628\u0644\u063A \u0627\u0644\u0645\u0637\u0644\u0648\u0628 \u063A\u064A\u0631 \u0635\u0627\u0644\u062D \u0623\u0648 \u064A\u062A\u062C\u0627\u0648\u0632 \u0631\u0635\u064A\u062F \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629." });
+      return;
+    }
+    securityState.ownerFinance.lockedTreasury.balanceEGP = round2(currentLocked - amountEGP);
+    securityState.ownerFinance.accounts[targetChannel] = round2((securityState.ownerFinance.accounts[targetChannel] || 0) + amountEGP);
+    securityState.ownerFinance.lockedTreasury.transfers.unshift({
+      transferId: `LKT-WD-${Date.now().toString(36).toUpperCase()}`,
+      sourceEntryId: "OWNER_WITHDRAW",
+      sourceLabel: `\u0633\u062D\u0628 \u0645\u0639\u062A\u0645\u062F \u0645\u0646 \u0627\u0644\u0645\u0627\u0644\u0643 \u0625\u0644\u0649 ${targetChannel}`,
+      netProfitBaseEGP: currentLocked,
+      deductedAmountEGP: -amountEGP,
+      noteAr: String(body.reason || "\u062A\u062D\u0648\u064A\u0644 \u0633\u064A\u0648\u0644\u0629 \u0645\u0646 \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629").slice(0, 200),
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    });
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0633\u062D\u0628 ${amountEGP.toLocaleString()} \u062C.\u0645 \u0645\u0646 \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 \u0625\u0644\u0649 (${targetChannel})`,
+      category: "locked_treasury",
+      amountEGP,
+      details: String(body.reason || "\u0633\u062D\u0628 \u0637\u0627\u0631\u0626 / \u0627\u0633\u062A\u062B\u0645\u0627\u0631\u064A \u0645\u0639\u062A\u0645\u062F")
+    });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/emergency-scan", requireVerifiedOwner2FA, async (req, res) => {
+    const sess = req.authSession;
+    const { accounts, payables, bolRows, inventoryItems, lockedTreasury } = securityState.ownerFinance;
+    const liquidTotal = round2((accounts.bank || 0) + (accounts.e_wallet || 0) + (accounts.treasury || 0));
+    const openPayables = payables.filter((p) => p.status !== "paid" && round2(p.totalAmountEGP - p.paidAmountEGP) > 0).map((p) => ({
+      id: p.payableId,
+      kind: "payable",
+      partyName: p.supplierName,
+      scope: p.supplierScope || "external_supplier",
+      scopeAr: p.supplierScope === "internal_platform" ? "\u0645\u0648\u0631\u062F \u062F\u0627\u062E\u0644\u064A \u0628\u0627\u0644\u0645\u0646\u0635\u0629" : "\u0645\u0648\u0631\u062F / \u062C\u0647\u0629 \u062E\u0627\u0631\u062C\u064A\u0629",
+      purpose: p.purpose,
+      amountEGP: round2(p.totalAmountEGP - p.paidAmountEGP),
+      dueDate: p.scheduledPaymentDate,
+      urgency: p.urgency || (Date.parse(p.scheduledPaymentDate) <= Date.now() + 3 * 864e5 ? "urgent" : "normal")
+    }));
+    const urgentBol = bolRows.filter((b) => (b.urgency === "urgent" || b.urgency === "emergency") && (b.remainingEGP > 0 || b.debitEGP > 0)).map((b) => ({
+      id: b.rowId,
+      kind: "bol",
+      partyName: b.partyName,
+      scope: "internal_platform",
+      scopeAr: "\u0627\u0644\u062A\u0632\u0627\u0645 \u0628\u0648\u0644\u064A\u0635\u0629 \u0639\u0627\u062C\u0644",
+      purpose: `${b.statement} (${b.originLabel})`,
+      amountEGP: round2(b.remainingEGP > 0 ? b.remainingEGP : b.debitEGP),
+      dueDate: b.entryDate,
+      urgency: b.urgency
+    }));
+    const lowStock = inventoryItems.filter((i) => i.quantityOnHand <= i.minStockAlert);
+    const emergencyItems = [...openPayables, ...urgentBol].sort((a, b) => {
+      const rank = { emergency: 3, urgent: 2, normal: 1 };
+      return (rank[b.urgency] || 1) - (rank[a.urgency] || 1) || b.amountEGP - a.amountEGP;
+    });
+    const totalUrgentNeedEGP = round2(emergencyItems.reduce((s, i) => s + i.amountEGP, 0));
+    const deficitEGP = Math.max(0, round2(totalUrgentNeedEGP - liquidTotal));
+    const coveragePct = totalUrgentNeedEGP > 0 ? Math.min(100, round2(liquidTotal / totalUrgentNeedEGP * 100)) : 100;
+    let aiPriorityNoteAr = deficitEGP > 0 ? `\u062A\u0648\u062C\u062F \u0641\u062C\u0648\u0629 \u0633\u064A\u0648\u0644\u0629 \u0641\u0648\u0631\u064A\u0629 \u0628\u0645\u0642\u062F\u0627\u0631 ${deficitEGP.toLocaleString()} \u062C.\u0645 \u0644\u062A\u063A\u0637\u064A\u0629 \u0627\u0644\u0627\u0644\u062A\u0632\u0627\u0645\u0627\u062A \u0627\u0644\u0639\u0627\u062C\u0644\u0629. \u064A\u064F\u0646\u0635\u062D \u0628\u062C\u062F\u0648\u0644\u0629 \u0627\u0644\u0645\u0648\u0631\u062F\u064A\u0646 \u063A\u064A\u0631 \u0627\u0644\u062D\u0631\u062C\u064A\u0646 \u0623\u0648 \u062A\u0639\u0632\u064A\u0632 \u0627\u0644\u062A\u062D\u0635\u064A\u0644.` : `\u0627\u0644\u0633\u064A\u0648\u0644\u0629 \u0627\u0644\u0645\u062A\u0627\u062D\u0629 (${liquidTotal.toLocaleString()} \u062C.\u0645) \u062A\u063A\u0637\u064A 100% \u0645\u0646 \u0627\u0644\u0627\u0644\u062A\u0632\u0627\u0645\u0627\u062A \u0627\u0644\u0639\u0627\u062C\u0644\u0629 \u0627\u0644\u062D\u0627\u0644\u064A\u0629 (${totalUrgentNeedEGP.toLocaleString()} \u062C.\u0645).`;
+    const apiKey = process.env.GEMINI_API_KEY?.trim();
+    if (apiKey && emergencyItems.length > 0) {
+      try {
+        const genaiPkg = ["@google", "genai"].join("/");
+        const { GoogleGenAI } = await import(genaiPkg);
+        const ai = new GoogleGenAI({ apiKey, httpOptions: { headers: { "User-Agent": "aistudio-build" } } });
+        const resp = await ai.models.generateContent({
+          model: "gemini-4-hydrogen",
+          contents: `\u0623\u0646\u062A \u0627\u0644\u0645\u0633\u062A\u0634\u0627\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u0644\u0644\u0637\u0648\u0627\u0631\u0626 \u0641\u064A \u0634\u0631\u0643\u0629 \u0628\u0627\u0633\u0637. \u0623\u0639\u0637\u0650 \u062A\u0648\u0635\u064A\u0629 \u0639\u0631\u0628\u064A\u0629 \u0645\u062E\u062A\u0635\u0631\u0629 \u062C\u062F\u0627\u064B (\u0633\u0637\u0631\u064A\u0646 \u0641\u0642\u0637) \u0644\u062A\u0631\u062A\u064A\u0628 \u0623\u0648\u0644\u0648\u064A\u0629 \u0627\u0644\u0633\u062F\u0627\u062F \u0628\u0646\u0627\u0621\u064B \u0639\u0644\u0649:
+\u0627\u0644\u0633\u064A\u0648\u0644\u0629 \u0627\u0644\u0633\u0627\u0626\u0644\u0629: ${liquidTotal} \u062C.\u0645\u060C \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 \u0627\u0644\u0627\u062D\u062A\u064A\u0627\u0637\u064A\u0629: ${lockedTreasury.balanceEGP} \u062C.\u0645\u060C \u0627\u0644\u0627\u0644\u062A\u0632\u0627\u0645\u0627\u062A: ${JSON.stringify(emergencyItems.slice(0, 8))}`
+        });
+        if (resp.text?.trim()) {
+          aiPriorityNoteAr = resp.text.trim();
+        }
+      } catch {
+      }
+    }
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u062A\u0634\u063A\u064A\u0644 \u0645\u0633\u062D \u0627\u0644\u0637\u0648\u0627\u0631\u0626 \u0648\u0627\u0644\u0627\u0644\u062A\u0632\u0627\u0645\u0627\u062A \u0627\u0644\u0639\u0627\u062C\u0644\u0629 (${emergencyItems.length} \u0628\u0646\u062F \u2014 \u062A\u063A\u0637\u064A\u0629 ${coveragePct}%)`,
+      category: "emergency",
+      amountEGP: totalUrgentNeedEGP,
+      details: `Liquid=${liquidTotal} EGP, Deficit=${deficitEGP} EGP, LowStock=${lowStock.length}`
+    });
+    res.json({
+      ok: true,
+      scan: {
+        scannedAt: (/* @__PURE__ */ new Date()).toISOString(),
+        liquidTotalEGP: liquidTotal,
+        totalUrgentNeedEGP,
+        deficitEGP,
+        coveragePct,
+        lowStockCount: lowStock.length,
+        lowStockItems: lowStock,
+        items: emergencyItems,
+        aiPriorityNoteAr
+      }
+    });
+  });
+  app.post("/api/owner-finance/managers", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const body = req.body || {};
+    const slotNumber = body.slotNumber === 2 ? 2 : 1;
+    const username = String(body.username || "").trim().toLowerCase().replace(/^@/, "");
+    const fullName = String(body.fullName || "").trim().slice(0, 120);
+    const password = String(body.password || "");
+    if (!/^[a-z0-9._-]{3,32}$/.test(username)) {
+      res.status(400).json({ ok: false, messageAr: "\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645 \u064A\u062C\u0628 \u0623\u0646 \u064A\u0643\u0648\u0646 3-32 \u062D\u0631\u0641\u0627\u064B/\u0631\u0642\u0645\u0627\u064B \u0625\u0646\u062C\u0644\u064A\u0632\u064A\u0627\u064B." });
+      return;
+    }
+    if (fullName.length < 2) {
+      res.status(400).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u0643\u062A\u0627\u0628\u0629 \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644 \u0644\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A." });
+      return;
+    }
+    if (!isStrongPassword(password)) {
+      res.status(400).json({ ok: false, messageAr: "\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u064A\u062C\u0628 \u0623\u0646 \u062A\u0643\u0648\u0646 8 \u0623\u062D\u0631\u0641/\u0623\u0631\u0642\u0627\u0645 \u0642\u0648\u064A\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644." });
+      return;
+    }
+    const activeManagers = securityState.ownerFinance.financeManagers.filter((m) => m.status !== "deleted");
+    const existingSameUsername = activeManagers.find((m) => m.username === username && m.slotNumber !== slotNumber);
+    if (existingSameUsername) {
+      res.status(409).json({ ok: false, messageAr: "\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645 \u0645\u0633\u062C\u0644 \u0644\u0645\u062F\u064A\u0631 \u0645\u0627\u0644\u064A \u0622\u062E\u0631 \u0628\u0627\u0644\u0641\u0639\u0644." });
+      return;
+    }
+    const existingSlot = activeManagers.find((m) => m.slotNumber === slotNumber);
+    const salt = crypto.randomBytes(16).toString("hex");
+    const hash = hashOwnerPin(password, salt);
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    if (existingSlot) {
+      terminateFinanceManagerSessions(existingSlot.managerId);
+      existingSlot.username = username;
+      existingSlot.fullName = fullName;
+      existingSlot.passwordSalt = salt;
+      existingSlot.passwordHash = hash;
+      existingSlot.status = "active";
+      existingSlot.mustChangePassword = false;
+      existingSlot.updatedAt = nowIso;
+    } else {
+      if (activeManagers.length >= 2) {
+        res.status(409).json({ ok: false, messageAr: "\u0627\u0644\u062D\u062F \u0627\u0644\u0623\u0642\u0635\u0649 \u0647\u0648 \u0627\u062B\u0646\u064A\u0646 \u0645\u062F\u0631\u0627\u0621 \u0645\u0627\u0644\u064A\u064A\u0646 \u0641\u0642\u0637." });
+        return;
+      }
+      securityState.ownerFinance.financeManagers.push({
+        managerId: `FM-${slotNumber}-${Date.now().toString(36).toUpperCase()}`,
+        slotNumber,
+        username,
+        fullName,
+        passwordSalt: salt,
+        passwordHash: hash,
+        status: "active",
+        mustChangePassword: false,
+        lastLoginAt: null,
+        createdAt: nowIso,
+        updatedAt: nowIso
+      });
+    }
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0627\u0639\u062A\u0645\u0627\u062F/\u062A\u062D\u062F\u064A\u062B \u062D\u0633\u0627\u0628 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u0631\u0642\u0645 (${slotNumber}): @${username}`,
+      category: "finance_manager",
+      amountEGP: 0,
+      details: `${fullName} \xB7 \u0645\u0639\u0632\u0648\u0644 \u062A\u0645\u0627\u0645\u0627\u064B \u0639\u0646 \u0623\u0631\u0635\u062F\u0629 \u0627\u0644\u0645\u0627\u0644\u0643`
+    });
+    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.patch("/api/owner-finance/managers/:managerId/status", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const managerId = String(req.params.managerId || "").trim();
+    const mgr = securityState.ownerFinance.financeManagers.find((m) => m.managerId === managerId && m.status !== "deleted");
+    if (!mgr) {
+      res.status(404).json({ ok: false, messageAr: "\u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F." });
+      return;
+    }
+    const nextStatus = req.body?.status === "suspended" ? "suspended" : "active";
+    mgr.status = nextStatus;
+    mgr.updatedAt = (/* @__PURE__ */ new Date()).toISOString();
+    if (nextStatus === "suspended") {
+      terminateFinanceManagerSessions(mgr.managerId);
+    }
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `${nextStatus === "suspended" ? "\u0625\u064A\u0642\u0627\u0641 \u0645\u0624\u0642\u062A" : "\u0625\u0639\u0627\u062F\u0629 \u062A\u0641\u0639\u064A\u0644"} \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A @${mgr.username}`,
+      category: "finance_manager",
+      amountEGP: 0,
+      details: `Slot ${mgr.slotNumber} -> ${nextStatus}`
+    });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.delete("/api/owner-finance/managers/:managerId", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const managerId = String(req.params.managerId || "").trim();
+    const mgr = securityState.ownerFinance.financeManagers.find((m) => m.managerId === managerId && m.status !== "deleted");
+    if (!mgr) {
+      res.status(404).json({ ok: false, messageAr: "\u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F \u0623\u0648 \u062A\u0645 \u062D\u0630\u0641\u0647 \u0645\u0633\u0628\u0642\u0627\u064B." });
+      return;
+    }
+    terminateFinanceManagerSessions(mgr.managerId);
+    mgr.status = "deleted";
+    mgr.updatedAt = (/* @__PURE__ */ new Date()).toISOString();
+    const relatedEntries = securityState.ownerFinance.managerSubTreasuryEntries.filter(
+      (e) => e.managerId === mgr.managerId
+    );
+    const existingArchiveIds = new Set(securityState.ownerFinance.archivedManagerRecords.map((a) => a.entryId));
+    for (const rec of relatedEntries) {
+      if (!existingArchiveIds.has(rec.entryId)) {
+        securityState.ownerFinance.archivedManagerRecords.unshift({
+          ...rec,
+          aiAuditNoteAr: `${rec.aiAuditNoteAr ? `${rec.aiAuditNoteAr} \xB7 ` : ""}\u0645\u0624\u0631\u0634\u0641 \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B \u0628\u0639\u062F \u062D\u0630\u0641 \u0627\u0644\u0645\u062F\u064A\u0631 (@${mgr.username}) \u0628\u062A\u0627\u0631\u064A\u062E ${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}`
+        });
+      }
+    }
+    saveSecurityState(securityState);
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u062D\u0630\u0641 \u062D\u0633\u0627\u0628 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A @${mgr.username} \u0645\u0639 \u062D\u0641\u0638 ${relatedEntries.length} \u0633\u062C\u0644 \u0641\u064A \u0627\u0644\u0623\u0631\u0634\u064A\u0641 \u0627\u0644\u0639\u0627\u0645`,
+      category: "finance_manager",
+      amountEGP: 0,
+      details: "Zero-data-loss deletion policy executed"
+    });
+    res.json({ ok: true, archivedCount: relatedEntries.length, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.post("/api/owner-finance/ai-manager-audit", requireVerifiedOwner2FA, async (req, res) => {
+    const sess = req.authSession;
+    const report = runDeterministicManagerAudit(false);
+    if (!report) {
+      res.status(400).json({ ok: false, messageAr: "\u0644\u0627 \u062A\u0648\u062C\u062F \u062D\u0631\u0643\u0627\u062A \u0645\u0633\u062C\u0644\u0629 \u0641\u064A \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0641\u0631\u0639\u064A\u0629 \u0644\u0644\u0645\u062F\u0631\u0627\u0621 \u0627\u0644\u0645\u0627\u0644\u064A\u064A\u0646 \u0628\u0639\u062F." });
+      return;
+    }
+    const apiKey = process.env.GEMINI_API_KEY?.trim();
+    if (apiKey) {
+      try {
+        const genaiPkg = ["@google", "genai"].join("/");
+        const { GoogleGenAI } = await import(genaiPkg);
+        const ai = new GoogleGenAI({ apiKey, httpOptions: { headers: { "User-Agent": "aistudio-build" } } });
+        const sampleEntries = securityState.ownerFinance.managerSubTreasuryEntries.slice(0, 40);
+        const resp = await ai.models.generateContent({
+          model: "gemini-4-hydrogen",
+          contents: `\u0623\u0646\u062A \u0627\u0644\u0645\u062F\u0642\u0642 \u0627\u0644\u0645\u0627\u0644\u064A \u0627\u0644\u0630\u0643\u064A \u0628\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0644\u0645\u0646\u0635\u0629 \u0628\u0627\u0633\u0637. \u0642\u062F\u0651\u0645 \u0645\u0644\u062E\u0635 \u062A\u062F\u0642\u064A\u0642 \u0627\u062D\u062A\u0631\u0627\u0641\u064A \u0628\u0627\u0644\u0639\u0631\u0628\u064A\u0629 (3-4 \u062C\u0645\u0644 \u0645\u0631\u0643\u0632\u0629) \u0644\u062D\u0631\u0643\u0627\u062A \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0641\u0631\u0639\u064A\u0629 \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0627\u0644\u0645\u062F\u0631\u0627\u0621 \u0627\u0644\u0645\u0627\u0644\u064A\u064A\u0646 \u062E\u0644\u0627\u0644 \u062F\u0648\u0631\u0629 45 \u064A\u0648\u0645\u0627\u064B \u0648\u0623\u064A \u0645\u062E\u0627\u0637\u0631 \u0623\u0648 \u062A\u0646\u0628\u064A\u0647\u0627\u062A \u0644\u0644\u0645\u0627\u0644\u0643:
+${JSON.stringify(sampleEntries)}`
+        });
+        if (resp.text?.trim()) {
+          report.summaryAr = resp.text.trim();
+          const latestAlert = securityState.ownerFinance.ownerAuditAlerts[0];
+          if (latestAlert && latestAlert.reportId === report.reportId) {
+            latestAlert.bodyAr = report.summaryAr;
+          }
+          saveSecurityState(securityState);
+        }
+      } catch {
+      }
+    }
+    appendOwnerFinanceAudit({
+      actorEmail: sess.email,
+      actionAr: `\u0625\u062C\u0631\u0627\u0621 \u0641\u062D\u0635 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0630\u0643\u064A\u0629 AI \u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u062F\u0631\u0627\u0621 \u0627\u0644\u0645\u0627\u0644\u064A\u064A\u0646 (${report.totalEntriesReviewed} \u062D\u0631\u0643\u0629)`,
+      category: "ai_audit",
+      amountEGP: report.totalVolumeEGP,
+      details: `Flagged: ${report.flaggedCount}`
+    });
+    res.json({ ok: true, report, ...buildOwnerFinanceSummaryPayload(sess) });
+  });
+  app.patch("/api/owner-finance/alerts/:alertId/read", requireVerifiedOwner2FA, (req, res) => {
+    const sess = req.authSession;
+    const alertId = String(req.params.alertId || "").trim();
+    const alert = securityState.ownerFinance.ownerAuditAlerts.find((a) => a.alertId === alertId);
+    if (!alert) {
+      res.status(404).json({ ok: false, messageAr: "\u0627\u0644\u062A\u0646\u0628\u064A\u0647 \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F." });
+      return;
+    }
+    alert.readByOwner = true;
+    saveSecurityState(securityState);
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
   });
   app.post("/api/owner-finance/receivables", requireVerifiedOwner2FA, (req, res) => {
     const sess = req.authSession;
@@ -4625,7 +5885,7 @@ async function createConfiguredApp() {
       amountEGP: totalAmountEGP,
       details: `${purpose} \xB7 \u0627\u0633\u062A\u062D\u0642\u0627\u0642: ${dueDate}`
     });
-    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload() });
+    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
   });
   app.patch("/api/owner-finance/receivables/:id/collect", requireVerifiedOwner2FA, (req, res) => {
     const sess = req.authSession;
@@ -4649,6 +5909,7 @@ async function createConfiguredApp() {
     recordOwnerFinancialInflow({
       source: rec.clientName,
       purpose: `\u062A\u062D\u0635\u064A\u0644 \u0645\u0633\u062A\u062D\u0642\u0627\u062A \u0639\u0645\u0644\u0627\u0621: ${rec.purpose}`,
+      originLabel: `\u062A\u062D\u0635\u064A\u0644 \u0645\u062F\u064A\u0648\u0646\u064A\u0629 \u0639\u0645\u0644\u0627\u0621 (${rec.clientName})`,
       grossEGP: collectAmt,
       commissionPct: 0,
       channel,
@@ -4663,7 +5924,7 @@ async function createConfiguredApp() {
       details: `\u0627\u0644\u062D\u0627\u0644\u0629 \u0627\u0644\u0622\u0646: ${rec.status} \xB7 \u0642\u0646\u0627\u0629 \u0627\u0644\u062A\u062D\u0635\u064A\u0644: ${channel}`
     });
     saveSecurityState(securityState);
-    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload() });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
   });
   app.post("/api/owner-finance/payables", requireVerifiedOwner2FA, (req, res) => {
     const sess = req.authSession;
@@ -4681,6 +5942,8 @@ async function createConfiguredApp() {
       payableId: `PAY-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
       supplierName,
       purpose,
+      supplierScope: body.supplierScope === "internal_platform" ? "internal_platform" : "external_supplier",
+      urgency: body.urgency === "urgent" || body.urgency === "emergency" ? body.urgency : "normal",
       totalAmountEGP,
       paidAmountEGP: 0,
       scheduledPaymentDate,
@@ -4695,9 +5958,9 @@ async function createConfiguredApp() {
       actionAr: `\u062C\u062F\u0648\u0644\u0629 \u0645\u0633\u062A\u062D\u0642\u0627\u062A \u0645\u0648\u0631\u062F (\u0639\u0644\u064A\u0646\u0627 \u0628\u0631\u0647) \u0644\u0640 ${supplierName} \u0628\u0642\u064A\u0645\u0629 ${totalAmountEGP.toLocaleString()} \u062C.\u0645`,
       category: "payable",
       amountEGP: totalAmountEGP,
-      details: `${purpose} \xB7 \u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0633\u062F\u0627\u062F: ${scheduledPaymentDate}`
+      details: `${purpose} \xB7 \u0627\u0644\u0646\u0637\u0627\u0642: ${payRec.supplierScope} \xB7 \u0627\u0633\u062A\u062D\u0642\u0627\u0642: ${scheduledPaymentDate}`
     });
-    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload() });
+    res.status(201).json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
   });
   app.patch("/api/owner-finance/payables/:id/pay", requireVerifiedOwner2FA, (req, res) => {
     const sess = req.authSession;
@@ -4724,6 +5987,8 @@ async function createConfiguredApp() {
       direction: "outflow",
       sourceOrBeneficiary: rec.supplierName,
       purpose: `\u0633\u062F\u0627\u062F \u062F\u0641\u0639\u0629 \u0645\u0648\u0631\u062F: ${rec.purpose}`,
+      originLabel: `\u0633\u062F\u0627\u062F \u0645\u0633\u062A\u062D\u0642\u0627\u062A (${rec.supplierScope === "internal_platform" ? "\u0645\u0648\u0631\u062F \u062F\u0627\u062E\u0644\u064A" : "\u0645\u0648\u0631\u062F \u062E\u0627\u0631\u062C\u064A"})`,
+      urgency: rec.urgency || "normal",
       expenseCategory: "raw_materials",
       channel,
       grossEGP: payAmt,
@@ -4744,7 +6009,7 @@ async function createConfiguredApp() {
       amountEGP: payAmt,
       details: `\u0627\u0644\u062D\u0627\u0644\u0629 \u0627\u0644\u0622\u0646: ${rec.status} \xB7 \u0627\u0644\u0642\u0646\u0627\u0629: ${channel}`
     });
-    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload() });
+    res.json({ ok: true, ...buildOwnerFinanceSummaryPayload(sess) });
   });
   app.post("/api/owner-finance/audit-export", requireVerifiedOwner2FA, (req, res) => {
     const sess = req.authSession;
@@ -4771,9 +6036,10 @@ async function createConfiguredApp() {
       });
       return;
     }
-    const summary = buildOwnerFinanceSummaryPayload();
+    const summary = buildOwnerFinanceSummaryPayload(sess);
     const safeReserveEGP = round2(Math.max(summary.totals.totalPayablesOpen * 1.15, 0));
     const investableSurplusEGP = round2(Math.max(0, summary.accounts.totalNetBalance - safeReserveEGP));
+    const lockedTreasuryBalanceEGP = round2(securityState.ownerFinance.lockedTreasury.balanceEGP || 0);
     try {
       const genaiPkg = ["@google", "genai"].join("/");
       const { GoogleGenAI } = await import(genaiPkg);
@@ -4783,11 +6049,18 @@ async function createConfiguredApp() {
       });
       const prompt = [
         '\u0623\u0646\u062A \u0627\u0644\u0645\u0633\u062A\u062B\u0645\u0631 \u0627\u0644\u0630\u0643\u064A \u0627\u0644\u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A \u0648\u0627\u0644\u0645\u0633\u062A\u0634\u0627\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u0627\u0644\u062D\u0635\u0631\u064A \u0644\u0645\u0627\u0644\u0643 \u0645\u0646\u0635\u0629 "\u0628\u0627\u0633\u0637 | BASIT" \u0644\u0644\u062A\u0645\u0648\u064A\u0646 \u0648\u0627\u0644\u062E\u062F\u0645\u0627\u062A \u0627\u0644\u0644\u0648\u062C\u0633\u062A\u064A\u0629 \u0641\u064A \u0645\u0635\u0631.',
-        "\u0642\u0645 \u0628\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u062A\u062F\u0641\u0642\u0627\u062A \u0627\u0644\u0646\u0642\u062F\u064A\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629 \u0628\u062F\u0642\u0629 \u0648\u0627\u0642\u062A\u0631\u062D \u0641\u0631\u0635 \u0627\u0633\u062A\u062B\u0645\u0627\u0631\u064A\u0629 \u0622\u0645\u0646\u0629 \u0648\u0639\u0645\u0644\u064A\u0629 \u0641\u064A \u0645\u0635\u0631 \u062A\u0646\u0627\u0633\u0628 \u0627\u0644\u0641\u0627\u0626\u0636 \u0627\u0644\u0645\u062A\u0627\u062D\u060C \u0645\u0639 \u0627\u0644\u0627\u0644\u062A\u0632\u0627\u0645 \u0628\u0625\u0631\u062C\u0627\u0639 JSON \u0641\u0642\u0637 \u0628\u0647\u0630\u0627 \u0627\u0644\u0647\u064A\u0643\u0644 \u0627\u0644\u062F\u0642\u064A\u0642:",
+        "\u0642\u0645 \u0628\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u062A\u062F\u0641\u0642\u0627\u062A \u0627\u0644\u0646\u0642\u062F\u064A\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629 \u0628\u062F\u0642\u0629 \u0648\u0627\u0642\u062A\u0631\u062D \u0641\u0631\u0635 \u0627\u0633\u062A\u062B\u0645\u0627\u0631\u064A\u0629 \u062F\u0627\u062E\u0644\u064A\u0629 (\u062F\u0627\u062E\u0644 \u0645\u0637\u0627\u0628\u062E \u0648\u062A\u0648\u0633\u0639\u0627\u062A \u0628\u0627\u0633\u0637) \u0648\u062E\u0627\u0631\u062C\u064A\u0629 (\u0623\u0630\u0648\u0646 \u062E\u0632\u0627\u0646\u0629\u060C \u0635\u0646\u0627\u062F\u064A\u0642 \u0646\u0642\u062F\u064A\u0629\u060C \u0625\u0644\u062E) \u062A\u0646\u0627\u0633\u0628 \u0627\u0644\u0641\u0627\u0626\u0636 \u0627\u0644\u0645\u062A\u0627\u062D\u060C \u0645\u0639 \u0627\u0644\u0627\u0644\u062A\u0632\u0627\u0645 \u0628\u0625\u0631\u062C\u0627\u0639 JSON \u0641\u0642\u0637 \u0628\u0647\u0630\u0627 \u0627\u0644\u0647\u064A\u0643\u0644 \u0627\u0644\u062F\u0642\u064A\u0642:",
         "{",
         '  "summaryAr": "\u0645\u0644\u062E\u0635 \u062A\u0646\u0641\u064A\u0630\u064A \u0648\u0627\u0636\u062D \u0644\u0644\u0648\u0636\u0639 \u0627\u0644\u0646\u0642\u062F\u064A \u0627\u0644\u062D\u0627\u0644\u064A \u0648\u0627\u0644\u0633\u064A\u0648\u0644\u0629 \u0627\u0644\u062D\u0631\u0629",',
         '  "riskPostureAr": "\u0645\u0646\u062E\u0641\u0636 \u0627\u0644\u0645\u062E\u0627\u0637\u0631 / \u0645\u062A\u0648\u0627\u0632\u0646 / \u062A\u062D\u0648\u0637\u064A",',
         '  "investableSurplusEGP": number,',
+        '  "lockedTreasuryAdviceAr": "\u062A\u0648\u0635\u064A\u0629 \u062D\u0648\u0644 \u062A\u0648\u0638\u064A\u0641 \u0631\u0635\u064A\u062F \u0627\u0644\u062E\u0632\u064A\u0646\u0629 \u0627\u0644\u0645\u0642\u0641\u0648\u0644\u0629 (10%)",',
+        '  "internalOpportunities": [',
+        '    { "titleAr": "\u0641\u0631\u0635\u0629 \u062F\u0627\u062E\u0644\u064A\u0629", "allocationEGP": number, "expectedYieldAr": "\u0627\u0644\u0639\u0627\u0626\u062F \u0627\u0644\u0645\u062A\u0648\u0642\u0639", "horizonAr": "\u0627\u0644\u0645\u062F\u0629", "safetyLevelAr": "\u0627\u0644\u0623\u0645\u0627\u0646", "rationaleAr": "\u0627\u0644\u0633\u0628\u0628" }',
+        "  ],",
+        '  "externalOpportunities": [',
+        '    { "titleAr": "\u0641\u0631\u0635\u0629 \u062E\u0627\u0631\u062C\u064A\u0629", "allocationEGP": number, "expectedYieldAr": "\u0627\u0644\u0639\u0627\u0626\u062F \u0627\u0644\u0645\u062A\u0648\u0642\u0639", "horizonAr": "\u0627\u0644\u0645\u062F\u0629", "safetyLevelAr": "\u0627\u0644\u0623\u0645\u0627\u0646", "rationaleAr": "\u0627\u0644\u0633\u0628\u0628" }',
+        "  ],",
         '  "opportunities": [',
         "    {",
         '      "titleAr": "\u0627\u0633\u0645 \u0627\u0644\u0641\u0631\u0635\u0629 \u0627\u0644\u0627\u0633\u062A\u062B\u0645\u0627\u0631\u064A\u0629",',
@@ -4805,9 +6078,11 @@ async function createConfiguredApp() {
         JSON.stringify({
           accounts: summary.accounts,
           totals: summary.totals,
+          lockedTreasuryBalanceEGP,
           estimatedSafeReserveEGP: safeReserveEGP,
           estimatedInvestableSurplusEGP: investableSurplusEGP,
-          expenseAnalytics: summary.expenseAnalytics
+          expenseAnalytics: summary.expenseAnalytics,
+          inventoryItemsCount: summary.inventoryItems.length
         })
       ].join("\n");
       const response = await ai.models.generateContent({
@@ -4837,7 +6112,7 @@ async function createConfiguredApp() {
       }
       appendOwnerFinanceAudit({
         actorEmail: sess.email,
-        actionAr: "\u062A\u0634\u063A\u064A\u0644 \u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0645\u0633\u062A\u062B\u0645\u0631 \u0627\u0644\u0630\u0643\u064A AI \u0644\u0644\u062A\u062F\u0641\u0642 \u0627\u0644\u0646\u0642\u062F\u064A \u0648\u0641\u0631\u0635 \u0627\u0644\u0627\u0633\u062A\u062B\u0645\u0627\u0631",
+        actionAr: "\u062A\u0634\u063A\u064A\u0644 \u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0645\u0633\u062A\u062B\u0645\u0631 \u0627\u0644\u0630\u0643\u064A AI \u0644\u0644\u062A\u062F\u0641\u0642 \u0627\u0644\u0646\u0642\u062F\u064A \u0648\u0641\u0631\u0635 \u0627\u0644\u0627\u0633\u062A\u062B\u0645\u0627\u0631 \u0627\u0644\u062F\u0627\u062E\u0644\u064A\u0629 \u0648\u0627\u0644\u062E\u0627\u0631\u062C\u064A\u0629",
         category: "ai_investor",
         amountEGP: investableSurplusEGP,
         details: `Net Balance: ${summary.accounts.totalNetBalance} EGP \xB7 Surplus: ${investableSurplusEGP} EGP`
@@ -4858,6 +6133,552 @@ async function createConfiguredApp() {
         messageAr: `\u062A\u0639\u0630\u0631 \u0625\u062A\u0645\u0627\u0645 \u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0645\u0633\u062A\u062B\u0645\u0631 \u0627\u0644\u0630\u0643\u064A: ${errMsg}`
       });
     }
+  });
+  app.post("/api/finance-manager/login", (req, res) => {
+    const body = req.body || {};
+    const username = String(body.username || "").trim().toLowerCase().replace(/^@/, "");
+    const password = String(body.password || "");
+    const clientIp = req.ip || "unknown";
+    const rateKey = `fm:${clientIp}:${username || "anon"}`;
+    const nowMs = Date.now();
+    const failRec = passwordLoginFailStore.get(rateKey) || { count: 0, lockedUntilMs: 0 };
+    if (failRec.lockedUntilMs > nowMs) {
+      const waitMin = Math.ceil((failRec.lockedUntilMs - nowMs) / 6e4);
+      res.status(429).json({
+        ok: false,
+        messageAr: `\u062A\u0645 \u062A\u0639\u0644\u064A\u0642 \u0645\u062D\u0627\u0648\u0644\u0627\u062A \u0627\u0644\u062F\u062E\u0648\u0644 \u0645\u0624\u0642\u062A\u0627\u064B \u0644\u0645\u062F\u0629 ${waitMin} \u062F\u0642\u064A\u0642\u0629.`
+      });
+      return;
+    }
+    const acct = securityState.ownerFinance.financeManagers.find(
+      (m) => m.username === username && m.status !== "deleted"
+    );
+    if (!acct || acct.status === "suspended") {
+      res.status(401).json({
+        ok: false,
+        messageAr: acct?.status === "suspended" ? "\u062A\u0645 \u0625\u064A\u0642\u0627\u0641 \u0647\u0630\u0627 \u0627\u0644\u062D\u0633\u0627\u0628 \u0645\u0624\u0642\u062A\u0627\u064B \u0645\u0646 \u0627\u0644\u0645\u0627\u0644\u0643." : "\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645 \u0623\u0648 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D\u0629."
+      });
+      return;
+    }
+    const candidateHash = hashOwnerPin(password, acct.passwordSalt);
+    if (!timingSafeHexEquals(candidateHash, acct.passwordHash)) {
+      const nextCount = failRec.count + 1;
+      passwordLoginFailStore.set(rateKey, {
+        count: nextCount >= LOGIN_MAX_ATTEMPTS ? 0 : nextCount,
+        lockedUntilMs: nextCount >= LOGIN_MAX_ATTEMPTS ? nowMs + LOGIN_LOCK_MS : 0
+      });
+      res.status(401).json({ ok: false, messageAr: "\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645 \u0623\u0648 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D\u0629." });
+      return;
+    }
+    passwordLoginFailStore.delete(rateKey);
+    acct.lastLoginAt = new Date(nowMs).toISOString();
+    saveSecurityState(securityState);
+    const token = crypto.randomBytes(32).toString("base64url");
+    const fmSess = {
+      sessionId: token,
+      managerId: acct.managerId,
+      slotNumber: acct.slotNumber,
+      username: acct.username,
+      fullName: acct.fullName,
+      createdAtMs: nowMs,
+      expiresAtMs: nowMs + SESSION_TTL_MS
+    };
+    financeManagerSessionStore.set(token, fmSess);
+    setFinanceManagerCookie(req, res, token);
+    res.json({
+      ok: true,
+      sessionToken: token,
+      manager: sanitizeFinanceManagerPublic(acct)
+    });
+  });
+  app.get("/api/finance-manager/session", (req, res) => {
+    const sess = resolveFinanceManagerSession(req);
+    if (!sess) {
+      res.status(401).json({ ok: false, messageAr: "\u0644\u0627 \u062A\u0648\u062C\u062F \u062C\u0644\u0633\u0629 \u0645\u062F\u064A\u0631 \u0645\u0627\u0644\u064A \u0646\u0634\u0637\u0629." });
+      return;
+    }
+    const acct = securityState.ownerFinance.financeManagers.find((m) => m.managerId === sess.managerId);
+    if (!acct || acct.status !== "active") {
+      res.status(401).json({ ok: false, messageAr: "\u0627\u0644\u062C\u0644\u0633\u0629 \u0645\u0646\u062A\u0647\u064A\u0629." });
+      return;
+    }
+    res.json({ ok: true, manager: sanitizeFinanceManagerPublic(acct) });
+  });
+  app.post("/api/finance-manager/change-password", (req, res) => {
+    if (!verifySameOriginOrTokenHeader(req)) {
+      res.status(403).json({ ok: false, messageAr: "\u062A\u062D\u0642\u0642 \u0645\u0646 \u0645\u0635\u062F\u0631 \u0627\u0644\u0637\u0644\u0628." });
+      return;
+    }
+    const sess = resolveFinanceManagerSession(req);
+    if (!sess) {
+      res.status(401).json({ ok: false, messageAr: "\u064A\u0644\u0632\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0643\u0645\u062F\u064A\u0631 \u0645\u0627\u0644\u064A." });
+      return;
+    }
+    const acct = securityState.ownerFinance.financeManagers.find((m) => m.managerId === sess.managerId);
+    if (!acct || acct.status !== "active") {
+      res.status(401).json({ ok: false, messageAr: "\u0627\u0644\u062D\u0633\u0627\u0628 \u063A\u064A\u0631 \u0646\u0634\u0637." });
+      return;
+    }
+    const currentPassword = String(req.body?.currentPassword || "");
+    const newPassword = String(req.body?.newPassword || "");
+    if (!timingSafeHexEquals(hashOwnerPin(currentPassword, acct.passwordSalt), acct.passwordHash)) {
+      res.status(401).json({ ok: false, messageAr: "\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u0627\u0644\u062D\u0627\u0644\u064A\u0629 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D\u0629." });
+      return;
+    }
+    if (!isStrongPassword(newPassword)) {
+      res.status(400).json({ ok: false, messageAr: "\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u0627\u0644\u062C\u062F\u064A\u062F\u0629 \u064A\u062C\u0628 \u0623\u0646 \u062A\u0643\u0648\u0646 8 \u0623\u062D\u0631\u0641/\u0623\u0631\u0642\u0627\u0645 \u0642\u0648\u064A\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644." });
+      return;
+    }
+    const nextSalt = crypto.randomBytes(16).toString("hex");
+    acct.passwordSalt = nextSalt;
+    acct.passwordHash = hashOwnerPin(newPassword, nextSalt);
+    acct.mustChangePassword = false;
+    acct.updatedAt = (/* @__PURE__ */ new Date()).toISOString();
+    saveSecurityState(securityState);
+    res.json({ ok: true, messageAr: "\u062A\u0645 \u062A\u062D\u062F\u064A\u062B \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u0628\u0646\u062C\u0627\u062D." });
+  });
+  app.post("/api/finance-manager/logout", (req, res) => {
+    const sess = resolveFinanceManagerSession(req);
+    if (sess) {
+      financeManagerSessionStore.delete(sess.sessionId);
+    }
+    clearFinanceManagerCookie(req, res);
+    res.json({ ok: true });
+  });
+  app.get("/api/finance-manager/workspace", (req, res) => {
+    const sess = resolveFinanceManagerSession(req);
+    if (!sess) {
+      res.status(401).json({ ok: false, messageAr: "\u064A\u0644\u0632\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0628\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A." });
+      return;
+    }
+    const acct = securityState.ownerFinance.financeManagers.find((m) => m.managerId === sess.managerId);
+    if (!acct || acct.status !== "active") {
+      res.status(403).json({ ok: false, messageAr: "\u062D\u0633\u0627\u0628 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u0645\u0648\u0642\u0648\u0641 \u0623\u0648 \u063A\u064A\u0631 \u0645\u062A\u0627\u062D." });
+      return;
+    }
+    const entries = securityState.ownerFinance.managerSubTreasuryEntries.filter(
+      (e) => e.managerId === sess.managerId
+    );
+    const subTreasuryTotalEGP = round2(entries.reduce((s, e) => s + (Number(e.amountEGP) || 0), 0));
+    res.json({
+      ok: true,
+      manager: sanitizeFinanceManagerPublic(acct),
+      subTreasuryTotalEGP,
+      entries,
+      inventoryCatalog: securityState.ownerFinance.inventoryItems.map((i) => ({
+        itemId: i.itemId,
+        sku: i.sku,
+        nameAr: i.nameAr,
+        unitAr: i.unitAr,
+        quantityOnHand: i.quantityOnHand
+      }))
+    });
+  });
+  app.post("/api/finance-manager/operations", (req, res) => {
+    if (!verifySameOriginOrTokenHeader(req)) {
+      res.status(403).json({ ok: false, messageAr: "\u062A\u062D\u0642\u0642 \u0645\u0646 \u0623\u0645\u0627\u0646 \u0627\u0644\u0637\u0644\u0628." });
+      return;
+    }
+    const sess = resolveFinanceManagerSession(req);
+    if (!sess) {
+      res.status(401).json({ ok: false, messageAr: "\u064A\u0644\u0632\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0628\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A." });
+      return;
+    }
+    const body = req.body || {};
+    const allowedActions = /* @__PURE__ */ new Set(["purchase", "supply", "collection", "quotation"]);
+    const actionType = body.actionType && allowedActions.has(body.actionType) ? body.actionType : null;
+    const partyName = String(body.partyName || "").trim().slice(0, 160);
+    const description = String(body.description || "").trim().slice(0, 300);
+    const amountEGP = round2(Number(body.amountEGP || 0));
+    if (!actionType || partyName.length < 2 || description.length < 2 || !Number.isFinite(amountEGP) || amountEGP <= 0) {
+      res.status(400).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u062A\u062D\u062F\u064A\u062F \u0646\u0648\u0639 \u0627\u0644\u0639\u0645\u0644\u064A\u0629 \u0648\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0629 \u0648\u0627\u0644\u0628\u064A\u0627\u0646 \u0648\u0645\u0628\u0644\u063A \u0635\u062D\u064A\u062D." });
+      return;
+    }
+    const channel = body.channel === "bank" || body.channel === "e_wallet" || body.channel === "treasury" ? body.channel : "treasury";
+    const sharedVia = body.sharedVia === "email" || body.sharedVia === "whatsapp" ? body.sharedVia : "none";
+    const shareTarget = String(body.shareTarget || "").trim().slice(0, 160);
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    const entryDate = /^\d{4}-\d{2}-\d{2}$/.test(String(body.entryDate || "")) ? String(body.entryDate) : nowIso.slice(0, 10);
+    const entry = {
+      entryId: `MSE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      managerId: sess.managerId,
+      managerUsername: sess.username,
+      managerName: sess.fullName,
+      actionType,
+      partyName,
+      description,
+      amountEGP,
+      channel,
+      sharedVia,
+      shareTarget,
+      auditCycleTag: "45D-CYCLE",
+      aiAuditStatus: "pending",
+      aiAuditNoteAr: "\u0628\u0627\u0646\u062A\u0638\u0627\u0631 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u062F\u0648\u0631\u064A\u0629 \u0627\u0644\u062A\u0644\u0642\u0627\u0626\u064A\u0629 \u0628\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A (45 \u064A\u0648\u0645\u0627\u064B)",
+      entryDate,
+      createdAt: nowIso
+    };
+    securityState.ownerFinance.managerSubTreasuryEntries.unshift(entry);
+    saveSecurityState(securityState);
+    const actionLabels = {
+      purchase: "\u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u0634\u062A\u0631\u064A\u0627\u062A",
+      supply: "\u0623\u0645\u0631 \u062A\u0648\u0631\u064A\u062F",
+      collection: "\u062A\u062D\u0635\u064A\u0644 \u0639\u0645\u064A\u0644",
+      quotation: "\u0639\u0631\u0636 \u0633\u0639\u0631 \u0631\u0633\u0645\u064A"
+    };
+    const msgText = `\u0645\u0646\u0635\u0629 \u0628\u0627\u0633\u0637 | ${actionLabels[actionType]}
+\u0627\u0644\u062C\u0647\u0629: ${partyName}
+\u0627\u0644\u0628\u064A\u0627\u0646: ${description}
+\u0627\u0644\u0642\u064A\u0645\u0629: ${amountEGP.toLocaleString()} \u062C.\u0645
+\u0627\u0644\u062A\u0627\u0631\u064A\u062E: ${entryDate}
+\u0628\u0648\u0627\u0633\u0637\u0629: ${sess.fullName}`;
+    const whatsappDigits = shareTarget.replace(/[^\d]/g, "");
+    const whatsappUrl = whatsappDigits ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(msgText)}` : `https://wa.me/?text=${encodeURIComponent(msgText)}`;
+    const mailtoUrl = `mailto:${encodeURIComponent(shareTarget.includes("@") ? shareTarget : "")}?subject=${encodeURIComponent(`BASIT | ${actionLabels[actionType]} \u2014 ${partyName}`)}&body=${encodeURIComponent(msgText)}`;
+    res.status(201).json({
+      ok: true,
+      entry,
+      shareLinks: { whatsappUrl, mailtoUrl }
+    });
+  });
+  app.post("/api/finance/voice-transcribe", async (req, res) => {
+    const fmSess = resolveFinanceManagerSession(req);
+    let authorizedActorEmail = fmSess ? `fm:${fmSess.username}` : "";
+    if (!authorizedActorEmail) {
+      const { session, revoked } = await resolveSessionOrFirebaseBearer(req);
+      if (revoked || !session || session.email.toLowerCase() !== BOOTSTRAPPED_OWNER_EMAIL) {
+        res.status(401).json({
+          ok: false,
+          messageAr: "\u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u0627\u0644\u0645\u0627\u064A\u0643 \u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0641\u064A \u0645\u062A\u0627\u062D \u0641\u0642\u0637 \u0644\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u0645\u0648\u062B\u0642 \u0623\u0648 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0627\u0644\u064A \u0627\u0644\u0646\u0634\u0637."
+        });
+        return;
+      }
+      authorizedActorEmail = session.email;
+    }
+    const apiKey = process.env.GEMINI_API_KEY?.trim();
+    if (!apiKey) {
+      res.status(503).json({
+        ok: false,
+        messageAr: "\u062E\u062F\u0645\u0629 \u0627\u0644\u062A\u062D\u0648\u064A\u0644 \u0627\u0644\u0635\u0648\u062A\u064A \u0628\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u063A\u064A\u0631 \u0645\u062A\u0627\u062D\u0629 \u0644\u0639\u062F\u0645 \u0636\u0628\u0637 GEMINI_API_KEY \u0639\u0644\u0649 \u0627\u0644\u062E\u0627\u062F\u0645."
+      });
+      return;
+    }
+    const body = req.body || {};
+    const audioBase64 = typeof body.audioBase64 === "string" ? body.audioBase64.trim() : "";
+    const mimeType = typeof body.mimeType === "string" && body.mimeType.startsWith("audio/") ? body.mimeType.split(";")[0].trim() : "audio/webm";
+    let transcript = typeof body.textTranscript === "string" ? body.textTranscript.trim().slice(0, 2e3) : "";
+    if (!audioBase64 && !transcript) {
+      res.status(400).json({ ok: false, messageAr: "\u064A\u0631\u062C\u0649 \u062A\u0633\u062C\u064A\u0644 \u0631\u0633\u0627\u0644\u0629 \u0635\u0648\u062A\u064A\u0629 \u0623\u0648 \u062A\u0645\u0631\u064A\u0631 \u0646\u0635 \u0627\u0644\u0643\u0644\u0627\u0645." });
+      return;
+    }
+    if (audioBase64.length > 7e6) {
+      res.status(413).json({ ok: false, messageAr: "\u062D\u062C\u0645 \u0627\u0644\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u0635\u0648\u062A\u064A \u0643\u0628\u064A\u0631 \u062C\u062F\u0627\u064B." });
+      return;
+    }
+    try {
+      const genaiPkg = ["@google", "genai"].join("/");
+      const { GoogleGenAI, Type } = await import(genaiPkg);
+      const ai = new GoogleGenAI({
+        apiKey,
+        httpOptions: { headers: { "User-Agent": "aistudio-build" } }
+      });
+      if (audioBase64) {
+        const cleanBase64 = audioBase64.includes(",") ? audioBase64.split(",").pop() || "" : audioBase64;
+        const transcribeResp = await ai.models.generateContent({
+          model: "gemini-3.5-transcribe",
+          contents: {
+            parts: [
+              {
+                inlineData: {
+                  mimeType,
+                  data: cleanBase64
+                }
+              },
+              {
+                text: "\u062D\u0648\u0651\u0644 \u0627\u0644\u0643\u0644\u0627\u0645 \u0627\u0644\u0635\u0648\u062A\u064A \u0628\u062F\u0642\u0629 \u062A\u0627\u0645\u0629 \u0625\u0644\u0649 \u0646\u0635 \u0639\u0631\u0628\u064A \u0648\u0627\u0636\u062D \u0643\u0645\u0627 \u0646\u0637\u0642\u0647 \u0627\u0644\u0645\u062A\u062D\u062F\u062B \u062F\u0648\u0646 \u0625\u0636\u0627\u0641\u0629 \u062A\u0639\u0644\u064A\u0642\u0627\u062A."
+              }
+            ]
+          }
+        });
+        transcript = (transcribeResp.text || "").trim();
+      }
+      if (!transcript) {
+        res.status(422).json({ ok: false, messageAr: "\u0644\u0645 \u064A\u062A\u0645 \u0627\u0644\u062A\u0639\u0631\u0641 \u0639\u0644\u0649 \u0643\u0644\u0627\u0645 \u0648\u0627\u0636\u062D \u0641\u064A \u0627\u0644\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u0635\u0648\u062A\u064A." });
+        return;
+      }
+      const parseResp = await ai.models.generateContent({
+        model: "gemini-4-hydrogen",
+        contents: `\u0627\u0633\u062A\u062E\u0631\u062C \u0627\u0644\u062D\u0642\u0648\u0644 \u0627\u0644\u0645\u0627\u0644\u064A\u0629 \u0645\u0646 \u0627\u0644\u062C\u0645\u0644\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629 \u0641\u064A \u0646\u0638\u0627\u0645 \u0628\u0627\u0633\u0637 \u0627\u0644\u0645\u062D\u0627\u0633\u0628\u064A (\u0633\u064A\u0627\u0642 \u0627\u0644\u0634\u0627\u0634\u0629: ${String(body.context || "\u0639\u0627\u0645")}):
+"${transcript}"`,
+        config: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              transcript: { type: Type.STRING },
+              amountEGP: { type: Type.NUMBER },
+              partyName: { type: Type.STRING },
+              purpose: { type: Type.STRING },
+              originLabel: { type: Type.STRING },
+              direction: { type: Type.STRING },
+              category: { type: Type.STRING },
+              urgency: { type: Type.STRING }
+            }
+          }
+        }
+      });
+      let extracted = { transcript };
+      try {
+        extracted = JSON.parse((parseResp.text || "{}").trim());
+      } catch {
+        extracted = { transcript };
+      }
+      if (authorizedActorEmail === BOOTSTRAPPED_OWNER_EMAIL) {
+        appendOwnerFinanceAudit({
+          actorEmail: authorizedActorEmail,
+          actionAr: `\u0625\u062F\u062E\u0627\u0644 \u0635\u0648\u062A\u064A \u0630\u0643\u064A \u0639\u0628\u0631 \u0627\u0644\u0645\u0627\u064A\u0643 \u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0641\u064A: "${transcript.slice(0, 60)}"`,
+          category: "voice_input",
+          amountEGP: Number(extracted.amountEGP || 0) || 0,
+          details: `Context: ${String(body.context || "general")}`
+        });
+      }
+      res.json({
+        ok: true,
+        transcript,
+        parsed: {
+          transcript,
+          amountEGP: Number(extracted.amountEGP || 0) || 0,
+          partyName: String(extracted.partyName || "").trim(),
+          purpose: String(extracted.purpose || transcript).trim(),
+          originLabel: String(extracted.originLabel || extracted.purpose || transcript).trim(),
+          direction: extracted.direction === "outflow" ? "outflow" : "inflow",
+          category: String(extracted.category || "other"),
+          urgency: extracted.urgency === "emergency" || extracted.urgency === "urgent" ? extracted.urgency : "normal"
+        }
+      });
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : "Voice transcription failed";
+      console.error("[api/finance/voice-transcribe] error:", errMsg);
+      res.status(502).json({
+        ok: false,
+        messageAr: `\u062A\u0639\u0630\u0631 \u0645\u0639\u0627\u0644\u062C\u0629 \u0627\u0644\u0635\u0648\u062A \u0628\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A: ${errMsg}`
+      });
+    }
+  });
+  const BASET_CARD_COOKIE_NAME = "baset_card_token";
+  function signBasetCardSid(sid) {
+    const mac = crypto.createHmac("sha256", SERVER_SECRET).update(`baset-card:${sid}`).digest("hex");
+    return `${sid}.${mac}`;
+  }
+  function verifyBasetCardToken(rawToken) {
+    const trimmed = String(rawToken || "").trim();
+    const dotIdx = trimmed.lastIndexOf(".");
+    if (dotIdx <= 0) return null;
+    const sid = trimmed.slice(0, dotIdx);
+    const sig = trimmed.slice(dotIdx + 1);
+    if (!/^[a-zA-Z0-9_-]{8,64}$/.test(sid) || !/^[a-f0-9]{64}$/.test(sig)) {
+      return null;
+    }
+    const expected = crypto.createHmac("sha256", SERVER_SECRET).update(`baset-card:${sid}`).digest("hex");
+    return timingSafeHexEquals(sig, expected) ? sid : null;
+  }
+  function setBasetCardCookie(req, res, signedToken) {
+    const maxAgeSec = 180 * 24 * 60 * 60;
+    const sameSite = isSecureRequest(req) ? "SameSite=None; Secure; Partitioned" : "SameSite=Lax";
+    res.setHeader(
+      "Set-Cookie",
+      `${BASET_CARD_COOKIE_NAME}=${encodeURIComponent(signedToken)}; HttpOnly; Path=/; ${sameSite}; Max-Age=${maxAgeSec}`
+    );
+  }
+  async function resolveBasetCardSubject(req) {
+    const { session, revoked } = await resolveSessionOrFirebaseBearer(req);
+    if (!revoked && session) {
+      const uidOrEmail = (session.uid || session.email || "").trim().toLowerCase();
+      if (uidOrEmail) {
+        return {
+          subjectKey: `auth:${uidOrEmail}`,
+          authEmail: session.email || "",
+          isAuthenticatedUser: true
+        };
+      }
+    }
+    const cookies = parseCookies(req);
+    const headerToken = String(req.headers["x-baset-card-token"] || "").trim();
+    const cookieToken = cookies[BASET_CARD_COOKIE_NAME] || "";
+    const sid = verifyBasetCardToken(headerToken) || verifyBasetCardToken(cookieToken);
+    if (sid) {
+      return {
+        subjectKey: `member:${sid}`,
+        authEmail: "",
+        isAuthenticatedUser: false
+      };
+    }
+    return {
+      subjectKey: null,
+      authEmail: "",
+      isAuthenticatedUser: false
+    };
+  }
+  app.get("/api/baset-card/status", async (req, res) => {
+    const { subjectKey, isAuthenticatedUser } = await resolveBasetCardSubject(req);
+    if (!subjectKey) {
+      res.json({
+        ok: true,
+        activated: false,
+        status: "inactive",
+        card: null,
+        redemptions: [],
+        isAuthenticatedUser
+      });
+      return;
+    }
+    const card = securityState.basetCards[subjectKey] || null;
+    const activated = Boolean(card && card.status === "active");
+    const redemptions = securityState.basetOfferRedemptions.filter((r) => r.subjectKey === subjectKey).slice(0, 20);
+    res.json({
+      ok: true,
+      activated,
+      status: activated ? "active" : "inactive",
+      card: activated ? card : null,
+      redemptions,
+      isAuthenticatedUser
+    });
+  });
+  app.post("/api/baset-card/activate", async (req, res) => {
+    const body = req.body || {};
+    const holderName = String(body.holderName || "").trim().slice(0, 120);
+    const rawPhone = String(body.phone || "").trim().slice(0, 30);
+    const phoneDigits = rawPhone.replace(/[^\d+]/g, "");
+    const entityName = String(body.entityName || "").trim().slice(0, 140) || "\u0639\u0636\u0648\u064A\u0629 \u0628\u0627\u0633\u0637 \u0627\u0644\u0639\u0627\u0626\u0644\u064A\u0629";
+    const employeeCode = String(body.employeeCode || "").trim().slice(0, 48);
+    if (holderName.length < 3) {
+      res.status(400).json({
+        ok: false,
+        messageAr: "\u064A\u0631\u062C\u0649 \u0625\u062F\u062E\u0627\u0644 \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644 \u0644\u0635\u0627\u062D\u0628 \u0627\u0644\u0643\u0627\u0631\u062A (3 \u0623\u062D\u0631\u0641 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644)."
+      });
+      return;
+    }
+    if (phoneDigits.replace(/\D/g, "").length < 8) {
+      res.status(400).json({
+        ok: false,
+        messageAr: "\u064A\u0631\u062C\u0649 \u0625\u062F\u062E\u0627\u0644 \u0631\u0642\u0645 \u0645\u0648\u0628\u0627\u064A\u0644 \u0635\u062D\u064A\u062D \u0644\u0644\u062A\u0641\u0639\u064A\u0644."
+      });
+      return;
+    }
+    if (body.acceptedTerms === false) {
+      res.status(400).json({
+        ok: false,
+        messageAr: "\u064A\u0631\u062C\u0649 \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629 \u0639\u0644\u0649 \u0634\u0631\u0648\u0637 \u0628\u0631\u0646\u0627\u0645\u062C \u0645\u0632\u0627\u064A\u0627 \u0643\u0627\u0631\u062A \u0628\u0627\u0633\u0637 \u0627\u0644\u0639\u0627\u0626\u0644\u064A."
+      });
+      return;
+    }
+    const resolved = await resolveBasetCardSubject(req);
+    let subjectKey = resolved.subjectKey;
+    let issuedToken = null;
+    if (!subjectKey) {
+      const sid = crypto.randomBytes(16).toString("base64url");
+      subjectKey = `member:${sid}`;
+      issuedToken = signBasetCardSid(sid);
+      setBasetCardCookie(req, res, issuedToken);
+    } else if (subjectKey.startsWith("member:")) {
+      const existingSid = subjectKey.slice("member:".length);
+      issuedToken = signBasetCardSid(existingSid);
+      setBasetCardCookie(req, res, issuedToken);
+    }
+    const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+    const existing = securityState.basetCards[subjectKey];
+    const cardSerialBlockA = crypto.randomInt(1e3, 9999);
+    const cardSerialBlockB = crypto.randomInt(1e3, 9999);
+    const cardNumber = existing?.cardNumber || `BASET-FAM-${cardSerialBlockA}-${cardSerialBlockB}`;
+    const cardId = existing?.cardId || `BC-${crypto.randomBytes(4).toString("hex").toUpperCase()}`;
+    const qrPayload = `BASET:FAM:${cardNumber}:10PCT:VERIFIED`;
+    const card = {
+      cardId,
+      subjectKey,
+      cardNumber,
+      holderName,
+      phone: phoneDigits,
+      entityName,
+      employeeCode,
+      tier: "family_benefits",
+      discountPct: 10,
+      status: "active",
+      qrPayload,
+      activatedAt: existing?.status === "active" ? existing.activatedAt : nowIso,
+      updatedAt: nowIso
+    };
+    securityState.basetCards[subjectKey] = card;
+    saveSecurityState(securityState);
+    const redemptions = securityState.basetOfferRedemptions.filter((r) => r.subjectKey === subjectKey).slice(0, 20);
+    res.status(201).json({
+      ok: true,
+      activated: true,
+      status: "active",
+      card,
+      cardToken: issuedToken,
+      redemptions,
+      messageAr: "\u062A\u0645 \u062A\u0641\u0639\u064A\u0644 \u0643\u0627\u0631\u062A \u0628\u0627\u0633\u0637 \u0627\u0644\u0639\u0627\u0626\u0644\u064A \u0628\u0646\u062C\u0627\u062D \u2014 \u062E\u0635\u0645 10% \u0645\u0641\u0639\u0651\u0644 \u0627\u0644\u0622\u0646 \u0639\u0644\u0649 \u0639\u0631\u0648\u0636 \u0627\u0644\u0637\u0639\u0627\u0645 \u0648\u0627\u0644\u062A\u0631\u0641\u064A\u0647."
+    });
+  });
+  app.post("/api/baset-card/redeem-offer", async (req, res) => {
+    const { subjectKey } = await resolveBasetCardSubject(req);
+    const card = subjectKey ? securityState.basetCards[subjectKey] : null;
+    if (!subjectKey || !card || card.status !== "active") {
+      res.status(403).json({
+        ok: false,
+        requiresActivation: true,
+        messageAr: "\u0643\u0627\u0631\u062A \u0628\u0627\u0633\u0637 \u063A\u064A\u0631 \u0645\u0641\u0639\u0651\u0644 \u0628\u0639\u062F \u2014 \u0641\u0639\u0651\u0644 \u0627\u0644\u0643\u0627\u0631\u062A \u0623\u0648\u0644\u0627\u064B \u0644\u062A\u0637\u0628\u064A\u0642 \u062E\u0635\u0645 10% \u0627\u0644\u0645\u0639\u062A\u0645\u062F."
+      });
+      return;
+    }
+    const body = req.body || {};
+    const destination = body.destination === "family_entertainment" ? "family_entertainment" : "food_meal_benefits";
+    const offerId = String(body.offerId || "").trim().slice(0, 80);
+    const offerTitle = String(body.offerTitle || "").trim().slice(0, 160);
+    const partnerName = String(body.partnerName || "").trim().slice(0, 140) || "BASET Partner";
+    const notes = String(body.notes || "").trim().slice(0, 300);
+    if (!offerId || !offerTitle) {
+      res.status(400).json({
+        ok: false,
+        messageAr: "\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0639\u0631\u0636 \u0627\u0644\u0645\u0637\u0644\u0648\u0628 \u063A\u064A\u0631 \u0645\u0643\u062A\u0645\u0644\u0629."
+      });
+      return;
+    }
+    const redemption = {
+      redemptionId: `RED-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`,
+      subjectKey,
+      cardNumber: card.cardNumber,
+      destination,
+      offerId,
+      offerTitle,
+      partnerName,
+      discountAppliedPct: card.discountPct,
+      notes,
+      status: "confirmed",
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    securityState.basetOfferRedemptions.unshift(redemption);
+    if (securityState.basetOfferRedemptions.length > 500) {
+      securityState.basetOfferRedemptions = securityState.basetOfferRedemptions.slice(0, 500);
+    }
+    saveSecurityState(securityState);
+    res.status(201).json({
+      ok: true,
+      redemption,
+      discountAppliedPct: card.discountPct,
+      messageAr: `\u062A\u0645 \u062A\u0633\u062C\u064A\u0644 \u0627\u0633\u062A\u0641\u0627\u062F\u062A\u0643 \u0628\u0627\u0644\u0639\u0631\u0636 (${offerTitle}) \u0628\u062E\u0635\u0645 10% \u0639\u0644\u0649 \u0643\u0627\u0631\u062A ${card.cardNumber}.`
+    });
+  });
+  app.post("/api/baset-card/deactivate", async (req, res) => {
+    const { subjectKey } = await resolveBasetCardSubject(req);
+    if (subjectKey && securityState.basetCards[subjectKey]) {
+      securityState.basetCards[subjectKey] = {
+        ...securityState.basetCards[subjectKey],
+        status: "inactive",
+        updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      saveSecurityState(securityState);
+    }
+    res.json({ ok: true, activated: false, status: "inactive" });
   });
   return app;
 }

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: basit-catering-egypt
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && NODE_OPTIONS="--max-old-space-size=384" npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
