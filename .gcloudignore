@@ -1,0 +1,9 @@
+.gcloudignore
+.git
+.gitignore
+.backups/
+.aistudio/
+node_modules/
+dist/
+coverage/
+*.log

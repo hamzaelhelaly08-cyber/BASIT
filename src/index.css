@@ -1,0 +1,514 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --font-arabic: 'Cairo', system-ui, sans-serif;
+  --font-latin: 'Plus Jakarta Sans', system-ui, sans-serif;
+  /* Strict BASIT Royal Palette: Deep Royal Purple, Light Royal Purple, Luminous Gold */
+  --basit-purple-deep: #3B0764;
+  --basit-purple: #4C1D95;
+  --basit-purple-royal: #581C87;
+  --basit-purple-light: #C084FC;
+  --basit-purple-soft: #D8B4FE;
+  --basit-purple-mist: #EDE9FE;
+  --basit-gold-bright: #FFD54F;
+  --basit-gold: #FACC15;
+  --basit-gold-rich: #EAB308;
+  --basit-gold-canvas: #FEF9C3;
+  --basit-gold-silk: #FEF3C7;
+  --basit-ink: #3B0764;
+  --basit-muted: #581C87;
+  --basit-card: #FFFBEB;
+  --basit-border: rgba(76, 29, 149, 0.22);
+}
+
+html {
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-arabic);
+  background: linear-gradient(180deg, #3B0764 0%, #4C1D95 26%, #EDE9FE 62%, #FEF9C3 100%);
+  color: var(--basit-ink);
+  overflow-x: clip;
+}
+
+.dark body {
+  background: linear-gradient(180deg, #3B0764 0%, #4C1D95 45%, #581C87 100%);
+  color: #FEF9C3;
+}
+
+[dir="ltr"] body,
+[dir="ltr"] {
+  font-family: var(--font-latin);
+}
+
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+.font-mono,
+table td,
+table th {
+  font-variant-numeric: tabular-nums;
+}
+
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* =========================================================
+   BASIT | باسط — STRICT ROYAL PURPLE & LUMINOUS GOLD SYSTEM
+   Deep Purple: #3B0764 / #4C1D95 / #581C87
+   Light Purple: #C084FC / #D8B4FE / #EDE9FE
+   Luminous Gold: #FFD54F / #FACC15 / #EAB308
+   ========================================================= */
+
+.basit-liquid-glass,
+.basit-glass-card,
+.basit-porcelain-card {
+  background: linear-gradient(155deg, #FFFDF2 0%, #FEF9C3 52%, #EDE9FE 100%);
+  border: 1px solid rgba(76, 29, 149, 0.2);
+  box-shadow:
+    0 12px 28px -14px rgba(59, 7, 100, 0.22),
+    0 2px 8px -4px rgba(234, 179, 8, 0.24);
+}
+
+.dark .basit-liquid-glass,
+.dark .basit-glass-card,
+.dark .basit-porcelain-card {
+  background: linear-gradient(155deg, #4C1D95 0%, #3B0764 100%);
+  border: 1px solid rgba(255, 213, 79, 0.35);
+  box-shadow:
+    0 14px 32px -16px rgba(59, 7, 100, 0.72),
+    0 0 0 1px rgba(192, 132, 252, 0.22);
+}
+
+.basit-glass-tile {
+  background: linear-gradient(160deg, #FEF9C3 0%, #EDE9FE 100%);
+  border: 1px solid rgba(76, 29, 149, 0.18);
+  box-shadow:
+    0 10px 22px -12px rgba(59, 7, 100, 0.18),
+    0 2px 6px -3px rgba(234, 179, 8, 0.2);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.basit-glass-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(234, 179, 8, 0.72);
+  box-shadow:
+    0 14px 28px -14px rgba(76, 29, 149, 0.28),
+    0 4px 10px -4px rgba(250, 204, 21, 0.32);
+}
+
+.dark .basit-glass-tile {
+  background: linear-gradient(160deg, #581C87 0%, #3B0764 100%);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  box-shadow: 0 10px 24px -14px rgba(59, 7, 100, 0.65);
+}
+
+.dark .basit-glass-tile:hover {
+  border-color: rgba(255, 213, 79, 0.75);
+  box-shadow: 0 16px 32px -14px rgba(192, 132, 252, 0.45);
+}
+
+.basit-glass-pill {
+  background: linear-gradient(145deg, #FEF9C3 0%, #EDE9FE 100%);
+  border: 1px solid rgba(76, 29, 149, 0.22);
+  box-shadow: 0 4px 12px -6px rgba(59, 7, 100, 0.16);
+}
+
+.dark .basit-glass-pill {
+  background: linear-gradient(145deg, #581C87 0%, #3B0764 100%);
+  border: 1px solid rgba(255, 213, 79, 0.35);
+  box-shadow: 0 6px 16px -8px rgba(59, 7, 100, 0.55);
+}
+
+.basit-glass-search {
+  background: linear-gradient(145deg, #FFFBEB 0%, #EDE9FE 100%);
+  border: 1.5px solid rgba(76, 29, 149, 0.26);
+  box-shadow:
+    0 4px 14px -6px rgba(59, 7, 100, 0.14),
+    inset 0 1px 2px rgba(255, 255, 255, 0.65);
+}
+
+.dark .basit-glass-search {
+  background: #4C1D95;
+  border: 1.5px solid rgba(255, 213, 79, 0.42);
+}
+
+.basit-glass-btn-primary {
+  background: linear-gradient(135deg, #581C87 0%, #4C1D95 52%, #3B0764 100%);
+  border: 1px solid rgba(255, 213, 79, 0.48);
+  box-shadow:
+    0 10px 22px -8px rgba(59, 7, 100, 0.5),
+    0 3px 8px -3px rgba(255, 213, 79, 0.25);
+  color: #FFFFFF;
+}
+
+.basit-glass-btn-primary:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    0 14px 28px -8px rgba(76, 29, 149, 0.6),
+    0 4px 10px -4px rgba(255, 213, 79, 0.35);
+}
+
+/* Signature Luminous Gold CTA (#FFD54F -> #FACC15 -> #EAB308 with #3B0764 Royal Ink) */
+.basit-glass-btn-yellow {
+  background: linear-gradient(135deg, #FFD54F 0%, #FACC15 55%, #EAB308 100%);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 10px 24px -8px rgba(234, 179, 8, 0.55),
+    0 2px 6px -2px rgba(59, 7, 100, 0.18);
+  color: #3B0764;
+}
+
+.basit-glass-btn-yellow:hover {
+  filter: brightness(1.04);
+  box-shadow: 0 14px 28px -8px rgba(250, 204, 21, 0.68);
+}
+
+.basit-glass-icon-halo {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FEF9C3 55%, #EDE9FE 100%);
+  border: 1px solid rgba(255, 213, 79, 0.55);
+  box-shadow:
+    0 8px 18px -6px rgba(234, 179, 8, 0.35),
+    0 2px 6px -2px rgba(59, 7, 100, 0.12),
+    inset 0 1px 0 #FFFFFF;
+}
+
+.dark .basit-glass-icon-halo {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FEF3C7 100%);
+  border: 1px solid rgba(255, 213, 79, 0.75);
+  box-shadow:
+    0 10px 22px -8px rgba(255, 213, 79, 0.45),
+    inset 0 1px 0 #FFFFFF;
+}
+
+/* Mobile Safe-Area & Horizontal Pill Scroll Helpers */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Serrated coupon voucher borders matching luminous canvas */
+.ce-coupon-notch {
+  position: relative;
+}
+.ce-coupon-notch::before,
+.ce-coupon-notch::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background-color: #FEF9C3;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+.dark .ce-coupon-notch::before,
+.dark .ce-coupon-notch::after {
+  background-color: #3B0764;
+}
+.ce-coupon-notch::before {
+  left: -10px;
+}
+.ce-coupon-notch::after {
+  right: -10px;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(76, 29, 149, 0.32);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(234, 179, 8, 0.65);
+}
+
+/* Isolated Official A4 Print Stylesheet */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  @page ce-landscape-sheet {
+    size: A4 landscape;
+    margin: 7mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body.ce-printing-portal #root {
+    display: none !important;
+  }
+
+  body.ce-printing-portal #ce-print-portal {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #ce-print-portal .ce-a4-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 6mm 8mm !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  #ce-print-portal .ce-a4-page.ce-a4-landscape {
+    page: ce-landscape-sheet;
+    padding: 4mm 6mm !important;
+  }
+
+  #ce-print-portal .ce-a4-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  #ce-print-portal table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: auto;
+  }
+
+  #ce-print-portal thead {
+    display: table-header-group;
+  }
+
+  #ce-print-portal tr,
+  #ce-print-portal .ce-keep-together {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}
+
+/* Smooth infinite marquee keyframes */
+@keyframes ce-marquee-ltr {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ce-marquee-rtl {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+.ce-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ce-marquee-ltr 34s linear infinite;
+}
+
+[dir="rtl"] .ce-marquee-track {
+  animation-name: ce-marquee-rtl;
+}
+
+.ce-marquee-container:hover .ce-marquee-track,
+.ce-marquee-container:active .ce-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ce-marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes ce-splash-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes ce-splash-fade-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes ce-splash-light-sweep {
+  0% {
+    transform: translate3d(-120%, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+  28% {
+    opacity: 0.72;
+  }
+  100% {
+    transform: translate3d(220%, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ce-splash-ring-pulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.75;
+  }
+}
+
+.ce-splash-float {
+  animation: ce-splash-float 3.8s ease-in-out infinite;
+}
+
+.ce-splash-fade {
+  animation: ce-splash-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ce-splash-sweep {
+  animation: ce-splash-light-sweep 2.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s infinite;
+}
+
+.ce-splash-ring {
+  animation: ce-splash-ring-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes ce-splash-progress-3s {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.ce-splash-3s-bar {
+  animation: ce-splash-progress-3s 2.9s linear forwards;
+}
+
+.ce-splash-5s-bar {
+  animation: ce-splash-progress-3s 4.95s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ce-splash-float,
+  .ce-splash-fade,
+  .ce-splash-sweep,
+  .ce-splash-ring,
+  .ce-splash-3s-bar,
+  .ce-splash-5s-bar {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    width: 100%;
+  }
+}
+
+/* Royal Purple & Gold B2B Storefront & Fly-to-Cart Pop Effects */
+.basit-royal-orange-bg {
+  background: linear-gradient(135deg, #581C87 0%, #4C1D95 52%, #3B0764 100%);
+}
+
+.basit-3d-product-card {
+  background: linear-gradient(160deg, #FEF9C3 0%, #EDE9FE 100%);
+  border: 1px solid rgba(76, 29, 149, 0.22);
+  box-shadow:
+    0 18px 34px -18px rgba(59, 7, 100, 0.26),
+    0 6px 14px -8px rgba(234, 179, 8, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.26s ease, border-color 0.26s ease;
+}
+
+.basit-3d-product-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(234, 179, 8, 0.72);
+  box-shadow:
+    0 24px 44px -16px rgba(59, 7, 100, 0.34),
+    0 10px 20px -10px rgba(250, 204, 21, 0.35);
+}
+
+.dark .basit-3d-product-card {
+  background: linear-gradient(160deg, #4C1D95 0%, #3B0764 100%);
+  border: 1px solid rgba(255, 213, 79, 0.35);
+  box-shadow:
+    0 18px 34px -16px rgba(59, 7, 100, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+@keyframes ce-cart-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.22);
+  }
+  75% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ce-cart-pop-active {
+  animation: ce-cart-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
