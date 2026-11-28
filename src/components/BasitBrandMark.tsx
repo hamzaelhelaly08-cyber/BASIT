@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const BASIT_OFFICIAL_LOGO_PNG =
-  '/assets/aistudio/Gemini_Generated_Image_4760z64760z64760_08073fb5.jpg';
+  '/assets/aistudio/Gemini_Generated_Image_o3dq2co3dq2co3dq_5e34cdd2.jpg';
 export const BASIT_IDENTITY_BOARD_IMG = BASIT_OFFICIAL_LOGO_PNG;
 
 interface BasitBrandMarkProps {
@@ -16,7 +16,7 @@ interface BasitBrandMarkProps {
 
 /**
  * Official BASIT | باسط Brand Mark component.
- * Renders the approved official BASIT | باسط logo on pure white floor with golden ambient lighting.
+ * Renders the approved official BASIT | باسط logo cleanly without distortion.
  */
 export const BasitBrandMark: React.FC<BasitBrandMarkProps> = ({
   customLogoDataUrl,
@@ -27,9 +27,9 @@ export const BasitBrandMark: React.FC<BasitBrandMarkProps> = ({
 }) => {
   const sizeClass =
     size === 'xs'
-      ? 'w-8 h-8 sm:w-9 sm:h-9 rounded-[11px] p-0.5'
+      ? 'w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] p-0.5'
       : size === 'sm'
-        ? 'w-11 h-11 sm:w-12 sm:h-12 rounded-[15px] p-1'
+        ? 'w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] p-1'
         : size === 'md'
           ? 'w-14 h-14 sm:w-16 sm:h-16 rounded-[18px] p-1'
           : size === 'lg'
@@ -39,13 +39,13 @@ export const BasitBrandMark: React.FC<BasitBrandMarkProps> = ({
   return (
     <div className="inline-flex items-center gap-3 shrink-0">
       <div
-        className={`relative shrink-0 ${sizeClass} bg-white border border-[#FFD54F]/85 shadow-[0_8px_22px_rgba(234,179,8,0.38)] flex items-center justify-center overflow-hidden ${className}`}
+        className={`relative shrink-0 ${sizeClass} bg-white border border-[#4C1D95]/15 shadow-sm flex items-center justify-center overflow-hidden ${className}`}
       >
         <img
           src={customLogoDataUrl || BASIT_OFFICIAL_LOGO_PNG}
-          alt="BASIT | باسط Official Logo"
+          alt="BASIT | باسط — الشعار الرسمي"
           referrerPolicy="no-referrer"
-          className="relative z-0 w-full h-full object-contain rounded-[inherit] bg-white scale-[1.03]"
+          className="relative z-0 w-full h-full object-contain rounded-[inherit] bg-white"
         />
       </div>
       {showBadgeWordmark && (

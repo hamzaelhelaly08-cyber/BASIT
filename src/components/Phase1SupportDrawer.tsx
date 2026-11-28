@@ -328,10 +328,10 @@ export const Phase1SupportDrawer: React.FC<Phase1SupportDrawerProps> = ({
 
       {isOpen && (
         <div className="fixed inset-x-0 bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-50 max-w-[430px] w-full mx-auto px-3 pointer-events-none flex justify-end">
-          <div className="pointer-events-auto w-full rounded-3xl bg-[#FFFBEB] border border-[#4C1D95]/25 shadow-2xl overflow-hidden flex flex-col max-h-[min(78vh,620px)]">
-            <div className="p-3.5 bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#581C87] text-white flex items-center justify-between shrink-0">
+          <div className="pointer-events-auto w-full rounded-3xl bg-[#FAF8F5] dark:bg-[#1B132B] border border-[#4C1D95]/20 shadow-2xl overflow-hidden flex flex-col max-h-[min(78vh,620px)]">
+            <div className="p-3.5 bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#5B21B6] text-white flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-[#FFD54F] text-[#3B0764] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-[#F5C451] text-[#2A0E4D] flex items-center justify-center">
                 {activeMode === 'ai_assistant' ? <Bot className="w-5 h-5" /> : <Headphones className="w-5 h-5" />}
               </div>
               <div>
@@ -351,24 +351,24 @@ export const Phase1SupportDrawer: React.FC<Phase1SupportDrawerProps> = ({
               type="button"
               onClick={() => setIsOpen(false)}
               aria-label={isRtl ? 'إغلاق الدعم' : 'Close support'}
-              className="min-h-[44px] min-w-[44px] text-white hover:text-[#FFD54F] flex items-center justify-center cursor-pointer"
+              className="min-h-[44px] min-w-[44px] text-white hover:text-[#F5C451] flex items-center justify-center cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* Dual Mode Switcher: AI Assistant vs Support Tickets */}
-          <div className="p-2 bg-[#EDE9FE] border-b border-[#4C1D95]/15 grid grid-cols-2 gap-1.5 shrink-0">
+          <div className="p-2 bg-white dark:bg-[#120D1D] border-b border-[#4C1D95]/12 grid grid-cols-2 gap-1.5 shrink-0">
             <button
               type="button"
               onClick={() => setActiveMode('ai_assistant')}
               className={`min-h-[40px] rounded-xl text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer transition-all ${
                 activeMode === 'ai_assistant'
-                  ? 'bg-[#4C1D95] text-[#FFD54F] shadow-xs'
-                  : 'bg-[#FFFBEB] text-[#3B0764]'
+                  ? 'bg-[#4C1D95] text-white shadow-xs'
+                  : 'bg-[#FAF8F5] dark:bg-[#241B38] text-[#4C1D95] dark:text-[#EDE9FE]'
               }`}
             >
-              <Bot className="w-3.5 h-3.5 text-[#FFD54F]" />
+              <Bot className="w-3.5 h-3.5 text-[#F5C451]" />
               <span>{isRtl ? 'المساعد الذكي' : 'AI Assistant'}</span>
             </button>
             <button
@@ -376,11 +376,11 @@ export const Phase1SupportDrawer: React.FC<Phase1SupportDrawerProps> = ({
               onClick={() => setActiveMode('tickets')}
               className={`min-h-[40px] rounded-xl text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer transition-all ${
                 activeMode === 'tickets'
-                  ? 'bg-[#4C1D95] text-[#FFD54F] shadow-xs'
-                  : 'bg-[#FFFBEB] text-[#3B0764]'
+                  ? 'bg-[#4C1D95] text-white shadow-xs'
+                  : 'bg-[#FAF8F5] dark:bg-[#241B38] text-[#4C1D95] dark:text-[#EDE9FE]'
               }`}
             >
-              <Headphones className="w-3.5 h-3.5 text-[#FFD54F]" />
+              <Headphones className="w-3.5 h-3.5 text-[#F5C451]" />
               <span>{isRtl ? `تذاكر الدعم (${messages.length})` : `Tickets (${messages.length})`}</span>
             </button>
           </div>
@@ -389,7 +389,7 @@ export const Phase1SupportDrawer: React.FC<Phase1SupportDrawerProps> = ({
             <>
               <div
                 ref={aiScrollRef}
-                className="p-3.5 flex-1 overflow-y-auto space-y-2.5 bg-gradient-to-b from-[#FEF9C3]/75 to-[#EDE9FE]"
+                className="p-3.5 flex-1 overflow-y-auto space-y-2.5 bg-[#FAF8F5] dark:bg-[#120D1D]"
               >
                 <div className="p-3 rounded-2xl bg-white dark:bg-[#1F172F] border border-[#E6E0F5] dark:border-[#62339A]/35 text-[11px] text-[#292333] dark:text-white leading-relaxed font-semibold space-y-2">
                   <p>

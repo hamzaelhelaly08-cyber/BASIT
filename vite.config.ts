@@ -69,15 +69,23 @@ export default defineConfig(() => {
       basitMobileCssCompat(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.ico', 'pwa-192x192.png'],
+        includeAssets: [
+          'favicon.ico',
+          'pwa-192x192.png',
+          'pwa-512x512.png',
+          'pwa-maskable-512x512.png',
+          'apple-touch-icon.png',
+          'basit-official-logo.png',
+        ],
         manifest: {
           id: '/',
           name: 'BASIT | باسط — منظومة الإعاشة والمزايا للشركة الوطنية اللوجستية',
           short_name: 'BASIT | باسط',
           description: 'الذراع الرقمي للشركة الوطنية اللوجستية لإدارة الإعاشة والتغذية للمصانع والشركات والترفيه والمزايا والخدمات المجتمعية',
-          theme_color: '#852BEB',
-          background_color: '#FAF9FC',
+          theme_color: '#3B0764',
+          background_color: '#FAF8F5',
           display: 'standalone',
+          orientation: 'portrait',
           start_url: '/',
           scope: '/',
           icons: [

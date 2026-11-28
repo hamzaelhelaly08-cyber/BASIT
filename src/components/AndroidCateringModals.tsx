@@ -610,8 +610,8 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
 
             <div className="p-4 sm:p-5 space-y-4">
               {isGuestMode && (
-                <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-[#2A1D3D] border border-[#FFC928]/60 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 text-xs font-black text-[#4A2378] dark:text-[#FFC928]">
+                <div className="p-3 rounded-2xl bg-[#FAF8F5] dark:bg-[#1B132B] border border-[#E6E0F5] dark:border-[#3B0764]/50 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 text-xs font-black text-[#3B0764] dark:text-[#F5C451]">
                     <Lock className="w-4 h-4 shrink-0" />
                     <span>
                       {isRtl

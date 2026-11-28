@@ -358,6 +358,36 @@
       "qrPayload": "BASET:FAM:BASET-FAM-3788-5892:10PCT:VERIFIED",
       "activatedAt": "2026-11-25T19:40:41.609Z",
       "updatedAt": "2026-11-25T19:40:41.645Z"
+    },
+    "member:af-UweHf4gs5QyRRI7KLcA": {
+      "cardId": "BC-43CFF51C",
+      "subjectKey": "member:af-UweHf4gs5QyRRI7KLcA",
+      "cardNumber": "BASET-FAM-1467-6256",
+      "holderName": "اختبار مراجعة باسط",
+      "phone": "01012345678",
+      "entityName": "الشركة الوطنية اللوجستية",
+      "employeeCode": "",
+      "tier": "family_benefits",
+      "discountPct": 10,
+      "status": "inactive",
+      "qrPayload": "BASET:FAM:BASET-FAM-1467-6256:10PCT:VERIFIED",
+      "activatedAt": "2026-11-28T03:46:54.456Z",
+      "updatedAt": "2026-11-28T03:46:59.449Z"
+    },
+    "member:oSHNtIg0ANB7zMf08JST9Q": {
+      "cardId": "BC-56449DE6",
+      "subjectKey": "member:oSHNtIg0ANB7zMf08JST9Q",
+      "cardNumber": "BASET-FAM-5760-8513",
+      "holderName": "ياسر أحمد خليل",
+      "phone": "01012345678",
+      "entityName": "الشركة الوطنية اللوجستية",
+      "employeeCode": "BS10987654",
+      "tier": "family_benefits",
+      "discountPct": 10,
+      "status": "active",
+      "qrPayload": "BASET:FAM:BASET-FAM-5760-8513:10PCT:VERIFIED",
+      "activatedAt": "2026-11-28T04:21:40.504Z",
+      "updatedAt": "2026-11-28T04:21:40.504Z"
     }
   },
   "basetOfferRedemptions": [

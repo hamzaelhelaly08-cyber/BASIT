@@ -8,20 +8,18 @@ import coffeeNutsImg from '../assets/images/coffee_nuts_roastery_1794847882208.j
 import macaronaBechamelImg from '../assets/images/baked_macarona_bechamel_tray_1795443068298.jpg';
 import charcoalGrillsImg from '../assets/images/succulent_charcoal_grills_1795443029475.jpg';
 import camelLiverImg from '../assets/images/sizzling_camel_liver_tasa_1795443029110.jpg';
-import eidMeatPacksImg from '../assets/images/eid_adha_meat_packs_1795443063943.jpg';
+import eidMeatPacksImg from '../assets/images/eid_meat_clean_box_1795839381870.jpg';
 import pizzaMixImg from '../assets/images/pizza_oriental_western_mix_1795443026422.jpg';
-import ammarFamilyLogoImg from '../assets/images/ammar_family_kitchen_logo_1795562707107.jpg';
 import basitCouponsImg from '../assets/images/basit_discount_coupons_1795562708296.jpg';
 import microwaveMealBoxesImg from '../assets/images/basit_microwave_meal_boxes_1795562708424.jpg';
 import vipMajlisBanquetImg from '../assets/images/vip_majlis_7star_banquet_1795443028287.jpg';
-import sweetsPatisserieMenuImg from '../assets/images/sweets_patisserie_offer_1794836175470.jpg';
-import turkishIskenderMenuImg from '../assets/images/turkish_iskender_pide_spread_1795443036737.jpg';
-import indianTandooriMenuImg from '../assets/images/indian_tandoori_curry_spread_1795443034770.jpg';
-import sushiPlatterMenuImg from '../assets/images/sushi_platter_offer_1794836175423.jpg';
+import boardroomMeetingsImg from '../assets/images/basit_boardroom_meetings_menu_1795841343955.jpg';
+import charityMealsCleanImg from '../assets/images/basit_charity_meals_1795841339828.jpg';
+import hospitalClinicalMealImg from '../assets/images/basit_hospital_clinical_meal_1795841340700.jpg';
+import healthyBowlCleanImg from '../assets/images/sector_basit_healthy_1795835812014.jpg';
 
 export const BASIT_COUPONS_ARTWORK = basitCouponsImg;
 export const BASIT_MICROWAVE_ARTWORK = microwaveMealBoxesImg;
-export const AMMAR_FAMILY_LOGO = ammarFamilyLogoImg;
 
 export type LanguageCode = 'ar' | 'en';
 export type CountryCode = 'EG' | 'QA' | 'OM' | 'GB';
@@ -335,9 +333,7 @@ export const TWELVE_SERVICES: ServiceItem12[] = PLATFORM_FUNCTIONS;
 export type CentralKitchenId =
   | 'hanger_station'
   | 'mall_al_ain'
-  | 'bait_al_eila'
-  | 'ammar_family'
-  | 'om_refaay';
+  | 'bait_al_eila';
 
 export interface CentralKitchenProfile {
   id: CentralKitchenId;
@@ -605,73 +601,6 @@ export const THREE_CENTRAL_KITCHENS: CentralKitchenProfile[] = [
       },
     ],
   },
-  {
-    id: 'om_refaay',
-    codeNameEn: 'OM REFAAY RESTAURANT - SHOROUK CITY',
-    nameAr: 'مطعم عم الرفاعي مدينة الشروق',
-    nameEn: 'Om Refaay Restaurant - Shorouk City',
-    imageUrl: '/assets/branding/om_refaay_shorouk_logo.png',
-    officialLogoUrl: '/assets/branding/om_refaay_shorouk_logo.png',
-    hasOfficialLogo: true,
-    locationAr: 'مدينة الشروق — من شبرا بلد اللقمة الطيبة',
-    locationEn: 'El Shorouk City — Authentic Egyptian Dining',
-    coverageAr: 'الشروق، مدينة بدر، مصانع مدينة بدر، ومدينتي',
-    coverageEn: 'El Shorouk, Badr City, Badr Factories & Madinaty',
-    coverageAreasAr: ['الشروق', 'مدينة بدر', 'مصانع مدينة بدر', 'مدينتي'],
-    coverageAreasEn: ['El Shorouk', 'Badr City', 'Badr Factories', 'Madinaty'],
-    servicesAr: [
-      'مشويات طازجة على الفحم ووصفات شبرا الأصيلة (كفتة، كباب، طواجن)',
-      'وجبات وسندوتشات الطهاة المحترفين بتتبيلات طازجة',
-      'طلبات الشركات والمصانع في الشروق وبدر',
-    ],
-    servicesEn: [
-      'Charcoal grills and authentic Egyptian dishes & tagines',
-      'Master-chef seasoned platters & traditional Egyptian bites',
-      'Corporate & factory catering across El Shorouk & Badr',
-    ],
-    menuCategoriesAr: ['المشويات على الفحم', 'طواجن اللقمة الطيبة', 'وجبات المصانع والشركات'],
-    menuCategoriesEn: ['Charcoal Grills', 'Traditional Tagines', 'Corporate Meals'],
-    sampleMenuItems: [],
-  },
-  {
-    id: 'ammar_family',
-    codeNameEn: 'AMMAR FAMILY CENTRAL KITCHEN',
-    nameAr: 'عمار فاميلي',
-    nameEn: 'Ammar Family Central Kitchen',
-    imageUrl: ammarFamilyLogoImg,
-    officialLogoUrl: ammarFamilyLogoImg,
-    hasOfficialLogo: true,
-    locationAr: 'مدينة بدر والمناطق الصناعية الشرقية',
-    locationEn: 'Badr City & Eastern Industrial Corridor',
-    coverageAr: 'مدينة بدر، مصانع مدينة بدر، العاصمة الإدارية، الشروق، مدينتي',
-    coverageEn: 'Badr City, Badr Factories, New Capital, El Shorouk, Madinaty',
-    coverageAreasAr: ['العاصمة الإدارية', 'مدينة بدر', 'مصانع مدينة بدر', 'الشروق', 'مدينتي'],
-    coverageAreasEn: ['New Capital', 'Badr City', 'Badr Factories', 'El Shorouk', 'Madinaty'],
-    servicesAr: [
-      'تشغيل خطوط الإعاشة اليومية للمصانع والعمال',
-      'تجهيز بوفيهات المؤتمرات والمناسبات العائلية الكبرى',
-      'وجبات صحية وهيلثي معبأة حرارياً بأعلى جودة',
-    ],
-    servicesEn: [
-      'Daily factory workforce meal production',
-      'Conference buffets and large family occasions catering',
-      'Thermally sealed healthy & standard meal boxes',
-    ],
-    menuCategoriesAr: ['منيو العمالة', 'منيو المناسبات والأفراح', 'منيو الهيلثي'],
-    menuCategoriesEn: ['Workforce Menu', 'Events Menu', 'Healthy Menu'],
-    sampleMenuItems: [
-      {
-        id: 'af_meal_1',
-        nameAr: 'وجبة عمار فاميلي المتكاملة للمصانع',
-        nameEn: 'Ammar Family Complete Factory Meal',
-        descAr: 'بروتين مشوي أو طاجن مع أرز بسمتي وخضار سوتيه وسلطة طازجة',
-        descEn: 'Grilled protein with basmati rice, sautéed vegetables & fresh salad',
-        approvedPrice: null,
-        rating: 4.9,
-        dishImageUrl: microwaveMealBoxesImg,
-      },
-    ],
-  },
 ];
 
 export interface OrganizedCateringMenu {
@@ -726,7 +655,7 @@ export const EIGHT_CATERING_MENUS: OrganizedCateringMenu[] = [
     shortLabelAr: 'الاجتماعات',
     shortLabelEn: 'Meetings',
     accentGradient: 'from-[#4C1D95] to-[#581C87]',
-    imageUrl: sweetsPatisserieMenuImg,
+    imageUrl: boardroomMeetingsImg,
     sampleDishesAr: ['بوكس إفطار مجالس الإدارة', 'ساندوتشات كلوب وكرواسون محشو', 'قهوة مختصة ومشروبات ساخنة'],
     sampleDishesEn: ['Boardroom Breakfast Box', 'Club Sandwiches & Croissants', 'Specialty Coffee Service'],
     clientTierNoteAr: 'اجتماعات الشركات والوفود',
@@ -754,7 +683,7 @@ export const EIGHT_CATERING_MENUS: OrganizedCateringMenu[] = [
     shortLabelAr: 'أعمال الخير',
     shortLabelEn: 'Charity',
     accentGradient: 'from-[#4C1D95] to-[#3B0764]',
-    imageUrl: '/assets/catering/charity_meals.jpg',
+    imageUrl: charityMealsCleanImg,
     sampleDishesAr: ['وجبات إطعام ساخنة معقمة', 'كراتين إطعام ومواد غذائية موثقة', 'وجبات إفطار صائم والمناسبات'],
     sampleDishesEn: ['Sealed Hot Charity Meals', 'Documented Food Aid Cartons', 'Seasonal Feeding Campaigns'],
     clientTierNoteAr: 'مبادرات الإطعام بتوثيق كامل',
@@ -767,8 +696,8 @@ export const EIGHT_CATERING_MENUS: OrganizedCateringMenu[] = [
     titleEn: 'Hospitals & Patients Menu',
     shortLabelAr: 'المستشفيات والمرضى',
     shortLabelEn: 'Hospitals',
-    accentGradient: 'from-[#581C87] to-[#3B0764]',
-    imageUrl: indianTandooriMenuImg,
+    accentGradient: 'from-[#5A189A] to-[#4B148C]',
+    imageUrl: hospitalClinicalMealImg,
     sampleDishesAr: ['وجبات منخفضة الصوديوم والدهون', 'بروتين مسلوق وسوتيه معقم طبياً', 'وجبات مخصصة للطاقم الطبي والمناوبات'],
     sampleDishesEn: ['Low-Sodium Therapeutic Meals', 'Steamed Clinical Protein & Veggies', 'Medical Staff Shift Meals'],
     clientTierNoteAr: 'اشتراطات طبية وغذائية دقيقة',
@@ -781,8 +710,8 @@ export const EIGHT_CATERING_MENUS: OrganizedCateringMenu[] = [
     titleEn: 'Healthy, Sports & Gym Menu',
     shortLabelAr: 'الهيلثي والجيم',
     shortLabelEn: 'Healthy & Gym',
-    accentGradient: 'from-[#4C1D95] to-[#581C87]',
-    imageUrl: sushiPlatterMenuImg || turkishIskenderMenuImg,
+    accentGradient: 'from-[#5A189A] to-[#4B148C]',
+    imageUrl: healthyBowlCleanImg,
     sampleDishesAr: ['صدور دجاج مشوية بالزعتر + كينوا وأرز بني', 'أطباق هاي بروتين محسوبة السعرات', 'سمك سلمون فيليه وخضار مشوي'],
     sampleDishesEn: ['Herb Chicken + Quinoa & Brown Rice', 'Calorie-Counted High Protein Bowls', 'Grilled Salmon & Steamed Greens'],
     clientTierNoteAr: 'محسوب السعرات والبروتين',

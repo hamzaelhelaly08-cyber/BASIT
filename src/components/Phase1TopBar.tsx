@@ -26,7 +26,6 @@ import {
   QrCode,
   HeartHandshake,
   Scale,
-  Sparkles,
   Building2,
   Heart,
   Settings,
@@ -36,8 +35,6 @@ import {
   Trash2,
   Leaf,
   CreditCard,
-  Gem,
-  Package,
   Truck,
   Factory,
   PartyPopper,
@@ -62,8 +59,7 @@ import { OfficialCountryFlag } from './OfficialCountryFlags';
 import { PWAInstallButton } from './PWAInstallButton';
 import { AL_AIN_RESTAURANTS, PARTNER_ENTERTAINMENT_VENUES } from '../data/visitorWorldData';
 import { BasitBrandMark } from './BasitBrandMark';
-import { MobileGeometricNotchBar, MobileCoverWaves } from './MobileCoverFrame';
-import { BasetCleanImage } from './BasetCleanImage';
+import { MobileCoverWaves } from './MobileCoverFrame';
 import { BASET_FAMILY_CARD_ASSET } from '../data/basetBenefitsData';
 
 export interface NotificationItem {
@@ -653,15 +649,13 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
         />
       )}
 
-      {/* Creative Royal Purple Top Cover + Geometric Notch + Layered Waves (Uncrowded Clean Top) */}
-      <header className="sticky top-0 z-50 w-full max-w-[430px] mx-auto pt-safe bg-gradient-to-b from-[#3B0764] via-[#4C1D95] to-[#581C87] text-white shadow-[0_12px_30px_-8px_rgba(59,7,100,0.48)] transition-colors overflow-x-clip">
-        <MobileGeometricNotchBar statusText={selectedCountryObj.currencyEn} />
-
+      {/* Sleek Royal Purple Sticky Top Bar (Uncrowded Single-Row Header + Smooth Ivory Transition) */}
+      <header className="sticky top-0 z-50 w-full max-w-[430px] mx-auto pt-safe bg-gradient-to-b from-[#3B0764] to-[#4C1D95] text-white shadow-[0_8px_24px_-8px_rgba(30,22,51,0.35)] transition-colors overflow-x-clip">
         <div
           dir="ltr"
-          className="w-full px-3.5 pt-1 pb-2 min-h-[48px] flex items-center justify-between gap-2 min-w-0"
+          className="w-full px-3.5 py-2.5 min-h-[54px] flex items-center justify-between gap-2 min-w-0"
         >
-          {/* Left: Clean Brand Emblem + Wordmark (Zero Black Underlay) */}
+          {/* Left: Clean Brand Emblem + Wordmark */}
           <button
             type="button"
             onClick={() => {
@@ -671,58 +665,71 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
             className="flex items-center gap-2 cursor-pointer shrink-0 group text-left"
             aria-label="BASIT | باسط"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FEF9C3] to-[#FFD54F] p-0.5 shadow-[0_4px_14px_rgba(255,213,79,0.45)] overflow-hidden shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-white p-0.5 shadow-sm overflow-hidden shrink-0">
               <BasitBrandMark size="xs" isRtl={isRtl} className="w-full h-full border-0 shadow-none" />
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-xs font-black text-[#FFD54F] tracking-wide whitespace-nowrap">
+              <span className="text-xs font-black text-[#F5C451] tracking-wide whitespace-nowrap">
                 BASIT
               </span>
-              <span className="text-[10px] font-extrabold text-[#EDE9FE] whitespace-nowrap">
+              <span className="text-[10px] font-bold text-white/90 whitespace-nowrap">
                 باسط
               </span>
             </div>
           </button>
 
-          {/* Center: Clean User / Market Emblem below Geometric Notch (Matching Reference Screen) */}
+          {/* Center: Clean Market / Account Chip */}
           <button
             type="button"
             onClick={() => {
               if (onOpenAuthGate && isGuestMode) onOpenAuthGate();
               else onNavigateSection('login');
             }}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3B0764]/65 border border-[#C084FC]/45 text-[11px] font-black text-white cursor-pointer max-w-[155px] truncate"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/12 hover:bg-white/18 border border-white/15 text-[11px] font-bold text-white cursor-pointer max-w-[165px] truncate transition-colors"
             title={loggedInEmail || (isRtl ? 'الحساب' : 'Account')}
           >
             <OfficialCountryFlag country={selectedCountryObj.code} className="w-4 h-3 rounded-[2px] shrink-0" />
-            <span className="truncate text-[#FFD54F]">
+            <span className="truncate">
               {isAuthenticated
                 ? isAdminUser
-                  ? isRtl ? 'الإدارة الملكية' : 'Admin'
+                  ? isRtl ? 'الإدارة' : 'Admin'
                   : (loggedInEmail?.split('@')[0] || (isRtl ? 'حسابي' : 'Account'))
-                : isRtl ? 'وضع الزائر' : 'Visitor'}
+                : isRtl ? 'زائر · تسجيل' : 'Visitor · Sign In'}
             </span>
           </button>
 
-          {/* Right: Single Clean Unboxed White Menu Trigger (No Crowded Header Icons) */}
-          <button
-            type="button"
-            onClick={() => {
-              setNotifOpen(false);
-              setDrawerOpen(true);
-            }}
-            aria-label={isRtl ? 'فتح القائمة الرئيسية' : 'Open navigation menu'}
-            className="min-w-[40px] min-h-[40px] flex items-center justify-end text-white hover:text-[#FFD54F] cursor-pointer transition-colors shrink-0"
-          >
-            <Menu className="w-6 h-6" strokeWidth={2} />
-          </button>
+          {/* Right: Search + Menu Trigger */}
+          <div className="flex items-center gap-1 shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setNotifOpen(false);
+                setSearchModalOpen(true);
+              }}
+              aria-label={isRtl ? 'بحث' : 'Search'}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-white/90 hover:text-[#F5C451] cursor-pointer transition-colors"
+            >
+              <Search className="w-5 h-5" strokeWidth={1.9} />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setNotifOpen(false);
+                setDrawerOpen(true);
+              }}
+              aria-label={isRtl ? 'فتح القائمة الرئيسية' : 'Open navigation menu'}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-white hover:text-[#F5C451] cursor-pointer transition-colors"
+            >
+              <Menu className="w-6 h-6" strokeWidth={2} />
+            </button>
+          </div>
         </div>
 
-        {/* Notifications Popover Container (opened via Drawer / Alert Trigger) */}
+        {/* Notifications Popover Container */}
         <div ref={notifContainerRef} className="relative">
           {notifOpen && (
-            <div className="fixed inset-x-0 max-w-[430px] mx-auto px-3 top-24 z-50">
-              <div className="w-full max-h-[calc(100vh-7rem)] overflow-y-auto rounded-3xl basit-liquid-glass p-4 space-y-2.5 shadow-2xl text-[#3B0764]">
+            <div className="fixed inset-x-0 max-w-[430px] mx-auto px-3 top-20 z-50">
+              <div className="w-full max-h-[calc(100vh-7rem)] overflow-y-auto rounded-3xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 p-4 space-y-2.5 shadow-2xl text-[#1E1633] dark:text-[#FAF8F5]">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#4C1D95]/15 pb-2">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-black text-[#3B0764]">
@@ -767,7 +774,7 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                       sortedFirestoreNotifications.map((n) => (
                         <div
                           key={n.notifId}
-                          className="p-2.5 rounded-xl border border-[#4C1D95]/20 bg-[#FFFBEB] text-xs space-y-1.5"
+                          className="p-2.5 rounded-xl border border-[#4C1D95]/15 bg-[#FAF8F5] dark:bg-[#241B38] text-xs space-y-1.5"
                         >
                           <div className="flex items-start justify-between gap-2">
                             <button
@@ -830,7 +837,7 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                     visibleFallbackNotifications.map((n) => (
                       <div
                         key={n.id}
-                        className="p-2.5 rounded-xl bg-[#FFFBEB] border border-[#4C1D95]/20 text-xs space-y-1"
+                        className="p-2.5 rounded-xl bg-[#FAF8F5] dark:bg-[#241B38] border border-[#4C1D95]/15 text-xs space-y-1"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <button
@@ -872,98 +879,67 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
           )}
         </div>
 
-        {/* Persistent Visitor Registration Banner inside Cover */}
-        {isGuestMode && (
-          <div className="px-3.5 pb-1.5">
-            <div className="w-full px-3 py-1.5 rounded-2xl bg-[#3B0764]/70 border border-[#FFD54F]/55 flex flex-wrap items-center justify-between gap-2 min-w-0">
-              <div className="flex items-center gap-1.5 min-w-0 flex-1">
-                <Sparkles className="w-3.5 h-3.5 text-[#FFD54F] shrink-0" />
-                <span className="text-[10px] font-black text-[#FFD54F] truncate">
-                  {isRtl
-                    ? 'وضع الزائر — سجّل الآن لفتح جميع المزايا'
-                    : 'Visitor Mode — Register for full features'}
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  if (onOpenAuthGate) onOpenAuthGate();
-                  else onNavigateSection('login');
-                }}
-                className="shrink-0 min-h-[28px] px-3 py-0.5 rounded-full bg-[#FFD54F] text-[#3B0764] text-[10px] font-black shadow-xs cursor-pointer whitespace-nowrap"
-              >
-                {isRtl ? 'سجّل الآن' : 'Register'}
-              </button>
-            </div>
-          </div>
-        )}
-
         <MobileCoverWaves />
       </header>
 
-      {/* Full-Screen Royal Purple Control Dashboard ("لوحة التحكم") constrained to 430px Mobile Frame */}
+      {/* Main Navigation Drawer (Calm Ivory Canvas + Royal Purple Header) */}
       {drawerOpen && (
         <div
-          className="fixed inset-0 max-w-[430px] w-full mx-auto z-50 bg-gradient-to-b from-[#3B0764] via-[#4C1D95] to-[#581C87] text-white overflow-y-auto overflow-x-hidden pt-safe"
+          className="fixed inset-0 max-w-[430px] w-full mx-auto z-50 bg-[#FAF8F5] dark:bg-[#120D1D] text-[#1E1633] dark:text-[#FAF8F5] overflow-y-auto overflow-x-hidden pt-safe"
           role="dialog"
           aria-modal="true"
-          aria-label={isRtl ? 'لوحة تحكم باسط للأعمال' : 'BASIT B2B Control Dashboard'}
+          aria-label={isRtl ? 'القائمة الرئيسية — باسط' : 'BASIT Main Menu'}
         >
-          <MobileGeometricNotchBar statusText="BASIT" />
-          <div className="w-full px-3.5 py-3 space-y-5 pb-16 min-w-0">
-            {/* Control Dashboard Top Bar */}
-            <div className="flex items-center justify-between gap-3 pb-3.5 border-b border-[#FFD54F]/30">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="p-1 rounded-2xl bg-gradient-to-br from-[#FEF9C3] to-[#FFD54F] shadow-md shrink-0">
-                  <BasitBrandMark size="xs" isRtl={isRtl} />
-                </div>
-                <div className="min-w-0">
-                  <h2 className="text-sm font-black text-[#FFD54F] truncate">
-                    {isRtl ? 'لوحة التحكم — باسط للأعمال' : 'BASIT Control Dashboard'}
-                  </h2>
-                  <p className="text-[11px] font-bold text-[#EDE9FE] truncate">
-                    {isRtl
-                      ? 'الوطنية اللوجستية المالية · حلول الشركات'
-                      : 'Wataniya Logistics · Corporate B2B'}
-                  </p>
-                </div>
+          <div className="bg-gradient-to-b from-[#3B0764] to-[#4C1D95] text-white px-4 py-3.5 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="p-0.5 rounded-xl bg-white shadow-sm shrink-0">
+                <BasitBrandMark size="xs" isRtl={isRtl} />
               </div>
-
-              <button
-                type="button"
-                onClick={() => setDrawerOpen(false)}
-                aria-label={isRtl ? 'إغلاق لوحة التحكم' : 'Close Control Dashboard'}
-                className="min-h-[44px] min-w-[44px] text-white hover:text-[#FFD54F] flex items-center justify-center cursor-pointer transition-colors shrink-0"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              <div className="min-w-0">
+                <h2 className="text-sm font-black text-white truncate">
+                  {isRtl ? 'القائمة الرئيسية — باسط' : 'BASIT Menu'}
+                </h2>
+                <p className="text-[11px] font-semibold text-white/80 truncate">
+                  {isRtl ? 'الضيافة، التموين، ومزايا العائلة' : 'Hospitality, Catering & Family Perks'}
+                </p>
+              </div>
             </div>
 
-            {/* Clean Quick Settings Row inside Drawer: Language · Search · Country Selector */}
-            <div className="rounded-[24px] bg-[#3B0764]/65 border border-[#FFD54F]/40 p-3.5 space-y-3">
-              <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(false)}
+              aria-label={isRtl ? 'إغلاق القائمة' : 'Close menu'}
+              className="min-h-[44px] min-w-[44px] text-white hover:text-[#F5C451] flex items-center justify-center cursor-pointer transition-colors shrink-0"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="w-full px-3.5 py-4 space-y-4 pb-16 min-w-0">
+            {/* Quick Settings Card: Search · Language · Country */}
+            <div className="rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 p-3.5 space-y-3 shadow-xs">
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => {
                     setDrawerOpen(false);
                     setSearchModalOpen(true);
                   }}
-                  className="flex-1 min-h-[42px] px-3 rounded-xl bg-[#FFD54F] text-[#3B0764] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 min-h-[44px] px-3 rounded-xl bg-[#4C1D95] text-white text-xs font-extrabold flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Search className="w-4 h-4" />
+                  <Search className="w-4 h-4 text-[#F5C451]" />
                   <span>{isRtl ? 'بحث شامل' : 'Search'}</span>
                 </button>
                 <button
                   type="button"
                   onClick={onToggleLang}
-                  className="min-h-[42px] px-3.5 rounded-xl bg-[#EDE9FE] text-[#3B0764] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="min-h-[44px] px-3.5 rounded-xl bg-[#FAF8F5] dark:bg-[#231938] border border-[#4C1D95]/15 text-[#3B0764] dark:text-white text-xs font-extrabold flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Languages className="w-4 h-4" />
+                  <Languages className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451]" />
                   <span>{isRtl ? 'English' : 'العربية'}</span>
                 </button>
               </div>
 
-              {/* Country Market Selector */}
               <div className="grid grid-cols-2 gap-1.5">
                 {SUPPORTED_COUNTRIES.slice(0, 4).map((c) => {
                   const active = c.code === country;
@@ -972,25 +948,25 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                       key={c.code}
                       type="button"
                       onClick={() => onSelectCountry(c.code)}
-                      className={`min-h-[38px] px-2.5 rounded-xl text-[11px] font-black flex items-center justify-between gap-1.5 cursor-pointer transition-all ${
+                      className={`min-h-[40px] px-2.5 rounded-xl text-[11px] font-bold flex items-center justify-between gap-1.5 cursor-pointer transition-all ${
                         active
-                          ? 'bg-[#FFD54F] text-[#3B0764] shadow-sm'
-                          : 'bg-[#581C87]/75 text-[#EDE9FE] border border-[#C084FC]/30'
+                          ? 'bg-[#4C1D95] text-white shadow-xs'
+                          : 'bg-[#FAF8F5] dark:bg-[#231938] text-[#1E1633] dark:text-[#FAF8F5] border border-[#4C1D95]/12'
                       }`}
                     >
                       <span className="flex items-center gap-1.5 min-w-0">
                         <OfficialCountryFlag country={c.code} className="w-4 h-3 rounded-[2px] shrink-0" />
                         <span className="truncate">{isRtl ? c.nameAr : c.nameEn}</span>
                       </span>
-                      <span className="font-mono text-[9px] shrink-0">{c.currencyEn}</span>
+                      <span className="font-mono text-[9px] opacity-80 shrink-0">{c.currencyEn}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Dedicated Basit Card Display (Royal Purple & Luminous Gold — Zero Duplicate Image) */}
-            <section className="relative rounded-[28px] overflow-hidden bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#581C87] border-2 border-[#FFD54F]/75 p-5 shadow-[0_20px_44px_-14px_rgba(59,7,100,0.5)]">
+            {/* Dedicated Basit Card Featured Highlight (Royal Purple + Luminous Gold Accent) */}
+            <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#3B0764] to-[#4C1D95] p-4 shadow-md text-white space-y-3">
               <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
                 <div className="space-y-2.5">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD54F] text-[#3B0764] text-xs font-black">
@@ -1023,11 +999,10 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-x-8 bottom-1 h-8 rounded-full bg-[#FFD54F]/30 blur-xl"
                     />
-                    <BasetCleanImage
+                    <img
                       src={BASET_FAMILY_CARD_ASSET}
-                      alt={isRtl ? 'كارت باسط العائلي' : 'BASET Family Benefits Card'}
-                      cleanCheckerboard
-                      className="relative z-10 w-full max-h-[175px] object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.55)] group-hover:scale-[1.02] transition-transform"
+                      alt={isRtl ? 'بطاقة باسط الرسمية المعتمدة' : 'Official BASIT Card'}
+                      className="relative z-10 w-full max-h-[175px] object-contain rounded-xl group-hover:scale-[1.02] transition-transform"
                     />
                   </button>
 
@@ -1069,142 +1044,66 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
               </div>
             </section>
 
-            {/* Benefits + November Offers */}
-            <div className="grid grid-cols-1 gap-3.5">
-              <div className="rounded-[24px] bg-[#581C87]/75 border border-[#C084FC]/35 p-4 space-y-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-2xl bg-[#FFD54F] text-[#3B0764] flex items-center justify-center shrink-0">
-                    <Gem className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-black text-white">{isRtl ? 'مزايا الكاش باك' : 'Cash Back Benefits'}</h3>
-                    <p className="text-xs text-[#EDE9FE]">
-                      {isRtl ? 'استرداد نقدي تراكمي حتى 7% على عقود الشركات' : 'Up to 7% recurring B2B corporate cashback'}
-                    </p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 gap-2 pt-1 text-center">
-                  <div className="p-2.5 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/25">
-                    <div className="text-sm font-black text-[#FFD54F]">3%</div>
-                    <div className="text-[10px] font-bold text-[#EDE9FE]">{isRtl ? 'عقود شهرية' : 'Monthly'}</div>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/25">
-                    <div className="text-sm font-black text-[#FFD54F]">5%</div>
-                    <div className="text-[10px] font-bold text-[#EDE9FE]">{isRtl ? 'ورديات المصانع' : 'Factory Shifts'}</div>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/25">
-                    <div className="text-sm font-black text-[#FFD54F]">7%</div>
-                    <div className="text-[10px] font-bold text-[#EDE9FE]">{isRtl ? 'عقود سنوية' : 'Annual VIP'}</div>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDrawerOpen(false);
-                    onNavigateSection('fresh_world');
-                  }}
-                  className="w-full min-h-[42px] rounded-xl bg-[#EDE9FE] text-[#3B0764] text-xs font-black cursor-pointer"
-                >
-                  {isRtl ? 'تفعيل رصيد الكاش باك في المتجر' : 'Activate Cash Back in Store'}
-                </button>
-              </div>
-
-              <div className="rounded-[24px] bg-[#581C87]/75 border border-[#C084FC]/35 p-4 space-y-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-2xl bg-[#FFD54F] text-[#3B0764] flex items-center justify-center shrink-0">
-                    <Package className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-black text-white">{isRtl ? 'عروض نوفمبر' : 'November Offers'}</h3>
-                    <p className="text-xs text-[#EDE9FE]">
-                      {isRtl ? 'باقات التوريد الشتوية وقسائم خصم المطاعم' : 'Seasonal B2B packages & dining vouchers'}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-xs font-medium text-[#FEF9C3] leading-relaxed">
-                  {isRtl
-                    ? 'خصومات خاصة على باقات الميكرويف الحرارية للعاملين وبوكسات حصاد النيل الأخضر خلال نوفمبر.'
-                    : 'Exclusive B2B rates on thermal meal packs and fresh produce boxes throughout November.'}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDrawerOpen(false);
-                    onNavigateSection('al_ain_coupons');
-                  }}
-                  className="w-full min-h-[42px] rounded-xl bg-[#FFD54F] text-[#3B0764] text-xs font-black cursor-pointer"
-                >
-                  {isRtl ? 'استعراض عروض وكوبونات نوفمبر' : 'View November Vouchers'}
-                </button>
-              </div>
-            </div>
-
-            {/* B2B Business Solutions Division */}
-            <section className="rounded-[24px] bg-[#3B0764]/65 border border-[#FFD54F]/35 p-4 space-y-3.5">
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-[#FFD54F]" />
-                  <h3 className="text-sm font-black text-[#FFD54F]">
-                    {isRtl ? 'قطاع حلول الأعمال B2B' : 'B2B Business Solutions'}
-                  </h3>
-                </div>
+            {/* Corporate & Hospitality Services (Unified Lucide Icons on Ivory Cards) */}
+            <section className="rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 p-4 space-y-3 shadow-xs">
+              <div className="flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451]" />
+                <h3 className="text-xs font-black text-[#3B0764] dark:text-white">
+                  {isRtl ? 'قطاع خدمات الأعمال والمناسبات B2B' : 'B2B Catering & Events'}
+                </h3>
               </div>
 
               <div className="grid grid-cols-1 gap-2">
                 {[
                   {
                     id: 'b2b_factory',
-                    labelAr: '🥘 توريد وجبات المصانع (Factory Supply)',
-                    labelEn: '🥘 Factory Meal Supply',
+                    icon: Factory,
+                    labelAr: 'توريد وجبات المصانع والورديات',
+                    labelEn: 'Factory Meal Supply',
                     action: () => window.dispatchEvent(new CustomEvent('basit:open-catering-modal', { detail: 'quote_tasting' })),
                   },
                   {
                     id: 'b2b_event',
-                    labelAr: '🎉 تجهيز الحفلات (Event Catering)',
-                    labelEn: '🎉 Event Catering',
-                    action: () => window.dispatchEvent(new CustomEvent('basit:open-catering-modal', { detail: 'events_conference_quote' })),
-                  },
-                  {
-                    id: 'b2b_wedding',
-                    labelAr: '💍 خدمات الأفراح (Wedding Catering)',
-                    labelEn: '💍 Wedding Catering',
-                    action: () => window.dispatchEvent(new CustomEvent('basit:open-catering-modal', { detail: 'events_conference_quote' })),
-                  },
-                  {
-                    id: 'b2b_corp',
-                    labelAr: '🤝 الفعاليات الاحترافية (Corporate Events)',
-                    labelEn: '🤝 Professional Corporate Events',
+                    icon: PartyPopper,
+                    labelAr: 'تجهيز الحفلات والمؤتمرات والأفراح',
+                    labelEn: 'Events, Conferences & Weddings',
                     action: () => window.dispatchEvent(new CustomEvent('basit:open-catering-modal', { detail: 'events_conference_quote' })),
                   },
                   {
                     id: 'b2b_venue',
-                    labelAr: '🏛️ تجهيز المواقع والقاعات (Venue Supply)',
-                    labelEn: '🏛️ Venue & Site Supply',
+                    icon: UtensilsCrossed,
+                    labelAr: 'تجهيز المواقع والقاعات والضيافة',
+                    labelEn: 'Venue & Site Supply',
                     action: () => window.dispatchEvent(new CustomEvent('basit:open-catering-modal', { detail: 'client_supply_order' })),
                   },
                   {
                     id: 'b2b_track',
-                    labelAr: '🚚 تتبع توريد الوجبات (Meal Tracking)',
-                    labelEn: '🚚 B2B Meal Tracking',
+                    icon: Truck,
+                    labelAr: 'تتبع توريد الوجبات والشحنات',
+                    labelEn: 'B2B Meal Tracking',
                     action: () => onNavigateSection('b2b_tracking'),
                   },
-                ].map((srv) => (
-                  <button
-                    key={srv.id}
-                    type="button"
-                    onClick={() => {
-                      setDrawerOpen(false);
-                      srv.action();
-                    }}
-                    className="min-h-[46px] px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#FEF9C3] to-[#EDE9FE] text-[#3B0764] text-xs font-black text-start flex items-center justify-between gap-2 shadow-xs cursor-pointer transition-transform active:scale-98"
-                  >
-                    <span>{isRtl ? srv.labelAr : srv.labelEn}</span>
-                  </button>
-                ))}
+                ].map((srv) => {
+                  const Icon = srv.icon;
+                  return (
+                    <button
+                      key={srv.id}
+                      type="button"
+                      onClick={() => {
+                        setDrawerOpen(false);
+                        srv.action();
+                      }}
+                      className="min-h-[46px] px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] dark:bg-[#231938] hover:bg-[#EDE9FE]/60 border border-[#4C1D95]/10 text-[#1E1633] dark:text-white text-xs font-bold text-start flex items-center gap-2.5 cursor-pointer transition-colors"
+                    >
+                      <Icon className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
+                      <span className="truncate">{isRtl ? srv.labelAr : srv.labelEn}</span>
+                    </button>
+                  );
+                })}
               </div>
             </section>
 
-            {/* Quick Navigation & Workspace Utilities */}
+            {/* Quick Navigation & Account Utilities */}
             <div className="grid grid-cols-2 gap-2.5">
               <button
                 type="button"
@@ -1212,22 +1111,22 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                   setDrawerOpen(false);
                   onNavigateSection('fresh_world');
                 }}
-                className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
               >
-                <Leaf className="w-4 h-4 text-[#FFD54F] shrink-0" />
-                <span className="truncate">{isRtl ? 'حصاد النيل الأخضر' : 'Green Nile 3D'}</span>
+                <Leaf className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
+                <span className="truncate">{isRtl ? 'حصاد النيل الأخضر' : 'Green Nile'}</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => {
                   setDrawerOpen(false);
-                  onNavigateSection('b2b_checkout');
+                  onNavigateSection('al_ain_restaurants');
                 }}
-                className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
               >
-                <Truck className="w-4 h-4 text-[#FFD54F] shrink-0" />
-                <span className="truncate">{isRtl ? 'التعاقد السريع B2B' : 'B2B Checkout'}</span>
+                <UtensilsCrossed className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
+                <span className="truncate">{isRtl ? 'عالم العين' : 'Al Ain Mall'}</span>
               </button>
 
               <button
@@ -1236,9 +1135,9 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                   setDrawerOpen(false);
                   onOpenCart();
                 }}
-                className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
               >
-                <ShoppingCart className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                <ShoppingCart className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
                 <span className="truncate">{isRtl ? `السلة (${cartCount})` : `Cart (${cartCount})`}</span>
               </button>
 
@@ -1249,9 +1148,9 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                     setDrawerOpen(false);
                     onOpenFavorites();
                   }}
-                  className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                 >
-                  <Heart className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                  <Heart className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
                   <span className="truncate">{isRtl ? `المفضلة (${favoritesCount})` : `Favorites (${favoritesCount})`}</span>
                 </button>
               )}
@@ -1262,18 +1161,18 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                   setDrawerOpen(false);
                   setNotifOpen(true);
                 }}
-                className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
               >
-                <Bell className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                <Bell className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
                 <span className="truncate">{isRtl ? `التنبيهات (${unreadCount})` : `Alerts (${unreadCount})`}</span>
               </button>
 
               <button
                 type="button"
                 onClick={onToggleTheme}
-                className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
               >
-                {isDark ? <Sun className="w-4 h-4 text-[#FFD54F] shrink-0" /> : <Moon className="w-4 h-4 text-[#FFD54F] shrink-0" />}
+                {isDark ? <Sun className="w-4 h-4 text-[#F5C451] shrink-0" /> : <Moon className="w-4 h-4 text-[#4C1D95] shrink-0" />}
                 <span className="truncate">{isDark ? (isRtl ? 'الوضع النهاري' : 'Light Mode') : (isRtl ? 'الوضع الليلي' : 'Dark Mode')}</span>
               </button>
 
@@ -1284,13 +1183,14 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                     setDrawerOpen(false);
                     onOpenOperationalTasks();
                   }}
-                  className="col-span-2 min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="col-span-2 min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                 >
-                  <ClipboardList className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                  <ClipboardList className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
                   <span className="truncate">{isRtl ? 'مهام التشغيل والمتابعة' : 'Operational Tasks'}</span>
                 </button>
               )}
 
+              {/* Owner & Admin Portals strictly visible ONLY to verified Owners/Admins */}
               {isStrictAppOwner && !isGuestMode && (
                 <button
                   type="button"
@@ -1298,13 +1198,27 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                     setDrawerOpen(false);
                     onNavigateSection('owner_finance');
                   }}
-                  className="col-span-2 min-h-[48px] px-3.5 rounded-xl bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#581C87] border border-[#FFD54F] text-[#FFD54F] text-xs font-black flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  className="col-span-2 min-h-[48px] px-3.5 rounded-xl bg-[#3B0764] text-[#F5C451] text-xs font-black flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 >
-                  <Lock className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                  <Lock className="w-4 h-4 shrink-0" />
                   <span className="truncate">
-                    {isRtl
-                      ? 'المنصة المالية الخاصة بالمالك (2FA / المستثمر الذكي)'
-                      : 'Owner Financial Vault (2FA / AI Investor)'}
+                    {isRtl ? 'المنصة المالية الخاصة بالمالك' : 'Owner Financial Vault'}
+                  </span>
+                </button>
+              )}
+
+              {(isAdminUser || isStrictAppOwner) && !isGuestMode && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDrawerOpen(false);
+                    onNavigateSection('finance_manager_portal');
+                  }}
+                  className="col-span-2 min-h-[46px] px-3.5 rounded-xl bg-[#4C1D95] text-white text-xs font-bold flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Briefcase className="w-4 h-4 text-[#F5C451] shrink-0" />
+                  <span className="truncate">
+                    {isRtl ? 'بوابة الإدارة والمالية' : 'Management & Finance Portal'}
                   </span>
                 </button>
               )}
@@ -1313,26 +1227,12 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                 type="button"
                 onClick={() => {
                   setDrawerOpen(false);
-                  onNavigateSection('finance_manager_portal');
-                }}
-                className="col-span-2 min-h-[46px] px-3.5 rounded-xl bg-[#4C1D95]/85 border border-[#C084FC]/45 hover:bg-[#581C87] text-white text-xs font-black flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Briefcase className="w-4 h-4 text-[#FFD54F] shrink-0" />
-                <span className="truncate">
-                  {isRtl ? 'بوابة المدير المالي (دخول معزول)' : 'Finance Manager Portal'}
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setDrawerOpen(false);
                   if (onOpenAuthGate && isGuestMode) onOpenAuthGate();
                   else onNavigateSection('login');
                 }}
-                className="min-h-[46px] px-3 rounded-xl bg-[#3B0764]/65 border border-[#C084FC]/30 hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer min-w-0"
+                className="min-h-[46px] px-3 rounded-xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 text-[#1E1633] dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer min-w-0"
               >
-                <UserIcon className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                <UserIcon className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
                 <span className="truncate">{loggedInEmail || (isRtl ? 'الحساب والتسجيل' : 'Account')}</span>
               </button>
 
@@ -1343,7 +1243,7 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                     setDrawerOpen(false);
                     onSignOut();
                   }}
-                  className="min-h-[46px] px-3 rounded-xl bg-[#3B0764] border border-[#FFD54F]/60 text-[#FFD54F] hover:bg-[#581C87] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="min-h-[46px] px-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <LogOut className="w-4 h-4 shrink-0" />
                   <span className="truncate">{isRtl ? 'تسجيل الخروج' : 'Sign Out'}</span>
@@ -1387,7 +1287,7 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
               </button>
             </div>
 
-            <div className="px-4 py-2.5 bg-[#EDE9FE] border-b border-[#4C1D95]/15 flex flex-wrap items-center gap-1.5">
+            <div className="px-4 py-2.5 bg-[#FAF8F5] dark:bg-[#231938] border-b border-[#4C1D95]/10 flex flex-wrap items-center gap-1.5">
               {scopeOptions.map((opt) => {
                 const active = searchScope === opt.id;
                 return (
@@ -1397,8 +1297,8 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                     onClick={() => setSearchScope(opt.id)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                       active
-                        ? 'bg-[#4C1D95] text-[#FFD54F] shadow-xs'
-                        : 'bg-[#FFFBEB] text-[#3B0764] border border-[#4C1D95]/20 hover:border-[#4C1D95]'
+                        ? 'bg-[#4C1D95] text-white shadow-xs'
+                        : 'bg-white dark:bg-[#1B132B] text-[#3B0764] dark:text-[#FAF8F5] border border-[#4C1D95]/15 hover:border-[#4C1D95]'
                     }`}
                   >
                     {opt.label}
@@ -1407,9 +1307,9 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
               })}
             </div>
 
-            <div className="max-h-96 overflow-y-auto divide-y divide-[#4C1D95]/10 p-2 bg-gradient-to-b from-[#FFFBEB] to-[#EDE9FE]">
+            <div className="max-h-96 overflow-y-auto divide-y divide-[#4C1D95]/10 p-2 bg-white dark:bg-[#1B132B]">
               {searchResults.length === 0 ? (
-                <div className="p-8 text-center text-xs text-[#581C87]">
+                <div className="p-8 text-center text-xs text-[#5B5270] dark:text-[#C4B5FD]">
                   {isRtl ? 'لا توجد نتائج مطابقة لبحثك' : 'No matching results found'}
                 </div>
               ) : (
@@ -1421,10 +1321,10 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                       onNavigateSection(item.section, item.kitchenId);
                       setSearchModalOpen(false);
                     }}
-                    className="w-full p-3 rounded-xl hover:bg-[#FEF3C7] text-start flex items-center justify-between gap-3 transition-colors cursor-pointer"
+                    className="w-full p-3 rounded-xl hover:bg-[#FAF8F5] dark:hover:bg-[#231938] text-start flex items-center justify-between gap-3 transition-colors cursor-pointer"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#4C1D95] to-[#3B0764] text-[#FFD54F] flex items-center justify-center shrink-0">
+                      <div className="w-9 h-9 rounded-xl bg-[#F5F3FF] dark:bg-[#231938] text-[#4C1D95] dark:text-[#F5C451] flex items-center justify-center shrink-0">
                         {item.scope === 'products' && <Leaf className="w-4 h-4" />}
                         {item.scope === 'catering' && <PartyPopper className="w-4 h-4" />}
                         {item.scope === 'companies' && <Factory className="w-4 h-4" />}
@@ -1436,15 +1336,15 @@ export const Phase1TopBar: React.FC<Phase1TopBarProps> = ({
                         {item.scope === 'meals' && <UtensilsCrossed className="w-4 h-4" />}
                       </div>
                       <div className="min-w-0">
-                        <div className="text-xs font-extrabold text-[#3B0764] truncate">
+                        <div className="text-xs font-extrabold text-[#1E1633] dark:text-white truncate">
                           {item.title}
                         </div>
-                        <div className="text-[11px] text-[#581C87] truncate">
+                        <div className="text-[11px] text-[#5B5270] dark:text-[#C4B5FD] truncate">
                           {item.subtitle}
                         </div>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold text-[#4C1D95] shrink-0">
+                    <span className="text-[10px] font-bold text-[#4C1D95] dark:text-[#F5C451] shrink-0">
                       {t.scopes[item.scope]}
                     </span>
                   </button>

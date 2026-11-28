@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CreditCard, ShieldCheck, Sparkles } from 'lucide-react';
 import { LanguageCode } from '../data/phase1Data';
 import { BASET_FAMILY_CARD_ASSET } from '../data/basetBenefitsData';
-import { BasetCleanImage } from './BasetCleanImage';
 import {
-  MobileGeometricNotchBar,
   MobileCoverWaves,
   BottomRoyalWaveFooter,
 } from './MobileCoverFrame';
@@ -56,10 +54,9 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
         exiting ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* Top Royal Purple Cover + Geometric Mobile Notch */}
+      {/* Top Royal Purple Cover */}
       <div className="relative z-20 bg-gradient-to-b from-[#2A1459] via-[#3B0764] to-[#4C1D95] pt-safe">
-        <MobileGeometricNotchBar statusText="BASET" />
-        <div className="px-4 pb-2 flex items-center justify-between gap-2">
+        <div className="px-4 pt-3 pb-2 flex items-center justify-between gap-2">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-[#FFD54F]/45 text-[10px] font-black text-[#FFD54F]">
             <CreditCard className="w-3.5 h-3.5" />
             <span>{isRtl ? 'برنامج مزايا كارت باسط العائلي' : 'BASET Family Benefits'}</span>
@@ -89,17 +86,11 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
           />
 
           {/* Frosted Glassmorphism Card Showcase Pedestal */}
-          <div className="relative w-full rounded-[28px] p-3 bg-white/10 backdrop-blur-md border border-[#FFD54F]/60 shadow-[0_24px_60px_rgba(0,0,0,0.5),0_0_32px_rgba(255,213,79,0.28)] overflow-hidden">
-            {/* Metallic Gold Sheen Sweep */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-[#FFD54F]/35 to-transparent ce-splash-sweep"
-            />
-            <BasetCleanImage
+          <div className="relative w-full rounded-[28px] p-2.5 bg-[#16082E] border border-[#FFD54F]/60 shadow-[0_24px_60px_rgba(0,0,0,0.5),0_0_32px_rgba(255,213,79,0.28)] overflow-hidden">
+            <img
               src={BASET_FAMILY_CARD_ASSET}
-              alt="BASET Family Benefits Card"
-              cleanCheckerboard
-              className="relative z-10 w-full h-auto max-h-[210px] object-contain mx-auto drop-shadow-[0_18px_28px_rgba(0,0,0,0.5)]"
+              alt="كارت باسط الرسمي المعتمد"
+              className="relative z-10 w-full h-auto max-h-[210px] object-contain mx-auto rounded-xl"
             />
           </div>
         </div>

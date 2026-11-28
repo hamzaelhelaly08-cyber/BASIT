@@ -219,7 +219,7 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
           {/* Form */}
           <form
             onSubmit={handleSubmit}
-            className="rounded-[24px] bg-gradient-to-b from-[#FFFDF0] via-[#FEF9C3] to-[#EDE9FE] border border-[#EAB308]/50 p-4 shadow-sm space-y-4"
+            className="rounded-[24px] bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 dark:border-[#C084FC]/20 p-4 shadow-xs space-y-4"
           >
             {formError && (
               <div className="p-3 rounded-2xl bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold flex items-center gap-2">
@@ -230,11 +230,11 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
 
             {/* Map Pin Location Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-black text-[#3B0764] flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-[#4C1D95]" />
+              <label className="text-xs font-black text-[#1E1633] dark:text-white flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451]" />
                 <span>{isRtl ? 'تحديد الموقع (Pin Location)' : 'Select Delivery Zone Pin'}</span>
               </label>
-              <div className="rounded-2xl bg-[#FFFBEB] border border-[#EAB308]/45 p-3 space-y-2.5">
+              <div className="rounded-2xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/12 p-3 space-y-2.5">
                 <div className="flex flex-wrap gap-1.5">
                   {B2B_MAP_PINS.map((pin) => {
                     const active = pin.id === selectedPinId;
@@ -250,8 +250,8 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                         }}
                         className={`min-h-[38px] px-2.5 py-1.5 rounded-xl text-[11px] font-bold flex items-center gap-1 cursor-pointer transition-all ${
                           active
-                            ? 'bg-[#4C1D95] text-[#FFD54F] shadow-sm'
-                            : 'bg-[#FEF9C3] text-[#3B0764] border border-[#EAB308]/45'
+                            ? 'bg-[#4C1D95] text-white shadow-xs'
+                            : 'bg-white dark:bg-[#1B132B] text-[#1E1633] dark:text-[#EDE9FE] border border-[#4C1D95]/15'
                         }`}
                       >
                         <Navigation className="w-3 h-3 shrink-0" />
@@ -260,7 +260,7 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                     );
                   })}
                 </div>
-                <div className="text-[11px] font-mono text-[#4C1D95] flex items-center gap-1.5" dir="ltr">
+                <div className="text-[11px] font-mono text-[#4C1D95] dark:text-[#F5C451] flex items-center gap-1.5" dir="ltr">
                   <MapPin className="w-3.5 h-3.5" />
                   <span>GPS Pin Locked: {selectedPin.coords}</span>
                 </div>
@@ -270,8 +270,8 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
             {/* Company Name (Required) + Location Type */}
             <div className="grid grid-cols-1 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-black text-[#3B0764] flex items-center gap-1.5">
-                  <Building2 className="w-4 h-4 text-[#4C1D95]" />
+                <label className="text-xs font-black text-[#1E1633] dark:text-white flex items-center gap-1.5">
+                  <Building2 className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451]" />
                   <span>{isRtl ? 'اسم الشركة / المصنع *' : 'Company / Factory Name *'}</span>
                 </label>
                 <input
@@ -280,18 +280,18 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
                   placeholder={isRtl ? 'مثال: مصنع السويدي أو شركة XD EGEMAC' : 'e.g. El Sewedy Electric / Factory B'}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-black text-[#3B0764]">
+                <label className="text-xs font-black text-[#1E1633] dark:text-white">
                   {isRtl ? 'نوع الموقع *' : 'Location Type *'}
                 </label>
                 <select
                   value={locationType}
                   onChange={(e) => setLocationType(e.target.value as B2BLocationType)}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 >
                   {B2B_LOCATION_TYPES.map((lt) => (
                     <option key={lt.id} value={lt.id}>
@@ -305,7 +305,7 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
             {/* Address, Floor, Apartment/Unit */}
             <div className="grid grid-cols-2 gap-2.5">
               <div className="col-span-2 space-y-1">
-                <label className="text-xs font-black text-[#3B0764]">
+                <label className="text-xs font-black text-[#1E1633] dark:text-white">
                   {isRtl ? 'العنوان التفصيلي *' : 'Detailed Street Address *'}
                 </label>
                 <input
@@ -314,12 +314,12 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder={isRtl ? 'القطعة، المحور، البوابة الرئيسية' : 'Plot number, main gate, landmark'}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-black text-[#3B0764]">
+                <label className="text-xs font-black text-[#1E1633] dark:text-white">
                   {isRtl ? 'الدور' : 'Floor'}
                 </label>
                 <input
@@ -327,12 +327,12 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                   value={floor}
                   onChange={(e) => setFloor(e.target.value)}
                   placeholder={isRtl ? 'الأرضي / 2' : 'Ground / 2nd'}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-black text-[#3B0764]">
+                <label className="text-xs font-black text-[#1E1633] dark:text-white">
                   {isRtl ? 'الشقة / الوحدة' : 'Apt / Unit'}
                 </label>
                 <input
@@ -340,7 +340,7 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                   value={apartment}
                   onChange={(e) => setApartment(e.target.value)}
                   placeholder={isRtl ? 'مكتب 4 / عنبر ب' : 'Office 4 / Gate B'}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 />
               </div>
             </div>
@@ -348,8 +348,8 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
             {/* Contact Person & Phone */}
             <div className="grid grid-cols-2 gap-2.5">
               <div className="space-y-1">
-                <label className="text-xs font-black text-[#3B0764] flex items-center gap-1">
-                  <User className="w-3.5 h-3.5 text-[#4C1D95]" />
+                <label className="text-xs font-black text-[#1E1633] dark:text-white flex items-center gap-1">
+                  <User className="w-3.5 h-3.5 text-[#4C1D95] dark:text-[#F5C451]" />
                   <span>{isRtl ? 'مسؤول الاستلام' : 'Receiving Officer'}</span>
                 </label>
                 <input
@@ -357,13 +357,13 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
                   placeholder={isRtl ? 'الاسم الثلاثي' : 'Full name'}
-                  className="w-full min-h-[44px] px-3 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-black text-[#3B0764] flex items-center gap-1">
-                  <Phone className="w-3.5 h-3.5 text-[#4C1D95]" />
+                <label className="text-xs font-black text-[#1E1633] dark:text-white flex items-center gap-1">
+                  <Phone className="w-3.5 h-3.5 text-[#4C1D95] dark:text-[#F5C451]" />
                   <span>{isRtl ? 'الهاتف' : 'Phone'}</span>
                 </label>
                 <input
@@ -372,19 +372,19 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+20 10..."
-                  className="w-full min-h-[44px] px-3 rounded-xl bg-[#FFFBEB] border border-[#C084FC]/45 text-xs font-bold text-[#3B0764] focus:outline-none focus:border-[#4C1D95]"
+                  className="w-full min-h-[44px] px-3 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none focus:border-[#4C1D95]"
                 />
               </div>
             </div>
 
-            <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-[#FFFBEB] border border-[#EAB308]/45 cursor-pointer">
+            <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-[#F5F3FF] dark:bg-[#241B38] border border-[#4C1D95]/15 cursor-pointer">
               <input
                 type="checkbox"
                 checked={createCorporateAccount}
                 onChange={(e) => setCreateCorporateAccount(e.target.checked)}
                 className="w-4 h-4 accent-[#4C1D95]"
               />
-              <span className="text-[11px] font-bold text-[#3B0764]">
+              <span className="text-[11px] font-bold text-[#1E1633] dark:text-[#EDE9FE]">
                 {isRtl
                   ? 'فتح حساب تعاقد مؤسسي (Corporate Account) لتفعيل خصم 10% ببطاقة باسط'
                   : 'Enroll in BASIT Corporate Account to unlock 10% staff card perks'}
@@ -393,30 +393,30 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
 
             <button
               type="submit"
-              className="w-full min-h-[50px] rounded-2xl bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#581C87] hover:brightness-105 text-[#FFD54F] border border-[#FFD54F]/50 font-black text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer transition-transform active:scale-99"
+              className="w-full min-h-[50px] rounded-2xl bg-[#4C1D95] hover:bg-[#3B0764] text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm cursor-pointer transition-all active:scale-99"
             >
-              <CheckCircle2 className="w-5 h-5 text-[#FFD54F]" />
+              <CheckCircle2 className="w-5 h-5 text-[#F5C451]" />
               <span>{isRtl ? 'تأكيد التعاقد والانتقال لتتبع الوجبات' : 'Confirm Order & Open Meal Tracker'}</span>
             </button>
           </form>
 
           {/* Summary Card */}
-          <aside className="rounded-[24px] bg-gradient-to-br from-[#FFFDF0] via-[#FEF9C3] to-[#EDE9FE] border border-[#EAB308]/50 p-4 shadow-sm space-y-3">
+          <aside className="rounded-[24px] bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 dark:border-[#C084FC]/20 p-4 shadow-xs space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-black text-[#3B0764]">
+              <h2 className="text-sm font-black text-[#1E1633] dark:text-white">
                 {isRtl ? 'ملخص أمر التوريد' : 'Order Summary'}
               </h2>
               <button
                 type="button"
                 onClick={onBrowseFreshWorld}
-                className="text-xs font-black text-[#4C1D95] cursor-pointer hover:underline"
+                className="text-xs font-black text-[#4C1D95] dark:text-[#F5C451] cursor-pointer hover:underline"
               >
                 {isRtl ? '+ إضافة منتجات' : '+ Add Items'}
               </button>
             </div>
 
             {cartItems.length === 0 ? (
-              <div className="p-3.5 rounded-2xl bg-[#FFFBEB] text-xs font-bold text-[#581C87] text-center">
+              <div className="p-3.5 rounded-2xl bg-[#FAF8F5] dark:bg-[#120D1D] text-xs font-bold text-[#5E5570] dark:text-[#C4B5FD] text-center">
                 <p>{isRtl ? 'السلة فارغة — يمكنك استكمال التعاقد أو إضافة أصناف من حصاد النيل.' : 'Cart is empty — add items from Fresh World or submit a facility contract.'}</p>
               </div>
             ) : (
@@ -424,17 +424,17 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                 {cartItems.map((item) => (
                   <div
                     key={item.id}
-                    className="p-2.5 rounded-xl bg-[#FFFBEB] border border-[#EAB308]/35 flex items-center justify-between gap-2 text-xs"
+                    className="p-2.5 rounded-xl bg-[#FAF8F5] dark:bg-[#120D1D] border border-[#4C1D95]/10 flex items-center justify-between gap-2 text-xs"
                   >
                     <div className="min-w-0">
-                      <div className="font-black text-[#3B0764] truncate">
+                      <div className="font-black text-[#1E1633] dark:text-white truncate">
                         {isRtl ? item.nameAr : item.nameEn}
                       </div>
-                      <div className="text-[11px] font-bold text-[#581C87]">
+                      <div className="text-[11px] font-bold text-[#5E5570] dark:text-[#C4B5FD]">
                         x{item.quantity}
                       </div>
                     </div>
-                    <div className="font-black text-[#4C1D95] shrink-0 tabular-nums" dir="ltr">
+                    <div className="font-black text-[#4C1D95] dark:text-[#F5C451] shrink-0 tabular-nums" dir="ltr">
                       {typeof item.approvedPrice === 'number'
                         ? `${(item.approvedPrice * item.quantity).toLocaleString()} ${currencyLabel}`
                         : isRtl
@@ -446,11 +446,11 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
               </div>
             )}
 
-            <div className="pt-2.5 border-t border-[#4C1D95]/15 flex items-center justify-between">
-              <span className="text-xs font-bold text-[#581C87]">
+            <div className="pt-2.5 border-t border-[#4C1D95]/12 flex items-center justify-between">
+              <span className="text-xs font-bold text-[#5E5570] dark:text-[#C4B5FD]">
                 {isRtl ? 'الإجمالي المبدئي' : 'Subtotal'}
               </span>
-              <span className="text-base font-black text-[#3B0764] tabular-nums" dir="ltr">
+              <span className="text-base font-black text-[#3B0764] dark:text-[#F5C451] tabular-nums" dir="ltr">
                 {pricedTotal.toLocaleString()} {currencyLabel}
               </span>
             </div>
@@ -460,13 +460,13 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
         /* Tracking Mode */
         <section className="space-y-4">
           {!activeOrder ? (
-            <div className="rounded-[24px] bg-gradient-to-b from-[#FFFDF0] via-[#FEF9C3] to-[#EDE9FE] border border-[#EAB308]/50 p-6 text-center space-y-3">
-              <Truck className="w-10 h-10 text-[#4C1D95] mx-auto" />
+            <div className="rounded-[24px] bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 dark:border-[#C084FC]/20 p-6 text-center space-y-3 shadow-xs">
+              <Truck className="w-10 h-10 text-[#4C1D95] dark:text-[#F5C451] mx-auto" />
               <div className="space-y-1">
-                <h2 className="text-sm font-black text-[#3B0764]">
+                <h2 className="text-sm font-black text-[#1E1633] dark:text-white">
                   {isRtl ? 'لا توجد شحنات قيد التتبع حالياً' : 'No active tracked B2B orders yet'}
                 </h2>
-                <p className="text-xs font-medium text-[#581C87]">
+                <p className="text-xs font-medium text-[#5E5570] dark:text-[#C4B5FD]">
                   {isRtl
                     ? 'أضف وجبات من حصاد النيل الأخضر وأكد نموذج التعاقد لبدء التتبع المباشر.'
                     : 'Add meals from Fresh World and submit B2B checkout to track stages live.'}
@@ -476,14 +476,14 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                 <button
                   type="button"
                   onClick={onBrowseFreshWorld}
-                  className="min-h-[42px] px-4 rounded-xl bg-gradient-to-r from-[#3B0764] to-[#4C1D95] text-[#FFD54F] text-xs font-black cursor-pointer"
+                  className="min-h-[42px] px-4 rounded-xl bg-[#4C1D95] text-white text-xs font-black cursor-pointer"
                 >
                   {isRtl ? 'تسوق حصاد النيل الأخضر' : 'Browse Fresh World'}
                 </button>
                 <button
                   type="button"
                   onClick={() => onSwitchMode('checkout')}
-                  className="min-h-[42px] px-4 rounded-xl bg-[#FFD54F] text-[#3B0764] text-xs font-black cursor-pointer"
+                  className="min-h-[42px] px-4 rounded-xl bg-[#F5C451] text-[#2A0E4D] text-xs font-black cursor-pointer"
                 >
                   {isRtl ? 'نموذج تعاقد جديد' : 'New B2B Order Form'}
                 </button>
@@ -500,8 +500,8 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                       onClick={() => setSelectedOrderId(ord.id)}
                       className={`min-h-[38px] px-3 rounded-xl text-xs font-black shrink-0 cursor-pointer transition-colors ${
                         ord.id === activeOrder.id
-                          ? 'bg-[#4C1D95] text-[#FFD54F]'
-                          : 'bg-[#FFFBEB] text-[#3B0764] border border-[#EAB308]/50'
+                          ? 'bg-[#4C1D95] text-white'
+                          : 'bg-white dark:bg-[#1B132B] text-[#1E1633] dark:text-white border border-[#4C1D95]/15'
                       }`}
                     >
                       {ord.id} · {ord.companyName}
@@ -510,17 +510,17 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                 </div>
               )}
 
-              <div className="rounded-[24px] bg-gradient-to-b from-[#FFFDF0] via-[#FEF9C3] to-[#EDE9FE] border border-[#EAB308]/50 p-4 shadow-sm space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#4C1D95]/15">
+              <div className="rounded-[24px] bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 dark:border-[#C084FC]/20 p-4 shadow-xs space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#4C1D95]/12">
                   <div className="space-y-1">
-                    <div className="text-[11px] font-mono font-black text-[#4C1D95]">
+                    <div className="text-[11px] font-mono font-black text-[#4C1D95] dark:text-[#F5C451]">
                       {activeOrder.id} · {activeOrder.createdAt}
                     </div>
-                    <h2 className="text-base font-black text-[#3B0764]">
+                    <h2 className="text-base font-black text-[#1E1633] dark:text-white">
                       {activeOrder.companyName}
                     </h2>
-                    <div className="text-[11px] font-bold text-[#581C87] flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#4C1D95]" />
+                    <div className="text-[11px] font-bold text-[#5E5570] dark:text-[#C4B5FD] flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5 text-[#4C1D95] dark:text-[#F5C451]" />
                       <span>
                         {activeOrder.mapPinLabel} — {activeOrder.address}
                       </span>
@@ -531,9 +531,9 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                     <button
                       type="button"
                       onClick={() => onAdvanceOrderStage(activeOrder.id)}
-                      className="min-h-[40px] px-3.5 rounded-xl bg-gradient-to-r from-[#3B0764] to-[#4C1D95] text-[#FFD54F] text-xs font-black flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95 transition-transform"
+                      className="min-h-[40px] px-3.5 rounded-xl bg-[#4C1D95] hover:bg-[#3B0764] text-white text-xs font-black flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
                     >
-                      <Sparkles className="w-4 h-4 text-[#FFD54F]" />
+                      <Sparkles className="w-4 h-4 text-[#F5C451]" />
                       <span>{isRtl ? 'المرحلة التالية' : 'Advance Stage'}</span>
                     </button>
                   )}
@@ -551,30 +551,30 @@ export const B2BCheckoutTrackingView: React.FC<B2BCheckoutTrackingViewProps> = (
                         key={stage.id}
                         className={`p-3.5 rounded-2xl border transition-all space-y-1.5 ${
                           isCurrent
-                            ? 'bg-gradient-to-br from-[#FEF9C3] to-[#FDE68A] border-[#4C1D95] shadow-sm'
+                            ? 'bg-[#F5F3FF] dark:bg-[#241B38] border-[#4C1D95] shadow-xs'
                             : completed
-                              ? 'bg-[#EDE9FE] border-[#C084FC]'
-                              : 'bg-[#FFFBEB] border-[#EAB308]/35 opacity-75'
+                              ? 'bg-[#FAF8F5] dark:bg-[#120D1D] border-[#4C1D95]/30'
+                              : 'bg-[#FAF8F5] dark:bg-[#120D1D] border-[#4C1D95]/10 opacity-75'
                         }`}
                       >
                         <div className="flex items-center justify-between">
                           <div
                             className={`w-9 h-9 rounded-xl flex items-center justify-center ${
                               completed
-                                ? 'bg-[#4C1D95] text-[#FFD54F]'
-                                : 'bg-[#FEF3C7] text-[#3B0764]'
+                                ? 'bg-[#4C1D95] text-[#F5C451]'
+                                : 'bg-white dark:bg-[#1B132B] text-[#4C1D95] dark:text-[#C4B5FD]'
                             }`}
                           >
                             <StageIcon className="w-4 h-4" />
                           </div>
-                          <span className="text-[11px] font-black tabular-nums text-[#581C87]">
+                          <span className="text-[11px] font-black tabular-nums text-[#5E5570] dark:text-[#C4B5FD]">
                             0{idx + 1}
                           </span>
                         </div>
-                        <div className="text-xs font-black text-[#3B0764]">
+                        <div className="text-xs font-black text-[#1E1633] dark:text-white">
                           {isRtl ? stage.labelAr : stage.labelEn}
                         </div>
-                        <p className="text-[11px] font-medium text-[#581C87] leading-relaxed">
+                        <p className="text-[11px] font-medium text-[#5E5570] dark:text-[#C4B5FD] leading-relaxed">
                           {isRtl ? stage.descAr : stage.descEn}
                         </p>
                       </div>

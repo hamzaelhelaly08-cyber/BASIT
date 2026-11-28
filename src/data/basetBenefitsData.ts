@@ -1,21 +1,25 @@
-import eidMeatNaturalImg from '../assets/images/eid_adha_meat_packs_1795443063943.jpg';
-import ramadanCartonRealImg from '../assets/images/ramadan_corporate_carton_box_1795443038684.jpg';
-import eidKahkLuxuryImg from '../assets/images/kahk_eid_luxury_box_1795443065782.jpg';
+import eidMeatCleanImg from '../assets/images/basit_eid_meat_fresh_1795846885518.jpg';
+import ramadanPantryCleanImg from '../assets/images/basit_ramadan_box_pro_1795846886042.jpg';
+import eidKahkCleanImg from '../assets/images/basit_kahk_eid_box_1795846886628.jpg';
+import oasisDatesCleanImg from '../assets/images/basit_dates_collection_grade_a_1795846885412.jpg';
+import mawlidSweetBoxImg from '../assets/images/basit_mawlid_sweet_box_1795846885879.jpg';
+import familyLeisureHeroCleanImg from '../assets/images/family_leisure_hero_clean_1795839382523.jpg';
 
 import circusImg from '../assets/images/al_ain_kids_circus_fun_1794529872787.jpg';
 import cinemaImg from '../assets/images/madinaty_cinema_vip_1794852898185.jpg';
-import screensGamingImg from '../assets/images/gaming_gift_vouchers_1794836178016.jpg';
+import screensGamingImg from '../assets/images/basit_family_screens_lounge_1795841341709.jpg';
 import touristResortsImg from '../assets/images/baset_tourist_resorts_1795635310828.jpg';
 import spaImg from '../assets/images/spa_relaxation_care_1794836174339.jpg';
 import saltHouseImg from '../assets/images/therapeutic_salt_cave_room_1795443030309.jpg';
 import familyTripsImg from '../assets/images/baset_family_trips_1795635311568.jpg';
 import coastalChaletsImg from '../assets/images/baset_coastal_chalets_1795635311736.jpg';
 
-export const BASET_FAMILY_CARD_ASSET = '/assets/aistudio/image_a8fc361f.png';
-export const BASET_ENTERTAINMENT_HERO_ASSET = '/assets/aistudio/image_24bfd195.png';
+export const BASIT_OFFICIAL_CARD_ASSET = '/assets/aistudio/image_31437b35.png';
+export const BASET_FAMILY_CARD_ASSET = BASIT_OFFICIAL_CARD_ASSET;
+export const BASET_ENTERTAINMENT_HERO_ASSET = familyLeisureHeroCleanImg;
 
 export interface BasetFoodOfferItem {
-  id: 'eid_adha_meat' | 'ramadan_carton' | 'eid_kahk_box' | 'zadi_ramadan_dates';
+  id: 'eid_adha_meat' | 'ramadan_carton' | 'eid_kahk_box' | 'zadi_ramadan_dates' | 'mawlid_sweet_box';
   titleAr: string;
   titleEn: string;
   subtitleAr: string;
@@ -39,25 +43,24 @@ export interface BasetFoodOfferItem {
 export const FOOD_BENEFIT_OFFERS: BasetFoodOfferItem[] = [
   {
     id: 'eid_adha_meat',
-    titleAr: 'لحوم الأضحية',
-    titleEn: 'Eid Al-Adha Sacrifice Meat',
-    subtitleAr: 'بوكس CATERING EGYPT المبرد لقطعيات اللحم الطازج البلدي والمختار',
-    subtitleEn: 'CATERING EGYPT chilled box with curated fresh prime cuts',
+    titleAr: 'لحوم الأضحية والطازج',
+    titleEn: 'Eid Al-Adha & Fresh Sacrifice Meat',
+    subtitleAr: 'بوكس CATERING EGYPT المبرد لقطعيات اللحم الطازج البلدي (جريد A)',
+    subtitleEn: 'CATERING EGYPT chilled box with curated fresh prime cuts Grade A',
     partnerBrandAr: 'CATERING MISR / CATERING EGYPT',
     partnerBrandEn: 'CATERING MISR / CATERING EGYPT',
-    primaryImage: '/assets/aistudio/image_92bbac70.png',
-    secondaryImage: eidMeatNaturalImg,
+    primaryImage: eidMeatCleanImg,
     discountPct: 10,
     basePriceEgp: 1950,
     unitLabelAr: 'بوكس عائلي / 5 كجم',
     unitLabelEn: 'Family Box / 5 kg',
     contentsAr: [
-      'قطعيات ستيك وكباب حلة ومكعبات طازجة معبأة حرارياً',
+      'قطعيات ستيك وكباب حلة ومكعبات طازجة معبأة حرارياً (Grade A)',
       'إشراف بيطري كامل وسلسلة تبريد HACCP معتمدة',
       'تغليف فاخر بشعار CATERING MISR وبطاقة الضمان',
     ],
     contentsEn: [
-      'Fresh vacuum-sealed prime steaks, ribs & stew cuts',
+      'Fresh vacuum-sealed prime steaks, ribs & stew cuts Grade A',
       'Full veterinary certification & HACCP cold-chain delivery',
       'Official CATERING MISR thermal packaging',
     ],
@@ -74,14 +77,13 @@ export const FOOD_BENEFIT_OFFERS: BasetFoodOfferItem[] = [
   },
   {
     id: 'ramadan_carton',
-    titleAr: 'كرتونة السلع الرمضانية',
-    titleEn: 'Ramadan Grocery Carton',
+    titleAr: 'كرتونة السلع والتموين الرمضاني',
+    titleEn: 'Ramadan Grocery & Pantry Carton',
     subtitleAr: 'كرتونة التموين والسلع الأساسية المتكاملة من CATERING MISR',
     subtitleEn: 'Complete Ramadan pantry & staple carton by CATERING MISR',
     partnerBrandAr: 'CATERING MISR',
     partnerBrandEn: 'CATERING MISR',
-    primaryImage: '/assets/aistudio/image_4028f582.png',
-    secondaryImage: ramadanCartonRealImg,
+    primaryImage: ramadanPantryCleanImg,
     discountPct: 10,
     basePriceEgp: 680,
     unitLabelAr: 'كرتونة سلع متكاملة',
@@ -109,14 +111,13 @@ export const FOOD_BENEFIT_OFFERS: BasetFoodOfferItem[] = [
   },
   {
     id: 'eid_kahk_box',
-    titleAr: 'كرتونة كحك عيد الفطر',
-    titleEn: 'Eid Al-Fitr Kahk Luxury Box',
+    titleAr: 'علبة كحك وبسكويت عيد الفطر',
+    titleEn: 'Eid Al-Fitr Kahk & Biscuits Luxury Box',
     subtitleAr: 'كحك وبسكويت العيد بالسكر البودرة الفاخر من مطابخ CATERING MISR',
     subtitleEn: 'Traditional butter Kahk & Eid biscuits by CATERING MISR',
     partnerBrandAr: 'CATERING MISR',
     partnerBrandEn: 'CATERING MISR',
-    primaryImage: '/assets/aistudio/image_399fbf47.png',
-    secondaryImage: eidKahkLuxuryImg,
+    primaryImage: eidKahkCleanImg,
     discountPct: 10,
     basePriceEgp: 540,
     unitLabelAr: 'علبة فاخرة 2 كجم',
@@ -142,36 +143,70 @@ export const FOOD_BENEFIT_OFFERS: BasetFoodOfferItem[] = [
   },
   {
     id: 'zadi_ramadan_dates',
-    titleAr: 'تمور رمضان — زادي الوادي والفرافرة',
-    titleEn: 'Ramadan Dates — ZADI El-Wadi & Farafra',
-    subtitleAr: 'تمور طبيعية فاخرة من واحات الوادي والفرافرة عبر CATERING EGYPT و ZADI',
-    subtitleEn: 'Authentic natural oasis dates from El-Wadi & Farafra by ZADI & CATERING EGYPT',
-    partnerBrandAr: 'ZADI | تمور الوادي والفرافرة · CATERING MISR',
-    partnerBrandEn: 'ZADI | El-Wadi & Farafra · CATERING MISR',
-    originTagAr: 'تمور طبيعية 100% — واحات الوادي والفرافرة',
-    originTagEn: '100% Natural Dates — El-Wadi & Farafra Oases',
-    primaryImage: '/assets/aistudio/image_ad1c9d48.png',
+    titleAr: 'تمور زادي — تمر الوادي والمجدول الفاخر (مقاسات S, M, L وجامبو وسوبر جامبو - جودة A & AB)',
+    titleEn: 'Zadi Dates — Premium Al-Wadi & Medjool (S, M, L, Jumbo & Super Jumbo - Grade A & AB)',
+    subtitleAr: 'تمور طبيعية فاخرة من واحات الوادي والفرافرة بتصنيف دقيق لجميع المقاسات (Grade A / AB)',
+    subtitleEn: 'Authentic oasis dates from El-Wadi & Farafra with rigorous sizing Grade A & AB',
+    partnerBrandAr: 'ZADI | تمور الوادي والمجدول · CATERING MISR',
+    partnerBrandEn: 'ZADI | El-Wadi & Medjool Dates · CATERING MISR',
+    originTagAr: 'تمور طبيعية 100% — جامبو وسوبر جامبو (جريد A & AB)',
+    originTagEn: '100% Natural Dates — Jumbo & Super Jumbo (Grade A & AB)',
+    primaryImage: oasisDatesCleanImg,
     discountPct: 10,
     basePriceEgp: 420,
-    unitLabelAr: 'عبوة تمور طبيعية مختارة',
-    unitLabelEn: 'Natural Selected Dates Box',
+    unitLabelAr: 'عبوة مختارة (مقاسات S, M, L, Jumbo)',
+    unitLabelEn: 'Selected Box (S, M, L, Jumbo)',
     contentsAr: [
-      'تمور مجدول وسيوي ووادي صعيدي طبيعية من مزارع الوادي والفرافرة',
-      'تعبئة صحية مفرغة من الهواء للحفاظ على الطراوة والطعم الأصيل',
-      'اعتماد علامة ZADI التجارية الرسمية وتغليف CATERING MISR',
+      'تمر مجدول فاخر (مقاسات S, M, L, وجامبو، وسوبر جامبو) — جودة A و AB',
+      'تمر الوادي الطبيعي منتقى بعناية وخالٍ من الإضافات الكيميائية',
+      'عبوات هدايا خشبية وكرتونية راقية تناسب الاستهلاك المؤسسي والعائلي',
     ],
     contentsEn: [
-      'Authentic natural Medjool & Siwi dates harvested from El-Wadi & Farafra oases',
-      'Vacuum-sealed & luxury boxed under ZADI & CATERING MISR quality seal',
-      'Preserves authentic oasis texture with zero artificial glazing',
+      'Premium Medjool dates (S, M, L, Jumbo & Super Jumbo) — Grade A & AB',
+      'Natural El-Wadi oasis dates carefully sorted without chemical additives',
+      'High-end wooden & carton gift presentation boxes',
     ],
     termsAr: [
-      'خصم 10% مفعّل لحامل كارت باسط الساري على عبوات ZADI وبلح الوادي.',
-      'صور حقيقية 100% للمنتج والعبوات المعتمدة دون أي إضافات صناعية.',
+      'خصم 10% فوري لحاملي بطاقة باسط العائلية المفعّلة.',
+      'متاح للشحن الفوري لجميع الشركات والمصانع والأفراد في مصر.',
     ],
     termsEn: [
-      '10% verified card-holder discount across ZADI & El-Wadi date cartons.',
-      '100% authentic product imagery & genuine oasis harvest.',
+      'Instant 10% discount for active BASET Family Card holders.',
+      'Available for immediate dispatch across corporate accounts in Egypt.',
+    ],
+  },
+  {
+    id: 'mawlid_sweet_box',
+    titleAr: 'صندوق حلاوة المولد النبوي الشريف (صندوق خشبي تراثي)',
+    titleEn: 'Prophet Mawlid Heritage Wooden Chest Box',
+    subtitleAr: 'صندوق خشبي تراثي فاخر محفور يدوياً يضم أطايب حلاوة المولد (سمسمية، فستقية، ملبن، وقشطة)',
+    subtitleEn: 'Hand-carved wooden chest box filled with traditional Egyptian Mawlid sweets',
+    partnerBrandAr: 'CATERING MISR / تراث الحلويات المصرية',
+    partnerBrandEn: 'CATERING MISR / Heritage Sweets',
+    originTagAr: 'حلويات تقليدية فاخرة — صُنِع في مصر',
+    originTagEn: 'Traditional Premium Sweets — Made in Egypt',
+    primaryImage: mawlidSweetBoxImg,
+    discountPct: 10,
+    basePriceEgp: 750,
+    unitLabelAr: 'صندوق خشبي تراثي فاخر',
+    unitLabelEn: 'Luxury Wooden Chest',
+    contentsAr: [
+      'سمسمية، فولية، حمصية، فستقية، بندقية، وملبن عين جمل',
+      'قشطة بالبندق وملبن محشي جيلي ومكسرات',
+      'صندوق خشبي تراثي فاخر قابل لإعادة الاستخدام بشعار باسط',
+    ],
+    contentsEn: [
+      'Sesame, peanut & chickpea brittle, pistachio, hazelnut & walnut malban',
+      'Marshmallow nougat rolls & fruit jellies',
+      'Reusable handcrafted wooden chest box with BASIT insignia',
+    ],
+    termsAr: [
+      'يسري خصم 10% الفوري باستخدام كارت باسط المفعّل.',
+      'متاح لحجوزات الشركات والجهات الحكومية والخاصة.',
+    ],
+    termsEn: [
+      '10% instant discount applies with active BASET card verification.',
+      'Available for corporate and institutional bulk reservations.',
     ],
   },
 ];

@@ -9,25 +9,19 @@ interface MobileCoverWavesProps {
  */
 export const MobileCoverWaves: React.FC<MobileCoverWavesProps> = ({ className = '' }) => (
   <svg
-    viewBox="0 0 430 44"
+    viewBox="0 0 430 32"
     preserveAspectRatio="none"
     aria-hidden="true"
-    className={`pointer-events-none block w-full h-9 ${className}`}
+    className={`pointer-events-none block w-full h-5 ${className}`}
   >
     <path
-      d="M0,18 C95,42 185,2 290,22 C355,34 398,22 430,12 L430,44 L0,44 Z"
-      fill="#C084FC"
-      fillOpacity="0.28"
-    />
-    <path
-      d="M0,26 C115,6 220,40 340,16 C380,8 410,16 430,24 L430,44 L0,44 Z"
-      fill="#FFD54F"
+      d="M0,14 C105,30 220,2 340,18 C385,24 412,18 430,12 L430,32 L0,32 Z"
+      fill="#C4B5FD"
       fillOpacity="0.22"
     />
     <path
-      d="M0,32 C110,44 240,14 360,30 C392,34 414,32 430,28 L430,44 L0,44 Z"
-      fill="#FEF9C3"
-      fillOpacity="0.96"
+      d="M0,22 C125,32 250,10 375,24 C400,27 416,25 430,22 L430,32 L0,32 Z"
+      className="fill-[#FAF8F5] dark:fill-[#120D1D]"
     />
   </svg>
 );

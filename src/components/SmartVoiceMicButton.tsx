@@ -210,8 +210,8 @@ export const SmartVoiceMicButton: React.FC<SmartVoiceMicButtonProps> = ({
       </button>
 
       {lastTranscript && (
-        <div className="px-2.5 py-1.5 rounded-lg bg-[#FFFBEB] border border-[#FFD54F]/80 text-[10px] font-bold text-[#3B0764] flex items-start gap-1.5 break-words">
-          <Sparkles className="w-3.5 h-3.5 text-[#4C1D95] shrink-0 mt-0.5" />
+        <div className="px-2.5 py-1.5 rounded-lg bg-[#FAF8F5] dark:bg-[#1B132B] border border-[#E6E0F5] dark:border-[#3B0764]/50 text-[10px] font-bold text-[#3B0764] dark:text-[#F5C451] flex items-start gap-1.5 break-words">
+          <Sparkles className="w-3.5 h-3.5 text-[#4C1D95] dark:text-[#F5C451] shrink-0 mt-0.5" />
           <span className="min-w-0">النص المُلتقط: «{lastTranscript}»</span>
         </div>
       )}

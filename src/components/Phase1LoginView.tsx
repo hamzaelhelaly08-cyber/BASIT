@@ -26,7 +26,6 @@ import { LanguageCode } from '../data/phase1Data';
 import { CANONICAL_ROLE_META, EXECUTIVE_ACCOUNTS, type CanonicalRole } from '../types/rbac';
 import { BasitBrandMark, BASIT_OFFICIAL_LOGO_PNG } from './BasitBrandMark';
 import {
-  MobileGeometricNotchBar,
   MobileCoverWaves,
   BottomRoyalWaveFooter,
 } from './MobileCoverFrame';
@@ -123,7 +122,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
   onSignOutGoogle,
   onBackHome,
   onContinueAsGuest,
-  onOpenFinanceManagerPortal,
+  onOpenFinanceManagerPortal: _onOpenFinanceManagerPortal,
   onOpenAdminHub,
   onOpenTenantWorkspace,
   onShowToast,
@@ -629,7 +628,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
           {claimPanelOpen && (
             <form
               onSubmit={handleClaimExecutivePassword}
-              className="p-4 rounded-2xl bg-[#FFFDF0] dark:bg-[#1F172F] border-2 border-[#FFC928] space-y-3"
+              className="p-4 rounded-2xl bg-[#FAF8F5] dark:bg-[#1F172F] border border-[#4C1D95]/25 space-y-3"
             >
               <div className="space-y-0.5">
                 <div className="text-xs font-black text-[#292333] dark:text-[#FFC928] flex items-center gap-1.5">
@@ -653,7 +652,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                 value={claimIdentifier}
                 onChange={(e) => setClaimIdentifier(e.target.value)}
                 placeholder={isRtl ? 'اسم المستخدم أو البريد التنفيذي' : 'Executive username or email'}
-                className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFDF0] dark:bg-[#140F1F] border border-[#62339A]/25 font-mono text-xs font-bold"
+                className="w-full min-h-[44px] px-3.5 rounded-xl bg-white dark:bg-[#140F1F] border border-[#62339A]/25 font-mono text-xs font-bold"
               />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <input
@@ -665,7 +664,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                   value={claimPassword}
                   onChange={(e) => setClaimPassword(e.target.value)}
                   placeholder={isRtl ? 'كلمة المرور (8+ أحرف)' : 'Password (8+ chars)'}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFDF0] dark:bg-[#140F1F] border border-[#62339A]/25 font-mono text-xs font-bold"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-white dark:bg-[#140F1F] border border-[#62339A]/25 font-mono text-xs font-bold"
                 />
                 <input
                   type="password"
@@ -676,7 +675,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                   value={claimConfirmPassword}
                   onChange={(e) => setClaimConfirmPassword(e.target.value)}
                   placeholder={isRtl ? 'تأكيد كلمة المرور' : 'Confirm password'}
-                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-[#FFFDF0] dark:bg-[#140F1F] border border-[#62339A]/25 font-mono text-xs font-bold"
+                  className="w-full min-h-[44px] px-3.5 rounded-xl bg-white dark:bg-[#140F1F] border border-[#62339A]/25 font-mono text-xs font-bold"
                 />
               </div>
               <button
@@ -1062,25 +1061,24 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
     return (
       <div
         dir={isRtl ? 'rtl' : 'ltr'}
-        className="fixed inset-0 z-[70] max-w-[430px] w-full mx-auto overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#FEF9C3] via-[#FEF3C7] to-[#EDE9FE] text-[#3B0764] flex flex-col justify-between"
+        className="fixed inset-0 z-[70] max-w-[430px] w-full mx-auto overflow-y-auto overflow-x-hidden bg-[#FAF8F5] dark:bg-[#120D1D] text-[#1E1633] dark:text-white flex flex-col justify-between"
       >
-        {/* Top Royal Purple Cover + Geometric Mobile Notch + Waves */}
-        <header className="relative z-20 shrink-0 bg-gradient-to-b from-[#3B0764] via-[#4C1D95] to-[#581C87] text-white pt-safe">
-          <MobileGeometricNotchBar statusText="BASIT" />
+        {/* Top Royal Purple Cover + Clean Wave */}
+        <header className="relative z-20 shrink-0 bg-gradient-to-b from-[#3B0764] via-[#4C1D95] to-[#5B21B6] text-white pt-safe">
           <div
             dir="ltr"
-            className="flex items-center justify-between gap-2 px-4 pt-1 pb-2 min-w-0"
+            className="flex items-center justify-between gap-2 px-4 pt-3 pb-2 min-w-0"
           >
             <div className="inline-flex items-center gap-2 min-w-0">
-              <div className="w-8 h-8 rounded-xl bg-white p-0.5 shadow-[0_4px_14px_rgba(255,213,79,0.45)] border border-[#FFD54F]/80 shrink-0 overflow-hidden">
+              <div className="w-8 h-8 rounded-xl bg-white p-0.5 shadow-sm border border-[#F5C451]/70 shrink-0 overflow-hidden">
                 <img
                   src={BASIT_OFFICIAL_LOGO_PNG}
                   alt="BASIT | باسط"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain bg-white scale-[1.03]"
+                  className="w-full h-full object-contain bg-white"
                 />
               </div>
-              <span className="text-xs font-black tracking-wide text-[#FFD54F] truncate">
+              <span className="text-xs font-black tracking-wide text-[#F5C451] truncate">
                 BASIT | باسط
               </span>
             </div>
@@ -1089,9 +1087,9 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               <button
                 type="button"
                 onClick={onToggleLang}
-                className="min-h-[38px] px-3 rounded-full bg-[#FFD54F] text-[#3B0764] text-xs font-black flex items-center gap-1.5 cursor-pointer shrink-0 shadow-sm"
+                className="min-h-[38px] px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-black flex items-center gap-1.5 cursor-pointer shrink-0 transition-colors"
               >
-                <Languages className="w-3.5 h-3.5 text-[#3B0764]" />
+                <Languages className="w-3.5 h-3.5 text-[#F5C451]" />
                 <span>{isRtl ? 'EN' : 'ع'}</span>
               </button>
             )}
@@ -1099,56 +1097,45 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
           <MobileCoverWaves />
         </header>
 
-        {/* Center Onboarding Stack on Luminous Gold-Lavender Full-Bleed Screen */}
+        {/* Center Onboarding Stack on Calm Ivory White */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-5 py-4 text-center w-full mx-auto space-y-4">
-          {/* Pure White Silk Floor 3D Pedestal + BASIT Logo (Distant Golden Backlight) */}
           <div className="relative flex items-center justify-center my-1">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute w-56 h-56 rounded-full bg-[#FFD54F]/45 blur-3xl"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute w-44 h-44 rounded-[36px] bg-[#FACC15]/35 blur-xl"
-            />
-            <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-[32px] p-1.5 bg-white shadow-[0_20px_48px_rgba(234,179,8,0.45),0_10px_24px_rgba(76,29,149,0.18)] border border-[#FFD54F]/85">
-              <div className="w-full h-full rounded-[26px] bg-white flex items-center justify-center overflow-hidden">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-[28px] p-1.5 bg-white shadow-[0_14px_34px_rgba(59,7,100,0.12)] border border-[#4C1D95]/15">
+              <div className="w-full h-full rounded-[22px] bg-white flex items-center justify-center overflow-hidden">
                 <img
                   src={BASIT_OFFICIAL_LOGO_PNG}
                   alt="BASIT | باسط"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain bg-white scale-[1.03]"
+                  className="w-full h-full object-contain bg-white"
                 />
               </div>
             </div>
           </div>
 
-          {/* Royal Purple & Luminous Gold Typography */}
           <div className="space-y-1.5">
-            <div className="text-base sm:text-lg font-black text-[#4C1D95]">
+            <div className="text-base sm:text-lg font-black text-[#4C1D95] dark:text-[#EDE9FE]">
               {isRtl ? 'مع باسط.. بسطناها.' : 'With BASIT.. Simplified.'}
             </div>
-            <div className="inline-flex items-center px-5 py-1 rounded-full bg-gradient-to-r from-[#4C1D95] to-[#581C87] border border-[#FFD54F] text-xl sm:text-2xl font-black text-[#FFD54F] shadow-md">
+            <div className="inline-flex items-center px-5 py-1 rounded-full bg-[#3B0764] text-lg sm:text-xl font-black text-[#F5C451] shadow-sm">
               {isRtl ? 'وجباتك.' : 'Your Meals.'}
             </div>
-            <p className="text-xs font-extrabold text-[#581C87]">
+            <p className="text-xs font-bold text-[#5E5570] dark:text-[#C4B5FD]">
               {isRtl ? 'توفير، راحة، استمرارية.' : 'Savings, Comfort, Continuity.'}
             </p>
           </div>
 
-          <h1 className="text-lg sm:text-xl font-black text-[#3B0764] leading-snug pt-0.5">
+          <h1 className="text-base sm:text-lg font-black text-[#1E1633] dark:text-white leading-snug pt-0.5">
             {isRtl
               ? 'أهلاً بك في باسط! اختر طريقة الدخول للبدء.'
               : 'Welcome to BASIT! Choose how to get started.'}
           </h1>
 
-          {/* Primary Onboarding Action Buttons (Consolidated & Uncrowded) */}
+          {/* Clean Onboarding Action Stack */}
           <div className="w-full space-y-2.5 pt-1">
-            {/* 1. Luminous Gold Primary Button: إنشاء حساب جديد */}
             <button
               type="button"
               onClick={() => openGateModal('register')}
-              className="w-full min-h-[50px] px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FFD54F] via-[#FACC15] to-[#EAB308] text-[#3B0764] text-sm font-black shadow-[0_12px_28px_rgba(234,179,8,0.42)] border border-[#FFFDF0]/70 flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-transform"
+              className="w-full min-h-[48px] px-4 py-2.5 rounded-2xl bg-[#F5C451] hover:bg-[#EAB308] text-[#2A0E4D] text-sm font-black shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
             >
               <UserPlus className="w-4 h-4 shrink-0" />
               <span>
@@ -1158,48 +1145,33 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               </span>
             </button>
 
-            {/* 2. Side-by-side compact login row: Client Sign In + Google */}
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => openGateModal('password_login')}
-                className="min-h-[48px] px-3 py-2.5 rounded-full bg-gradient-to-r from-[#4C1D95] to-[#3B0764] border border-[#FFD54F]/60 text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-md"
+                className="min-h-[46px] px-3 py-2.5 rounded-2xl bg-[#4C1D95] hover:bg-[#3B0764] text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-sm"
               >
-                <LogIn className="w-4 h-4 text-[#FFD54F] shrink-0" />
+                <LogIn className="w-4 h-4 text-[#F5C451] shrink-0" />
                 <span className="truncate">{isRtl ? 'تسجيل الدخول' : 'Sign In'}</span>
               </button>
 
               <button
                 type="button"
                 onClick={onGoogleSignIn}
-                className="min-h-[48px] px-3 py-2.5 rounded-full bg-[#EDE9FE] hover:bg-[#D8B4FE]/65 border border-[#4C1D95]/30 text-[#3B0764] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
+                className="min-h-[46px] px-3 py-2.5 rounded-2xl bg-white dark:bg-[#1B132B] hover:bg-[#F5F3FF] border border-[#4C1D95]/20 text-[#3B0764] dark:text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
               >
-                <LogIn className="w-4 h-4 text-[#4C1D95] shrink-0" />
+                <LogIn className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
                 <span className="truncate">{isRtl ? 'حساب Google' : 'Google'}</span>
               </button>
             </div>
 
-            {/* 3. Visitor & Dedicated Finance Manager Entry Row */}
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={onContinueAsGuest || onBackHome}
-                className="min-h-[44px] px-3 py-2 rounded-full bg-[#FEF9C3]/90 hover:bg-[#FFD54F]/50 border border-[#EAB308]/55 text-[#3B0764] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all"
-              >
-                <span className="truncate">{isRtl ? 'دخول كزائر' : 'Visitor'}</span>
-              </button>
-
-              {onOpenFinanceManagerPortal && (
-                <button
-                  type="button"
-                  onClick={onOpenFinanceManagerPortal}
-                  className="min-h-[44px] px-3 py-2 rounded-full bg-[#4C1D95]/15 hover:bg-[#4C1D95]/25 border border-[#4C1D95]/40 text-[#3B0764] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all"
-                >
-                  <KeyRound className="w-3.5 h-3.5 text-[#4C1D95] shrink-0" />
-                  <span className="truncate">{isRtl ? 'بوابة المدير المالي' : 'Finance Mgr'}</span>
-                </button>
-              )}
-            </div>
+            <button
+              type="button"
+              onClick={onContinueAsGuest || onBackHome}
+              className="w-full min-h-[44px] px-4 py-2 rounded-2xl bg-white dark:bg-[#1B132B] hover:bg-[#F5F3FF] border border-[#4C1D95]/15 text-[#4C1D95] dark:text-[#EDE9FE] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+            >
+              <span>{isRtl ? 'تصفح التطبيق كزائر' : 'Continue as Visitor'}</span>
+            </button>
           </div>
         </div>
 
@@ -1243,7 +1215,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
             onClick={() => setGateModalOpen(false)}
           >
             <div
-              className="w-full max-w-[430px] max-h-[92dvh] overflow-y-auto rounded-t-[28px] sm:rounded-[28px] bg-gradient-to-b from-[#FFFBEB] via-[#FEF9C3] to-[#EDE9FE] text-[#3B0764] border border-[#FFD54F] p-5 space-y-4 shadow-2xl"
+              className="w-full max-w-[430px] max-h-[92dvh] overflow-y-auto rounded-t-[28px] sm:rounded-[28px] bg-[#FAF8F5] dark:bg-[#1B132B] text-[#1E1633] dark:text-white border border-[#4C1D95]/20 p-5 space-y-4 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#E6E0F5] dark:border-[#62339A]/30">
@@ -1280,7 +1252,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
         {/* Legal Modal */}
         {legalModal && (
           <div className="fixed inset-0 z-[95] bg-[#3B0764]/75 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-md rounded-3xl bg-gradient-to-b from-[#FFFDF0] via-[#FEF9C3] to-[#EDE9FE] text-[#3B0764] border border-[#FFD54F] p-5 sm:p-6 space-y-4 shadow-2xl">
+            <div className="w-full max-w-md rounded-3xl bg-[#FAF8F5] dark:bg-[#1B132B] text-[#1E1633] dark:text-white border border-[#4C1D95]/20 p-5 sm:p-6 space-y-4 shadow-2xl">
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 text-sm font-black text-[#62339A] dark:text-[#FFC928]">
                   <FileText className="w-4 h-4" />
@@ -1359,8 +1331,8 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
         </button>
       </div>
 
-      <section className="relative rounded-[28px] overflow-hidden shadow-xl border border-[#4C1D95]/25 bg-gradient-to-b from-[#FFFBEB] via-[#FEF9C3] to-[#EDE9FE]">
-        <div className="relative bg-gradient-to-br from-[#3B0764] via-[#4C1D95] to-[#581C87] px-6 py-5 text-center text-white">
+      <section className="relative rounded-[28px] overflow-hidden shadow-md border border-[#4C1D95]/15 bg-white dark:bg-[#1B132B]">
+        <div className="relative bg-gradient-to-br from-[#3B0764] via-[#4C1D95] to-[#5B21B6] px-6 py-5 text-center text-white">
           <div className="relative z-10 flex flex-col items-center space-y-2">
             <BasitBrandMark size="md" isRtl={isRtl} className="ring-2 ring-[#FFD54F]/75 shadow-lg" />
             <h1 className="text-lg sm:text-xl font-black text-[#FFD54F]">
@@ -1405,7 +1377,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               <button
                 type="button"
                 onClick={onSignOutGoogle}
-                className="min-h-[38px] px-3.5 py-1.5 rounded-full bg-[#FFFDF0] dark:bg-[#140F1F] border border-rose-300 text-rose-600 text-xs font-black flex items-center gap-1.5 cursor-pointer"
+                className="min-h-[38px] px-3.5 py-1.5 rounded-full bg-white dark:bg-[#140F1F] border border-rose-300 text-rose-600 text-xs font-black flex items-center gap-1.5 cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 <span>{isRtl ? 'خروج' : 'Sign Out'}</span>
@@ -1440,7 +1412,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                 <button
                   type="button"
                   onClick={onClearOtpSession}
-                  className="min-h-[36px] px-3.5 py-1.5 rounded-full bg-[#FFFDF0] dark:bg-[#140F1F] border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-[11px] font-black cursor-pointer"
+                  className="min-h-[36px] px-3.5 py-1.5 rounded-full bg-white dark:bg-[#140F1F] border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-[11px] font-black cursor-pointer"
                 >
                   {isRtl ? 'تسجيل الخروج' : 'Sign Out'}
                 </button>
@@ -1476,14 +1448,14 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                     setShowChangePassword((v) => !v);
                     setChangePwFeedback(null);
                   }}
-                  className="min-h-[40px] px-3.5 py-1.5 rounded-full bg-[#FFFDF0] dark:bg-[#140F1F] border border-emerald-300 text-xs font-black text-[#62339A] dark:text-[#FFC928] flex items-center gap-1.5 cursor-pointer"
+                  className="min-h-[40px] px-3.5 py-1.5 rounded-full bg-white dark:bg-[#140F1F] border border-emerald-300 text-xs font-black text-[#62339A] dark:text-[#FFC928] flex items-center gap-1.5 cursor-pointer"
                 >
                   <KeyRound className="w-3.5 h-3.5" />
                   <span>{isRtl ? 'تغيير كلمة المرور الشخصية' : 'Change Personal Password'}</span>
                 </button>
 
                 {showChangePassword && (
-                  <form onSubmit={handleSelfChangePassword} className="p-3.5 rounded-2xl bg-[#FFFDF0] dark:bg-[#140F1F] border border-[#62339A]/25 space-y-2.5">
+                  <form onSubmit={handleSelfChangePassword} className="p-3.5 rounded-2xl bg-white dark:bg-[#140F1F] border border-[#62339A]/25 space-y-2.5">
                     <input
                       type="password"
                       dir="ltr"

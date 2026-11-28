@@ -19,7 +19,7 @@ import {
 import { BasitBrandMark } from './BasitBrandMark';
 import { OfficialCountryFlag } from './OfficialCountryFlags';
 import type { CountryCode } from '../data/phase1Data';
-import basitCateringHeroImg from '../assets/images/basit_catering_hero_1794650655662.jpg';
+import basitCateringHeroImg from '../assets/images/basit_catering_buffet_1795841338773.jpg';
 
 interface FullBleedAdvertisingHeroProps {
   isRtl: boolean;

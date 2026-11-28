@@ -11,9 +11,9 @@ import {
   Layers,
   Percent,
 } from 'lucide-react';
-import ramadanCartonImg from '../assets/images/ramadan_corporate_carton_box_1795443038684.jpg';
-import eidMeatPacksImg from '../assets/images/eid_adha_meat_packs_1795443063943.jpg';
-import kahkEidBoxImg from '../assets/images/kahk_eid_luxury_box_1795443065782.jpg';
+import ramadanCartonImg from '../assets/images/ramadan_pantry_clean_hamper_1795839382069.jpg';
+import eidMeatPacksImg from '../assets/images/eid_meat_clean_box_1795839381870.jpg';
+import kahkEidBoxImg from '../assets/images/eid_kahk_clean_platter_1795839382000.jpg';
 
 const charityCaravanImg = '/assets/aistudio/image_78717cad.jpg';
 const datesHarvestImg = '/assets/catering/siwa_dates.jpg';

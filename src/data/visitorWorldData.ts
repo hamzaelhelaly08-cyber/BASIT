@@ -25,7 +25,7 @@ import sushiPlatterImg from '../assets/images/sushi_platter_offer_1794836175423.
 import sweetsPatisserieImg from '../assets/images/sweets_patisserie_offer_1794836175470.jpg';
 import massagePoolImg from '../assets/images/massage_pool_lounge_1794836176271.jpg';
 import ghazalSpaImg from '../assets/images/ghazal_spa_lounge_1794836176633.jpg';
-import gamingGiftImg from '../assets/images/gaming_gift_vouchers_1794836178016.jpg';
+import gamingGiftImg from '../assets/images/basit_family_screens_lounge_1795841341709.jpg';
 import coffeeNutsImg from '../assets/images/coffee_nuts_roastery_1794847882208.jpg';
 import wataniyaGiftBoxesImg from '../assets/images/wataniya_seasonal_gift_boxes_1794529872199.jpg';
 import pizzaMixImg from '../assets/images/pizza_oriental_western_mix_1795443026422.jpg';
@@ -38,9 +38,9 @@ import foulTaameyaImg from '../assets/images/egyptian_foul_taameya_breakfast_179
 import kosharyBoxImg from '../assets/images/authentic_egyptian_koshary_box_1795443032946.jpg';
 import indianSpreadImg from '../assets/images/indian_tandoori_curry_spread_1795443034770.jpg';
 import turkishSpreadImg from '../assets/images/turkish_iskender_pide_spread_1795443036737.jpg';
-import ramadanCartonImg from '../assets/images/ramadan_corporate_carton_box_1795443038684.jpg';
-import eidMeatPacksImg from '../assets/images/eid_adha_meat_packs_1795443063943.jpg';
-import kahkBoxImg from '../assets/images/kahk_eid_luxury_box_1795443065782.jpg';
+import ramadanCartonImg from '../assets/images/ramadan_pantry_clean_hamper_1795839382069.jpg';
+import eidMeatPacksImg from '../assets/images/eid_meat_clean_box_1795839381870.jpg';
+import kahkBoxImg from '../assets/images/eid_kahk_clean_platter_1795839382000.jpg';
 import microwaveMealBoxesImg from '../assets/images/basit_microwave_meal_boxes_1795562708424.jpg';
 import basitDiscountCouponsImg from '../assets/images/basit_discount_coupons_1795562708296.jpg';
 import { CarouselShowcaseSlide } from './phase1Data';

@@ -8136,12 +8136,26 @@ export async function createConfiguredApp() {
 async function startServer() {
   const app = await createConfiguredApp();
   const port = Number(process.env.PORT || 3000);
-  const isProd = process.env.NODE_ENV === 'production';
+  const distDir = path.resolve(__dirname, 'dist');
+  const distIndexPath = path.join(distDir, 'index.html');
+  const hasBuiltDist = fs.existsSync(distIndexPath);
+  const isBundledServer = path.basename(__filename) === 'server.js';
+  const isCloudRun = Boolean(process.env.K_SERVICE || process.env.CLOUD_RUN_JOB);
+  const isProd =
+    process.env.NODE_ENV === 'production' ||
+    isBundledServer ||
+    isCloudRun;
 
+  app.get(['/_ah/health', '/healthz'], (_req: Request, res: Response) => {
+    res.status(200).json({ ok: true, status: 'healthy', port });
+  });
+
+  let mountedViteDev = false;
   if (!isProd) {
-    app.get('/@vite/client', (_req: Request, res: Response) => {
-      res.type('application/javascript; charset=utf-8');
-      res.send(`
+    try {
+      app.get('/@vite/client', (_req: Request, res: Response) => {
+        res.type('application/javascript; charset=utf-8');
+        res.send(`
 const sheetsMap = new Map();
 const linkSheetsMap = new Map();
 const hasDoc = typeof document !== "undefined";
@@ -8223,43 +8237,87 @@ export class ErrorOverlay extends BaseHTMLElement {
   }
 }
 `);
-    });
+      });
 
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true, hmr: false, ws: false },
-      appType: 'spa',
-    });
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: { middlewareMode: true, hmr: false, ws: false },
+        appType: 'spa',
+      });
 
-    app.get(['/habe', '/habe/*'], async (req: Request, res: Response, next) => {
-      try {
-        const htmlPath = path.resolve(__dirname, 'habe.html');
-        const rawHtml = await fs.promises.readFile(htmlPath, 'utf-8');
-        const transformed = await vite.transformIndexHtml(req.originalUrl, rawHtml);
-        res.status(200).set({ 'Content-Type': 'text/html; charset=utf-8' }).end(transformed);
-      } catch (err) {
-        next(err);
-      }
-    });
+      app.get(['/habe', '/habe/*'], async (req: Request, res: Response, next) => {
+        try {
+          const htmlPath = path.resolve(__dirname, 'habe.html');
+          const rawHtml = await fs.promises.readFile(htmlPath, 'utf-8');
+          const transformed = await vite.transformIndexHtml(req.originalUrl, rawHtml);
+          res.status(200).set({ 'Content-Type': 'text/html; charset=utf-8' }).end(transformed);
+        } catch (err) {
+          next(err);
+        }
+      });
 
-    app.use(vite.middlewares);
-  } else {
-    const distDir = path.resolve(__dirname, 'dist');
-    app.use(express.static(distDir));
-    app.get(['/habe', '/habe/*'], (_req: Request, res: Response) => {
-      res.sendFile(path.join(distDir, 'habe.html'));
-    });
-    app.get('*', (_req: Request, res: Response) => {
-      res.sendFile(path.join(distDir, 'index.html'));
-    });
+      app.use(vite.middlewares);
+      mountedViteDev = true;
+    } catch (viteErr) {
+      console.warn(
+        'Vite dev middleware unavailable; falling back to static dist serving:',
+        viteErr instanceof Error ? viteErr.message : String(viteErr)
+      );
+    }
   }
 
-  app.listen(port, '0.0.0.0', () => {
+  if (!mountedViteDev) {
+    if (hasBuiltDist) {
+      app.use(express.static(distDir));
+      app.get(['/habe', '/habe/*'], (_req: Request, res: Response) => {
+        const habePath = path.join(distDir, 'habe.html');
+        if (fs.existsSync(habePath)) {
+          res.sendFile(habePath);
+          return;
+        }
+        res.sendFile(distIndexPath);
+      });
+      app.use((req: Request, res: Response, next: NextFunction) => {
+        if (req.method !== 'GET' && req.method !== 'HEAD') {
+          next();
+          return;
+        }
+        if (req.path.startsWith('/api/')) {
+          next();
+          return;
+        }
+        res.sendFile(distIndexPath);
+      });
+    } else {
+      app.use((req: Request, res: Response, next: NextFunction) => {
+        if (req.path.startsWith('/api/')) {
+          next();
+          return;
+        }
+        res.status(200).type('text/html; charset=utf-8').send(
+          '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>BASIT | باسط</title></head><body><h1>BASIT | باسط</h1><p>Build output (dist/) not found. Run npm run build.</p></body></html>'
+        );
+      });
+    }
+  }
+
+  const server = app.listen(port, '0.0.0.0', () => {
     console.log(`الوطنية اللوجستية المالية | BASIT server running on http://0.0.0.0:${port}`);
+  });
+  server.on('error', (err) => {
+    console.error('HTTP server listen error:', err);
+    process.exit(1);
   });
 }
 
-const isEntrypoint = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(__filename);
+let isEntrypoint = path.basename(__filename) === 'server.js';
+if (!isEntrypoint && process.argv[1]) {
+  try {
+    isEntrypoint = fs.realpathSync(process.argv[1]) === fs.realpathSync(__filename);
+  } catch {
+    isEntrypoint = path.resolve(process.argv[1]) === path.resolve(__filename);
+  }
+}
 if (isEntrypoint) {
   startServer().catch((err) => {
     console.error('Failed to start server:', err);

@@ -607,7 +607,7 @@ export const PaymentMethodsHubView: React.FC<PaymentMethodsHubViewProps> = ({
 
                 {selectedMethod === 'fawry' && (
                   <div className="space-y-3.5">
-                    <div className="p-4 rounded-2xl bg-[#FFFDF0] dark:bg-[#201C12] border border-[#FFC928]/40 flex flex-wrap items-center justify-between gap-3">
+                    <div className="p-4 rounded-2xl bg-[#FAF8F5] dark:bg-[#1B132B] border border-[#E6E0F5] dark:border-[#3B0764]/50 flex flex-wrap items-center justify-between gap-3">
                       <div>
                         <span className="text-[11px] font-bold text-slate-500 block">
                           {isRtl ? 'كود السداد بمنافذ فوري باي (صالح 72 ساعة):' : 'Fawry Payment Code (Valid 72h):'}

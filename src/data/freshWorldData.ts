@@ -1,24 +1,20 @@
 import greenNileCarrotsImg from '../assets/images/green_nile_carrots_dew_1795563667625.jpg';
 import factoryMicrowavableMealImg from '../assets/images/b2b_factory_microwavable_meal_1795563667819.jpg';
-import basitLoyaltyCardHeroImg from '../assets/images/basit_loyalty_card_hero_1795563667645.jpg';
+const basitLoyaltyCardHeroImg = '/assets/aistudio/image_31437b35.png';
 import fresh3dFruitsCollectionImg from '../assets/images/fresh_3d_fruits_collection_1795563668485.jpg';
 import sweetSpicySandwichHeroImg from '../assets/images/sweet_spicy_sandwich_hero_1795563668343.jpg';
-import basitCateringHeroImg from '../assets/images/basit_catering_hero_1794650655662.jpg';
+import basitCateringHeroImg from '../assets/images/basit_catering_buffet_1795841338773.jpg';
 import alAinAttaraHerbsImg from '../assets/images/al_ain_attara_herbs_1795368109370.jpg';
 import alAinGrandMarketImg from '../assets/images/al_ain_grand_market_aisle_1795368108690.jpg';
 import microwaveMealBoxesImg from '../assets/images/basit_microwave_meal_boxes_1795562708424.jpg';
 import macaronaBechamelImg from '../assets/images/baked_macarona_bechamel_tray_1795443068298.jpg';
 import charcoalGrillsImg from '../assets/images/succulent_charcoal_grills_1795443029475.jpg';
-import canteenHotMealsImg from '../assets/images/canteen_hot_meals_platter_1794852898424.jpg';
-import factoryStripImg from '../assets/images/strip_factory_catering_1794519256376.jpg';
-import sweetsPatisserieImg from '../assets/images/sweets_patisserie_offer_1794836175470.jpg';
-import coffeeNutsImg from '../assets/images/coffee_nuts_roastery_1794847882208.jpg';
-import wataniyaGiftBoxesImg from '../assets/images/wataniya_seasonal_gift_boxes_1794529872199.jpg';
-import kahkLuxuryBoxImg from '../assets/images/kahk_eid_luxury_box_1795443065782.jpg';
-import kosharyBoxImg from '../assets/images/authentic_egyptian_koshary_box_1795443032946.jpg';
-import foulTaameyaImg from '../assets/images/egyptian_foul_taameya_breakfast_1795443033030.jpg';
-import traditionalAttaraImg from '../assets/images/traditional_attara_spice_shop_1795443031358.jpg';
-import regeneratedProduceImg from '../assets/images/regenerated_image_1795588931333.jpg';
+import freshRedApplesImg from '../assets/images/fresh_red_apples_1795834650545.jpg';
+import ripeHassAvocadosImg from '../assets/images/ripe_hass_avocados_1795834650780.jpg';
+import rubyFreshPlumsImg from '../assets/images/ruby_fresh_plums_1795834651219.jpg';
+import goldenHarvestBananasImg from '../assets/images/golden_harvest_bananas_1795834652129.jpg';
+import egyptianFreshEggplantImg from '../assets/images/egyptian_fresh_eggplant_1795834651738.jpg';
+import gardenFreshParsleyImg from '../assets/images/garden_fresh_parsley_1795834652434.jpg';
 
 export const GREEN_NILE_HERO_ASSETS = {
   carrotsDew: greenNileCarrotsImg,
@@ -168,7 +164,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'ساندوتش فردي 320 جم',
     unitEn: 'Single Pack 320g',
     priceEgp: 145,
-    imageUrl: canteenHotMealsImg,
+    imageUrl: sweetSpicySandwichHeroImg,
     badgeAr: 'اكتشف الجديد',
     badgeEn: 'Discover New',
     isNewDiscovery: true,
@@ -183,7 +179,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'وجبة كاملة 550 جم',
     unitEn: 'Complete Meal 550g',
     priceEgp: 165,
-    imageUrl: factoryStripImg,
+    imageUrl: factoryMicrowavableMealImg,
     badgeAr: 'الأكثر تعاقداً',
     badgeEn: 'B2B Best Seller',
   },
@@ -233,7 +229,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'عبوة 1 كجم',
     unitEn: '1 kg Pack',
     priceEgp: 95,
-    imageUrl: wataniyaGiftBoxesImg,
+    imageUrl: freshRedApplesImg,
   },
   {
     id: 'fw_avocado_hass',
@@ -245,7 +241,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'عبوة 500 جم (2 حبة)',
     unitEn: '500g Twin Pack',
     priceEgp: 140,
-    imageUrl: sweetsPatisserieImg,
+    imageUrl: ripeHassAvocadosImg,
   },
   {
     id: 'fw_plum_ruby',
@@ -257,7 +253,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'عبوة 750 جم',
     unitEn: '750g Punnet',
     priceEgp: 85,
-    imageUrl: kahkLuxuryBoxImg,
+    imageUrl: rubyFreshPlumsImg,
   },
   {
     id: 'fw_banana_nile',
@@ -269,7 +265,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'كجم صافي',
     unitEn: '1 kg Bunch',
     priceEgp: 42,
-    imageUrl: coffeeNutsImg,
+    imageUrl: goldenHarvestBananasImg,
   },
   {
     id: 'fw_dates_medjool',
@@ -293,7 +289,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'كيس 1 كجم',
     unitEn: '1 kg Bag',
     priceEgp: 35,
-    imageUrl: regeneratedProduceImg,
+    imageUrl: greenNileCarrotsImg,
   },
   {
     id: 'fw_eggplant_dark',
@@ -305,7 +301,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'عبوة 1.5 كجم',
     unitEn: '1.5 kg Crate',
     priceEgp: 45,
-    imageUrl: kosharyBoxImg,
+    imageUrl: egyptianFreshEggplantImg,
   },
   {
     id: 'fw_parsley_fresh',
@@ -317,7 +313,7 @@ export const FRESH_WORLD_PRODUCTS: FreshWorldProduct[] = [
     unitAr: 'باقة 3 حزم',
     unitEn: '3-Bunch Bundle',
     priceEgp: 28,
-    imageUrl: traditionalAttaraImg || foulTaameyaImg,
+    imageUrl: gardenFreshParsleyImg,
   },
 ];
 

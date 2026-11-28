@@ -1,0 +1,12 @@
+{
+	"appId": "com.watania.basit",
+	"appName": "BASIT | باسط",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	},
+	"android": {
+		"backgroundColor": "#3B0764",
+		"allowMixedContent": false
+	}
+}

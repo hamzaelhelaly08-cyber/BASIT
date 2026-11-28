@@ -84,20 +84,20 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[430px] bg-gradient-to-b from-[#FEF9C3] to-[#EDE9FE] h-full shadow-2xl border-x border-[#4C1D95]/20 flex flex-col pt-safe overflow-x-hidden"
+        className="w-full max-w-[430px] bg-[#FAF8F5] dark:bg-[#120D1D] h-full shadow-2xl border-x border-[#4C1D95]/15 flex flex-col pt-safe overflow-x-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-[#FFD54F]/40 flex items-center justify-between bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#581C87] text-white">
+        <div className="p-4 sm:p-5 border-b border-white/15 flex items-center justify-between bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#5B21B6] text-white">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-[14px] bg-[#FFD54F] text-[#3B0764] flex items-center justify-center shadow-sm">
+            <div className="w-11 h-11 rounded-[14px] bg-[#F5C451] text-[#2A0E4D] flex items-center justify-center shadow-sm">
               <ShoppingCart className="w-5 h-5" strokeWidth={2} />
             </div>
             <div>
               <h3 className="text-base font-black text-white">
                 {t.cartTitle}
               </h3>
-              <p className="text-xs font-bold text-[#FFD54F] tabular-nums" dir="ltr">
+              <p className="text-xs font-bold text-[#F5C451] tabular-nums" dir="ltr">
                 {items.reduce((sum, i) => sum + i.quantity, 0)}{' '}
                 {isRtl ? 'عنصر محفوظ' : 'saved items'}
               </p>
@@ -107,7 +107,7 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[44px] min-w-[44px] text-white hover:text-[#FFD54F] flex items-center justify-center cursor-pointer"
+            className="min-h-[44px] min-w-[44px] text-white hover:text-[#F5C451] flex items-center justify-center cursor-pointer"
             aria-label={isRtl ? 'إغلاق السلة' : 'Close Cart'}
           >
             <X className="w-5 h-5" />
@@ -115,14 +115,14 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-[#FEF9C3]/85 via-[#FEF3C7]/75 to-[#EDE9FE]">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF8F5] dark:bg-[#120D1D]">
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-3">
-              <div className="w-20 h-20 rounded-[22px] bg-[#EDE9FE] border border-[#4C1D95]/20 text-[#4C1D95] flex items-center justify-center shadow-sm">
+              <div className="w-20 h-20 rounded-[22px] bg-[#F5F3FF] dark:bg-[#1B132B] border border-[#4C1D95]/15 text-[#4C1D95] dark:text-[#F5C451] flex items-center justify-center shadow-sm">
                 <ShoppingCart className="w-9 h-9" strokeWidth={1.85} />
               </div>
-              <p className="text-sm font-black text-[#3B0764]">{t.cartEmpty}</p>
-              <p className="text-xs font-medium text-[#581C87] max-w-xs leading-relaxed">
+              <p className="text-sm font-black text-[#1E1633] dark:text-white">{t.cartEmpty}</p>
+              <p className="text-xs font-medium text-[#5E5570] dark:text-[#C4B5FD] max-w-xs leading-relaxed">
                 {isRtl
                   ? 'أضف وجبات من مطاعم العين أو المطابخ المركزية لتعديل الكميات وإتمام الطلب.'
                   : 'Add items from Al Ain Dining or Central Kitchens to adjust quantities and checkout.'}
@@ -132,7 +132,7 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
             items.map((item) => (
               <div
                 key={item.id}
-                className="p-3.5 rounded-2xl bg-gradient-to-br from-[#FFFDF0] via-[#FEF9C3] to-[#EDE9FE] border border-[#4C1D95]/20 shadow-xs space-y-2.5"
+                className="p-3.5 rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-[#C084FC]/20 shadow-xs space-y-2.5"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
@@ -140,18 +140,18 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
                       <img
                         src={item.imageUrl}
                         alt={isRtl ? item.nameAr : item.nameEn}
-                        className="w-12 h-12 rounded-xl object-cover shrink-0 border border-[#EAB308]/45 bg-[#FEF9C3]"
+                        className="w-14 h-14 rounded-xl object-cover shrink-0 border border-[#4C1D95]/15 bg-[#F5F3FF]"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-xl bg-[#FEF9C3] border border-[#EAB308]/45 text-[#4C1D95] flex items-center justify-center shrink-0">
+                      <div className="w-14 h-14 rounded-xl bg-[#F5F3FF] dark:bg-[#241B38] border border-[#4C1D95]/15 text-[#4C1D95] dark:text-[#F5C451] flex items-center justify-center shrink-0">
                         <UtensilsCrossed className="w-5 h-5" strokeWidth={1.85} />
                       </div>
                     )}
                     <div className="min-w-0">
-                      <h4 className="text-xs sm:text-sm font-black text-[#3B0764] leading-snug">
+                      <h4 className="text-xs sm:text-sm font-black text-[#1E1633] dark:text-white leading-snug">
                         {isRtl ? item.nameAr : item.nameEn}
                       </h4>
-                      <p className="text-[11px] font-semibold text-[#581C87] mt-0.5 truncate">
+                      <p className="text-[11px] font-semibold text-[#5E5570] dark:text-[#C4B5FD] mt-0.5 truncate">
                         {isRtl ? item.kitchenNameAr : item.kitchenNameEn}
                       </p>
                     </div>
@@ -184,22 +184,22 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
                   </div>
 
                   {/* Mobile Quantity Steppers ("− 1 +") */}
-                  <div className="flex items-center gap-1 bg-[#EDE9FE] border border-[#4C1D95]/20 p-1 rounded-full">
+                  <div className="flex items-center gap-1 bg-[#F5F3FF] dark:bg-[#241B38] border border-[#4C1D95]/15 p-1 rounded-full">
                     <button
                       type="button"
                       onClick={() => onUpdateQty(item.id, -1)}
-                      className="w-9 h-9 rounded-full bg-[#FFFBEB] text-[#3B0764] hover:bg-[#4C1D95] hover:text-[#FFD54F] flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-9 h-9 rounded-full bg-white dark:bg-[#1B132B] text-[#3B0764] dark:text-white hover:bg-[#4C1D95] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                       aria-label="Decrease quantity"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="w-7 text-center text-xs font-black text-[#3B0764] tabular-nums" dir="ltr">
+                    <span className="w-7 text-center text-xs font-black text-[#1E1633] dark:text-white tabular-nums" dir="ltr">
                       {item.quantity}
                     </span>
                     <button
                       type="button"
                       onClick={() => onUpdateQty(item.id, 1)}
-                      className="w-9 h-9 rounded-full bg-[#FFFBEB] text-[#3B0764] hover:bg-[#4C1D95] hover:text-[#FFD54F] flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-9 h-9 rounded-full bg-white dark:bg-[#1B132B] text-[#3B0764] dark:text-white hover:bg-[#4C1D95] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                       aria-label="Increase quantity"
                     >
                       <Plus className="w-3.5 h-3.5" />
@@ -213,18 +213,18 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
 
         {/* Cart Footer Summary */}
         {items.length > 0 && (
-          <div className="p-4 sm:p-5 pb-[calc(1rem+env(safe-area-inset-bottom))] bg-[#FFFBEB] border-t border-[#4C1D95]/15 space-y-3">
+          <div className="p-4 sm:p-5 pb-[calc(1rem+env(safe-area-inset-bottom))] bg-white dark:bg-[#1B132B] border-t border-[#4C1D95]/12 space-y-3">
             {hasUnapprovedItems && (
-              <div className="p-2.5 rounded-2xl bg-[#FEF3C7] border border-[#FFD54F] flex items-start gap-2 text-[11px] font-bold text-[#3B0764]">
-                <AlertCircle className="w-4 h-4 text-[#4C1D95] shrink-0 mt-0.5" />
+              <div className="p-2.5 rounded-2xl bg-[#FAF8F5] dark:bg-[#241B38] border border-[#4C1D95]/15 flex items-start gap-2 text-[11px] font-bold text-[#3B0764] dark:text-[#EDE9FE]">
+                <AlertCircle className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0 mt-0.5" />
                 <span>{t.cartUnapprovedNote}</span>
               </div>
             )}
 
             {/* Total Pill */}
-            <div className="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-[#EDE9FE] border border-[#4C1D95]/20 text-xs">
-              <span className="font-bold text-[#581C87]">{t.cartSubtotal}</span>
-              <span className="text-base font-black text-[#3B0764] tabular-nums" dir="ltr">
+            <div className="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-[#F5F3FF] dark:bg-[#241B38] border border-[#4C1D95]/15 text-xs">
+              <span className="font-bold text-[#5E5570] dark:text-[#C4B5FD]">{t.cartSubtotal}</span>
+              <span className="text-base font-black text-[#3B0764] dark:text-[#F5C451] tabular-nums" dir="ltr">
                 {pricedSubtotal.toLocaleString()} {currencyLabel}
               </span>
             </div>
@@ -283,13 +283,13 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
             </div>
 
             {couponOpen && (
-              <div className="p-2.5 rounded-2xl bg-[#FEF9C3] border border-[#4C1D95]/20 flex items-center gap-2">
+              <div className="p-2.5 rounded-2xl bg-[#FAF8F5] dark:bg-[#241B38] border border-[#4C1D95]/15 flex items-center gap-2">
                 <input
                   type="text"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
                   placeholder={isRtl ? 'أدخل كود القسيمة (مثل CE-DEMO-DINE)' : 'Enter voucher code'}
-                  className="flex-1 px-3 py-2 rounded-xl bg-[#FFFDF0] border border-[#4C1D95]/20 text-xs font-bold text-[#3B0764] focus:outline-none"
+                  className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-[#120D1D] border border-[#4C1D95]/20 text-xs font-bold text-[#1E1633] dark:text-white focus:outline-none"
                 />
                 <button
                   type="button"
@@ -343,7 +343,7 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
                   <button
                     type="button"
                     onClick={() => setConfirmClearOpen(false)}
-                    className="min-h-[40px] px-3 rounded-xl bg-[#FFFBEB] border border-[#4C1D95]/25 text-[#3B0764] text-xs font-black cursor-pointer"
+                    className="min-h-[40px] px-3 rounded-xl bg-white border border-[#4C1D95]/25 text-[#3B0764] text-xs font-black cursor-pointer"
                   >
                     {isRtl ? 'الاحتفاظ بالسلة' : 'Keep Cart'}
                   </button>
