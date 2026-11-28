@@ -220,6 +220,16 @@ export default defineConfig(() => {
       cssCodeSplit: true,
       chunkSizeWarningLimit: 600,
       rolldownOptions: {
+        onwarn(warning, warn) {
+          if (
+            warning.code === 'CIRCULAR_DEPENDENCY' ||
+            warning.message?.includes('react-is') ||
+            warning.message?.includes('Eval')
+          ) {
+            return;
+          }
+          warn(warning);
+        },
         input: {
           main: path.resolve(import.meta.dirname, 'index.html'),
           habe: path.resolve(import.meta.dirname, 'habe.html'),
