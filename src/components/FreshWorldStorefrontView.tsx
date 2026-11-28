@@ -87,27 +87,27 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
   return (
     <div className="space-y-5 pb-8">
       {/* 1. Storefront Royal Purple Header */}
-      <section className="relative rounded-[24px] overflow-hidden bg-gradient-to-br from-[#3B0764] via-[#4C1D95] to-[#5B21B6] text-white p-4 shadow-[0_14px_32px_-12px_rgba(59,7,100,0.48)]">
+      <section className="relative rounded-[24px] overflow-hidden bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] border border-[rgba(212,175,55,0.45)] text-[#FFFFFF] p-4 shadow-[0_14px_32px_-12px_rgba(36,0,70,0.48)]">
         <div className="relative z-10 space-y-3">
           <div className="flex items-center justify-between gap-2">
             <button
               type="button"
               onClick={onBackHome}
-              className="min-h-[40px] px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-extrabold flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="min-h-[44px] px-3.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/15 text-[#FFFFFF] text-xs font-extrabold flex items-center gap-1.5 cursor-pointer transition-colors"
             >
-              <BackIcon className="w-4 h-4 text-[#F5C451]" />
+              <BackIcon className="w-4 h-4 text-[#FFE875]" />
               <span>{isRtl ? 'الرئيسية' : 'Home'}</span>
             </button>
 
             <button
               type="button"
               onClick={onOpenCart}
-              className="min-h-[40px] px-3.5 rounded-xl bg-[#F5C451] hover:bg-[#EAB308] text-[#2A0E4D] font-black text-xs flex items-center gap-1.5 shadow-sm cursor-pointer transition-transform active:scale-95"
+              className="min-h-[44px] px-3.5 rounded-xl bg-[linear-gradient(135deg,#FFE875,#FACC15,#D4AF37)] text-[#240046] font-black text-xs flex items-center gap-1.5 shadow-sm cursor-pointer transition-transform active:scale-95"
             >
               <ShoppingCart className="w-4 h-4" />
               <span>{isRtl ? 'السلة' : 'Cart'}</span>
               {totalCartUnits > 0 && (
-                <span className="min-w-[20px] h-[20px] px-1 rounded-full bg-[#3B0764] text-[#F5C451] text-[10px] font-black flex items-center justify-center tabular-nums">
+                <span className="min-w-[20px] h-[20px] px-1 rounded-full bg-[#240046] text-[#FFE875] text-[10px] font-black flex items-center justify-center tabular-nums">
                   {totalCartUnits}
                 </span>
               )}
@@ -115,16 +115,16 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
           </div>
 
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#F5C451]">
-              <Leaf className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#FFE875]">
+              <Leaf className="w-3.5 h-3.5 text-[#FFE875]" />
               <span>{isRtl ? 'توريد مبرد للمصانع والشركات' : 'Refrigerated Corporate Supply'}</span>
             </div>
-            <h1 className="text-lg font-black tracking-tight text-white">
+            <h1 className="text-lg font-black tracking-tight text-[#FFFFFF]">
               {isRtl
                 ? 'حصاد النيل الأخضر | Fresh World'
                 : 'Green Nile Harvest | Fresh World'}
             </h1>
-            <p className="text-xs font-medium text-[#EDE9FE] leading-relaxed">
+            <p className="text-xs font-medium text-[#FFFDF7]/90 leading-relaxed">
               {isRtl
                 ? 'خضروات وفواكه الدلتا، تمور، ووجبات جاهزة بأسعار التوريد المعتمدة.'
                 : 'Farm-fresh fruits, vegetables & ready meals at verified corporate pricing.'}
@@ -143,16 +143,16 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className="group flex flex-col items-center gap-1.5 shrink-0 min-w-[68px] cursor-pointer focus:outline-none"
+                className="group flex flex-col items-center gap-1.5 shrink-0 min-w-[68px] min-h-[44px] cursor-pointer focus:outline-none"
               >
                 <div
                   className={`relative w-14 h-14 rounded-2xl p-0.5 transition-all duration-200 ${
                     active
-                      ? 'bg-[#4C1D95] ring-2 ring-[#F5C451] shadow-md scale-105'
-                      : 'bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 dark:border-[#C084FC]/25 group-hover:border-[#4C1D95]'
+                      ? 'bg-[#5A189A] ring-2 ring-[#FFE875] shadow-md scale-105'
+                      : 'bg-[rgba(255,255,255,0.95)] dark:bg-[#240046]/85 border border-[rgba(212,175,55,0.4)] group-hover:border-[#5A189A]'
                   }`}
                 >
-                  <div className="w-full h-full rounded-[14px] overflow-hidden bg-[#F5F3FF] dark:bg-[#241B38]">
+                  <div className="w-full h-full rounded-[14px] overflow-hidden bg-[#FFFDF7] dark:bg-[#1A052E]">
                     <img
                       src={cat.imageUrl}
                       alt={isRtl ? cat.labelAr : cat.labelEn}
@@ -165,8 +165,8 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
                 <span
                   className={`text-[11px] font-extrabold whitespace-nowrap ${
                     active
-                      ? 'text-[#4C1D95] dark:text-[#F5C451]'
-                      : 'text-[#3B0764] dark:text-[#EDE9FE]'
+                      ? 'text-[#5A189A] dark:text-[#FFE875]'
+                      : 'text-[#3B123F] dark:text-[#FFFDF7]'
                   }`}
                 >
                   {isRtl ? cat.labelAr : cat.labelEn}
@@ -177,9 +177,9 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
         </div>
       </section>
 
-      {/* 3. Featured "Discover New" Highlight Card on Calm Ivory */}
-      <section className="rounded-[22px] overflow-hidden bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-[#C084FC]/20 shadow-sm flex flex-col sm:flex-row">
-        <div className="sm:w-40 aspect-[4/3] sm:aspect-auto bg-[#F5F3FF] dark:bg-[#241B38] shrink-0 overflow-hidden relative">
+      {/* 3. Featured "Discover New" Highlight Card on Milky Cream */}
+      <section className="rounded-[22px] overflow-hidden bg-[rgba(255,255,255,0.95)] dark:bg-[#240046]/85 border border-[rgba(212,175,55,0.4)] shadow-sm flex flex-col">
+        <div className="aspect-[16/9] bg-[#FFFDF7] dark:bg-[#1A052E] shrink-0 overflow-hidden relative">
           <img
             src={discoverNewProduct.imageUrl}
             alt={isRtl ? discoverNewProduct.nameAr : discoverNewProduct.nameEn}
@@ -191,28 +191,28 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
 
         <div className="flex-1 p-3.5 min-w-0 flex flex-col justify-between gap-2.5">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1 text-[11px] font-black text-[#B45309] dark:text-[#F5C451]">
-              <Sparkles className="w-3.5 h-3.5 text-[#EAB308]" />
+            <div className="inline-flex items-center gap-1 text-[11px] font-black text-[#D4AF37] dark:text-[#FFE875]">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>{isRtl ? 'منتج مميز جديد' : 'Featured Arrival'}</span>
             </div>
-            <h2 className="text-sm font-black text-[#1E1633] dark:text-white leading-snug">
+            <h2 className="text-sm font-black text-[#240046] dark:text-[#FFFFFF] leading-snug">
               {isRtl ? discoverNewProduct.nameAr : discoverNewProduct.nameEn}
             </h2>
-            <p className="text-xs font-medium text-[#5E5570] dark:text-[#C4B5FD] line-clamp-1">
+            <p className="text-xs font-medium text-[#3B123F] dark:text-[#FFFDF7]/85 leading-snug">
               {isRtl ? discoverNewProduct.subtitleAr : discoverNewProduct.subtitleEn}
             </p>
           </div>
 
-          <div className="flex items-center justify-between gap-2 pt-1 border-t border-[#4C1D95]/10 dark:border-white/10">
-            <span className="text-sm font-black text-[#4C1D95] dark:text-[#F5C451] tabular-nums" dir="ltr">
+          <div className="flex items-center justify-between gap-2 pt-2 border-t border-[rgba(212,175,55,0.3)]">
+            <span className="text-sm font-black text-[#5A189A] dark:text-[#FFE875] tabular-nums" dir="ltr">
               {discoverNewProduct.priceEgp} {currencyLabel}
             </span>
             <button
               type="button"
               onClick={(e) => handleAdd(discoverNewProduct, e)}
-              className="min-h-[40px] px-4 rounded-xl bg-[#4C1D95] hover:bg-[#3B0764] text-white font-black text-xs flex items-center gap-1.5 shadow-sm cursor-pointer active:scale-95 transition-all"
+              className="min-h-[44px] px-4 rounded-xl bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-[#FFFFFF] font-black text-xs flex items-center gap-1.5 shadow-sm cursor-pointer active:scale-95 transition-all border border-[rgba(212,175,55,0.4)]"
             >
-              <Plus className="w-3.5 h-3.5 text-[#F5C451]" strokeWidth={2.5} />
+              <Plus className="w-4 h-4 text-[#FFE875]" strokeWidth={2.5} />
               <span>
                 {isRtl ? 'أضف للسلة' : 'Add'}
                 {getCartQty(discoverNewProduct.id) > 0
@@ -224,15 +224,15 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
         </div>
       </section>
 
-      {/* 4. Clean 2-Column 4:3 Catalog Grid (Talabat Mart Clarity) */}
+      {/* 4. Clean 2-Column 4:3 Catalog Grid */}
       <section className="space-y-3">
         <div className="flex items-center justify-between px-0.5">
-          <h2 className="text-sm font-black text-[#1E1633] dark:text-white">
+          <h2 className="text-sm font-black text-[#240046] dark:text-[#FFFFFF]">
             {isRtl
               ? `المنتجات الطازجة (${filteredProducts.length})`
               : `Fresh Catalog (${filteredProducts.length})`}
           </h2>
-          <span className="text-[11px] font-bold text-[#5E5570] dark:text-[#C4B5FD]">
+          <span className="text-[11px] font-bold text-[#3B123F] dark:text-[#FFFDF7]/80">
             {isRtl ? 'اضغط + للإضافة' : 'Tap + to add'}
           </span>
         </div>
@@ -245,12 +245,12 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
             return (
               <article
                 key={product.id}
-                className={`rounded-[20px] overflow-hidden bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-[#C084FC]/20 shadow-xs flex flex-col justify-between transition-transform duration-150 ${
-                  isPulsing ? 'scale-[0.98] ring-2 ring-[#F5C451]' : ''
+                className={`rounded-[20px] overflow-hidden bg-[rgba(255,255,255,0.95)] dark:bg-[#240046]/85 border border-[rgba(212,175,55,0.4)] shadow-xs flex flex-col justify-between transition-transform duration-150 ${
+                  isPulsing ? 'scale-[0.98] ring-2 ring-[#FFE875]' : ''
                 }`}
               >
                 <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F5F3FF] dark:bg-[#241B38]">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FFFDF7] dark:bg-[#1A052E]">
                     <img
                       src={product.imageUrl}
                       alt={isRtl ? product.nameAr : product.nameEn}
@@ -261,10 +261,10 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
                   </div>
 
                   <div className="p-2.5 pb-1.5 space-y-1">
-                    <h3 className="text-xs font-black text-[#1E1633] dark:text-white leading-snug line-clamp-1">
+                    <h3 className="text-xs font-black text-[#240046] dark:text-[#FFFFFF] leading-snug line-clamp-2">
                       {isRtl ? product.nameAr : product.nameEn}
                     </h3>
-                    <p className="text-[10px] font-medium text-[#5E5570] dark:text-[#C4B5FD] line-clamp-1">
+                    <p className="text-[10px] font-medium text-[#3B123F] dark:text-[#FFFDF7]/80 line-clamp-1">
                       {isRtl ? product.unitAr : product.unitEn}
                     </p>
                   </div>
@@ -272,7 +272,7 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
 
                 <div className="px-2.5 pb-2.5 pt-1 flex items-center justify-between gap-2">
                   <span
-                    className="text-xs font-black text-[#4C1D95] dark:text-[#F5C451] tabular-nums"
+                    className="text-xs font-black text-[#5A189A] dark:text-[#FFE875] tabular-nums"
                     dir="ltr"
                   >
                     {product.priceEgp} {currencyLabel}
@@ -284,10 +284,10 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
                     aria-label={
                       isRtl ? `إضافة ${product.nameAr} للسلة` : `Add ${product.nameEn} to cart`
                     }
-                    className={`min-h-[38px] min-w-[38px] px-2.5 rounded-xl font-black text-xs flex items-center justify-center gap-1 shadow-xs cursor-pointer transition-all active:scale-90 shrink-0 ${
+                    className={`min-h-[44px] min-w-[44px] px-2.5 rounded-xl font-black text-xs flex items-center justify-center gap-1 shadow-xs cursor-pointer transition-all active:scale-90 shrink-0 ${
                       qtyInCart > 0
-                        ? 'bg-[#F5C451] text-[#2A0E4D]'
-                        : 'bg-[#4C1D95] hover:bg-[#3B0764] text-white'
+                        ? 'bg-[linear-gradient(135deg,#FFE875,#D4AF37)] text-[#240046]'
+                        : 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-[#FFFFFF] border border-[rgba(212,175,55,0.4)]'
                     }`}
                   >
                     {qtyInCart > 0 ? (
@@ -296,7 +296,7 @@ export const FreshWorldStorefrontView: React.FC<FreshWorldStorefrontViewProps> =
                         {qtyInCart}
                       </span>
                     ) : (
-                      <Plus className="w-4 h-4" strokeWidth={2.5} />
+                      <Plus className="w-4 h-4 text-[#FFE875]" strokeWidth={2.5} />
                     )}
                   </button>
                 </div>

@@ -305,17 +305,19 @@ export const Phase1ServicesHub: React.FC<Phase1ServicesHubProps> = ({
 
     return (
       <div className="max-w-3xl mx-auto space-y-5 pb-10">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={() => onNavigateSection('home')}
-            className="min-h-[44px] inline-flex items-center gap-2 px-4 py-2 rounded-full basit-glass-pill hover:border-[#62339A] text-xs font-extrabold text-[#292333] dark:text-white cursor-pointer"
-          >
-            <BackIcon className="w-4 h-4 text-[#62339A] dark:text-[#A34FE8]" />
-            <span>{t.nav.home}</span>
-          </button>
+        <div className="flex flex-col gap-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigateSection('home')}
+              className="min-h-[44px] inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.45)] hover:border-[#D4AF37] text-xs font-extrabold text-[#240046] dark:text-[#FFFDF7] cursor-pointer"
+            >
+              <BackIcon className="w-4 h-4 text-[#5A189A] dark:text-[#FFE875]" />
+              <span>{t.nav.home}</span>
+            </button>
+          </div>
 
-          <div className="flex items-center gap-1.5 basit-glass-pill p-1.5 rounded-full">
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] shadow-xs">
             <button
               type="button"
               onClick={() => {
@@ -323,10 +325,10 @@ export const Phase1ServicesHub: React.FC<Phase1ServicesHubProps> = ({
                 setIsReviewingBeforeSend(false);
                 setLastSubmitted(null);
               }}
-              className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-extrabold whitespace-nowrap transition-colors cursor-pointer ${
+              className={`min-h-[44px] px-2 py-2 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
                 formType === 'quotation'
-                  ? 'basit-glass-btn-primary text-white'
-                  : 'text-[#292333] dark:text-slate-300'
+                  ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                  : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
               }`}
             >
               {t.quoteModalTitle}
@@ -339,10 +341,10 @@ export const Phase1ServicesHub: React.FC<Phase1ServicesHubProps> = ({
                 setIsReviewingBeforeSend(false);
                 setLastSubmitted(null);
               }}
-              className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-extrabold whitespace-nowrap transition-colors cursor-pointer ${
+              className={`min-h-[44px] px-2 py-2 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
                 formType === 'join_kitchen'
-                  ? 'basit-glass-btn-primary text-white'
-                  : 'text-[#292333] dark:text-slate-300'
+                  ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                  : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
               }`}
             >
               {t.joinKitchenTitle}
@@ -745,9 +747,9 @@ export const Phase1ServicesHub: React.FC<Phase1ServicesHubProps> = ({
                     <button
                       type="button"
                       onClick={() => setKitchenMenuOption('own_menu')}
-                      className={`p-2.5 rounded-xl border text-start font-bold cursor-pointer transition-all ${
+                      className={`min-h-[44px] p-2.5 rounded-xl border text-start font-bold cursor-pointer transition-all ${
                         kitchenMenuOption === 'own_menu'
-                          ? 'bg-[#62339A] text-white border-[#62339A]'
+                          ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white border-[rgba(212,175,55,0.45)]'
                           : 'bg-white dark:bg-[#292333] text-[#292333] dark:text-white border-[#E2E8F0]'
                       }`}
                     >
@@ -758,9 +760,9 @@ export const Phase1ServicesHub: React.FC<Phase1ServicesHubProps> = ({
                     <button
                       type="button"
                       onClick={() => setKitchenMenuOption('worker_catering')}
-                      className={`p-2.5 rounded-xl border text-start font-bold cursor-pointer transition-all ${
+                      className={`min-h-[44px] p-2.5 rounded-xl border text-start font-bold cursor-pointer transition-all ${
                         kitchenMenuOption === 'worker_catering'
-                          ? 'bg-[#62339A] text-white border-[#62339A]'
+                          ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white border-[rgba(212,175,55,0.45)]'
                           : 'bg-white dark:bg-[#292333] text-[#292333] dark:text-white border-[#E2E8F0]'
                       }`}
                     >

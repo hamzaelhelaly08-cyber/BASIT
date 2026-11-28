@@ -483,10 +483,10 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
             setAuthTab('password_login');
             resetMessages();
           }}
-          className={`min-h-[42px] px-2 py-2 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
+          className={`min-h-[44px] px-2 py-2 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
             authTab === 'password_login'
-              ? 'bg-[#62339A] text-white shadow-sm'
-              : 'text-[#5E5570] dark:text-[#C4B5FD] hover:text-[#62339A]'
+              ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-sm'
+              : 'text-[#3B123F] dark:text-[#FFFDF7]/85 hover:text-[#5A189A]'
           }`}
         >
           {isRtl ? 'دخول بكلمة المرور' : 'Password'}
@@ -497,10 +497,10 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
             setAuthTab('otp_login');
             resetMessages();
           }}
-          className={`min-h-[42px] px-2 py-2 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
+          className={`min-h-[44px] px-2 py-2 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
             authTab === 'otp_login'
-              ? 'bg-[#62339A] text-white shadow-sm'
-              : 'text-[#5E5570] dark:text-[#C4B5FD] hover:text-[#62339A]'
+              ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-sm'
+              : 'text-[#3B123F] dark:text-[#FFFDF7]/85 hover:text-[#5A189A]'
           }`}
         >
           {isRtl ? 'رمز البريد (OTP)' : 'Email OTP'}
@@ -511,10 +511,10 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
             setAuthTab('register');
             resetMessages();
           }}
-          className={`min-h-[42px] px-2 py-2 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
+          className={`min-h-[44px] px-2 py-2 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
             authTab === 'register'
-              ? 'bg-[#62339A] text-white shadow-sm'
-              : 'text-[#5E5570] dark:text-[#C4B5FD] hover:text-[#62339A]'
+              ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-sm'
+              : 'text-[#3B123F] dark:text-[#FFFDF7]/85 hover:text-[#5A189A]'
           }`}
         >
           {isRtl ? 'تسجيل حساب جديد' : 'Register'}
@@ -541,8 +541,8 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               <label className="text-xs font-black text-[#292333] dark:text-white block">
                 {isRtl ? 'اسم المستخدم أو البريد أو رقم الهاتف' : 'Username, Email or Phone Number'}
               </label>
-              <div className="relative">
-                <Mail className="w-4 h-4 text-[#62339A] dark:text-[#FFC928] absolute top-1/2 -translate-y-1/2 start-4" />
+              <div className="relative" dir="ltr">
+                <Mail className="w-4 h-4 text-[#5A189A] dark:text-[#FFE875] absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none" />
                 <input
                   type="text"
                   required
@@ -550,7 +550,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   placeholder="username / name@company.com / +2010..."
-                  className="w-full min-h-[48px] ps-11 pe-4 rounded-2xl bg-[#F7F5FA] dark:bg-[#1F172F] border border-[#E6E0F5] dark:border-[#62339A]/35 text-xs sm:text-sm font-mono font-bold text-[#292333] dark:text-white focus:border-[#62339A] focus:outline-none"
+                  className="w-full min-h-[48px] pl-11 pr-4 rounded-2xl bg-[#FFFDF7] dark:bg-[#1A052E] border border-[rgba(212,175,55,0.4)] text-xs sm:text-sm font-mono font-bold text-[#240046] dark:text-white focus:border-[#5A189A] focus:outline-none"
                 />
               </div>
             </div>
@@ -566,13 +566,13 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                     setAuthTab('forgot_password');
                     resetMessages();
                   }}
-                  className="text-[11px] font-black text-[#62339A] dark:text-[#FFC928] hover:underline cursor-pointer"
+                  className="min-h-[44px] px-2 inline-flex items-center text-[11px] font-black text-[#5A189A] dark:text-[#FFE875] hover:underline cursor-pointer"
                 >
                   {isRtl ? 'نسيت كلمة المرور؟' : 'Forgot password?'}
                 </button>
               </div>
-              <div className="relative">
-                <Lock className="w-4 h-4 text-[#62339A] dark:text-[#FFC928] absolute top-1/2 -translate-y-1/2 start-4" />
+              <div className="relative" dir="ltr">
+                <Lock className="w-4 h-4 text-[#5A189A] dark:text-[#FFE875] absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
@@ -581,13 +581,13 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full min-h-[48px] ps-11 pe-12 rounded-2xl bg-[#F7F5FA] dark:bg-[#1F172F] border border-[#E6E0F5] dark:border-[#62339A]/35 text-sm font-mono font-bold text-[#292333] dark:text-white focus:border-[#62339A] focus:outline-none"
+                  className="w-full min-h-[48px] pl-11 pr-12 rounded-2xl bg-[#FFFDF7] dark:bg-[#1A052E] border border-[rgba(212,175,55,0.4)] text-sm font-mono font-bold text-[#240046] dark:text-white focus:border-[#5A189A] focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute top-1/2 -translate-y-1/2 end-3 p-2 text-[#5E5570] dark:text-[#C4B5FD] cursor-pointer"
+                  className="absolute top-1/2 -translate-y-1/2 right-1 min-w-[44px] min-h-[44px] flex items-center justify-center text-[#5A189A] dark:text-[#FFE875] cursor-pointer"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -617,7 +617,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                   setClaimIdentifier(identifier.trim());
                 }
               }}
-              className="text-[11px] font-black text-[#62339A] dark:text-[#FFC928] hover:underline cursor-pointer"
+              className="min-h-[44px] px-3 inline-flex items-center justify-center text-[11px] font-black text-[#5A189A] dark:text-[#FFE875] hover:underline cursor-pointer"
             >
               {claimPanelOpen
                 ? isRtl ? 'إغلاق نموذج التفعيل الأولي' : 'Hide first-run setup'
@@ -1061,16 +1061,16 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
     return (
       <div
         dir={isRtl ? 'rtl' : 'ltr'}
-        className="fixed inset-0 z-[70] max-w-[430px] w-full mx-auto overflow-y-auto overflow-x-hidden bg-[#FAF8F5] dark:bg-[#120D1D] text-[#1E1633] dark:text-white flex flex-col justify-between"
+        className="fixed inset-0 z-[70] max-w-[430px] w-full mx-auto overflow-y-auto overflow-x-hidden bg-[#FFFDF7] dark:bg-[#1A052E] text-[#240046] dark:text-[#FFFDF7] flex flex-col justify-between"
       >
         {/* Top Royal Purple Cover + Clean Wave */}
-        <header className="relative z-20 shrink-0 bg-gradient-to-b from-[#3B0764] via-[#4C1D95] to-[#5B21B6] text-white pt-safe">
+        <header className="relative z-20 shrink-0 bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] text-[#FFFFFF] pt-safe">
           <div
             dir="ltr"
             className="flex items-center justify-between gap-2 px-4 pt-3 pb-2 min-w-0"
           >
             <div className="inline-flex items-center gap-2 min-w-0">
-              <div className="w-8 h-8 rounded-xl bg-white p-0.5 shadow-sm border border-[#F5C451]/70 shrink-0 overflow-hidden">
+              <div className="w-8 h-8 rounded-xl bg-[#FFFFFF] p-0.5 shadow-sm border border-[rgba(212,175,55,0.65)] shrink-0 overflow-hidden">
                 <img
                   src={BASIT_OFFICIAL_LOGO_PNG}
                   alt="BASIT | باسط"
@@ -1078,7 +1078,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                   className="w-full h-full object-contain bg-white"
                 />
               </div>
-              <span className="text-xs font-black tracking-wide text-[#F5C451] truncate">
+              <span className="text-xs font-black tracking-wide text-[#FFE875] truncate">
                 BASIT | باسط
               </span>
             </div>
@@ -1087,9 +1087,9 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               <button
                 type="button"
                 onClick={onToggleLang}
-                className="min-h-[38px] px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-black flex items-center gap-1.5 cursor-pointer shrink-0 transition-colors"
+                className="min-h-[44px] min-w-[44px] px-3 rounded-xl bg-white/15 hover:bg-white/25 border border-white/15 text-[#FFFFFF] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shrink-0 transition-colors"
               >
-                <Languages className="w-3.5 h-3.5 text-[#F5C451]" />
+                <Languages className="w-4 h-4 text-[#FFE875]" />
                 <span>{isRtl ? 'EN' : 'ع'}</span>
               </button>
             )}
@@ -1135,7 +1135,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
             <button
               type="button"
               onClick={() => openGateModal('register')}
-              className="w-full min-h-[48px] px-4 py-2.5 rounded-2xl bg-[#F5C451] hover:bg-[#EAB308] text-[#2A0E4D] text-sm font-black shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
+              className="w-full min-h-[48px] px-4 py-2.5 rounded-2xl bg-[linear-gradient(135deg,#FFE875,#FACC15,#D4AF37)] text-[#240046] text-sm font-black shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
             >
               <UserPlus className="w-4 h-4 shrink-0" />
               <span>
@@ -1149,26 +1149,26 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               <button
                 type="button"
                 onClick={() => openGateModal('password_login')}
-                className="min-h-[46px] px-3 py-2.5 rounded-2xl bg-[#4C1D95] hover:bg-[#3B0764] text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-sm"
+                className="min-h-[46px] px-3 py-2.5 rounded-2xl bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] border border-[rgba(212,175,55,0.45)] text-[#FFFFFF] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-sm"
               >
-                <LogIn className="w-4 h-4 text-[#F5C451] shrink-0" />
-                <span className="truncate">{isRtl ? 'تسجيل الدخول' : 'Sign In'}</span>
+                <LogIn className="w-4 h-4 text-[#FFE875] shrink-0" />
+                <span>{isRtl ? 'تسجيل الدخول' : 'Sign In'}</span>
               </button>
 
               <button
                 type="button"
                 onClick={onGoogleSignIn}
-                className="min-h-[46px] px-3 py-2.5 rounded-2xl bg-white dark:bg-[#1B132B] hover:bg-[#F5F3FF] border border-[#4C1D95]/20 text-[#3B0764] dark:text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
+                className="min-h-[46px] px-3 py-2.5 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.45)] text-[#240046] dark:text-[#FFFFFF] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
               >
-                <LogIn className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
-                <span className="truncate">{isRtl ? 'حساب Google' : 'Google'}</span>
+                <LogIn className="w-4 h-4 text-[#5A189A] dark:text-[#FFE875] shrink-0" />
+                <span>{isRtl ? 'حساب Google' : 'Google'}</span>
               </button>
             </div>
 
             <button
               type="button"
               onClick={onContinueAsGuest || onBackHome}
-              className="w-full min-h-[44px] px-4 py-2 rounded-2xl bg-white dark:bg-[#1B132B] hover:bg-[#F5F3FF] border border-[#4C1D95]/15 text-[#4C1D95] dark:text-[#EDE9FE] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+              className="w-full min-h-[44px] px-4 py-2 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046]/85 border border-[rgba(212,175,55,0.4)] text-[#5A189A] dark:text-[#FFE875] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all"
             >
               <span>{isRtl ? 'تصفح التطبيق كزائر' : 'Continue as Visitor'}</span>
             </button>
@@ -1331,11 +1331,11 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
         </button>
       </div>
 
-      <section className="relative rounded-[28px] overflow-hidden shadow-md border border-[#4C1D95]/15 bg-white dark:bg-[#1B132B]">
-        <div className="relative bg-gradient-to-br from-[#3B0764] via-[#4C1D95] to-[#5B21B6] px-6 py-5 text-center text-white">
+      <section className="relative rounded-[28px] overflow-hidden shadow-md border border-[rgba(212,175,55,0.45)] bg-[rgba(255,255,255,0.95)] dark:bg-[#240046]/85">
+        <div className="relative bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] px-6 py-5 text-center text-[#FFFFFF]">
           <div className="relative z-10 flex flex-col items-center space-y-2">
-            <BasitBrandMark size="md" isRtl={isRtl} className="ring-2 ring-[#FFD54F]/75 shadow-lg" />
-            <h1 className="text-lg sm:text-xl font-black text-[#FFD54F]">
+            <BasitBrandMark size="md" isRtl={isRtl} className="ring-2 ring-[#FFE875]/75 shadow-lg" />
+            <h1 className="text-lg font-black text-[#FFE875]">
               {isRtl ? 'إدارة الحساب والأمان — باسط | BASIT' : 'Account & Security — BASIT'}
             </h1>
           </div>
@@ -1377,7 +1377,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
               <button
                 type="button"
                 onClick={onSignOutGoogle}
-                className="min-h-[38px] px-3.5 py-1.5 rounded-full bg-white dark:bg-[#140F1F] border border-rose-300 text-rose-600 text-xs font-black flex items-center gap-1.5 cursor-pointer"
+                className="min-h-[44px] px-3.5 py-2 rounded-full bg-[#FFFFFF] dark:bg-[#1A052E] border border-rose-300 text-rose-600 text-xs font-black flex items-center gap-1.5 cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 <span>{isRtl ? 'خروج' : 'Sign Out'}</span>
@@ -1398,7 +1398,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                         {otpSession.fullName}
                       </span>
                       {activeRoleLabel && (
-                        <span className="px-2 py-0.5 rounded-full bg-[#62339A] text-white text-[10px] font-black">
+                        <span className="px-2 py-0.5 rounded-full bg-[#5A189A] text-white text-[10px] font-black">
                           {activeRoleLabel}
                         </span>
                       )}
@@ -1412,7 +1412,7 @@ export const Phase1LoginView: React.FC<Phase1LoginViewProps> = ({
                 <button
                   type="button"
                   onClick={onClearOtpSession}
-                  className="min-h-[36px] px-3.5 py-1.5 rounded-full bg-white dark:bg-[#140F1F] border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-[11px] font-black cursor-pointer"
+                  className="min-h-[44px] px-3.5 py-2 rounded-full bg-[#FFFFFF] dark:bg-[#1A052E] border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-[11px] font-black cursor-pointer"
                 >
                   {isRtl ? 'تسجيل الخروج' : 'Sign Out'}
                 </button>

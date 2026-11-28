@@ -110,9 +110,9 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
-          // Precache strictly the minimal App Shell (< 750 KB/file) for fast installs & free-tier publish limits
+          // Precache App Shell safely (2 MiB limit avoids build failure when feature chunks grow)
           cleanupOutdatedCaches: true,
-          maximumFileSizeToCacheInBytes: 750 * 1024,
+          maximumFileSizeToCacheInBytes: 2 * 1024 * 1024,
           globPatterns: [
             'index.html',
             'habe.html',
@@ -218,12 +218,15 @@ export default defineConfig(() => {
     build: {
       sourcemap: false,
       cssCodeSplit: true,
-      chunkSizeWarningLimit: 600,
+      chunkSizeWarningLimit: 1200,
       rolldownOptions: {
         onwarn(warning, warn) {
           if (
             warning.code === 'CIRCULAR_DEPENDENCY' ||
+            warning.code === 'MODULE_LEVEL_DIRECTIVE' ||
+            warning.code === 'EVAL' ||
             warning.message?.includes('react-is') ||
+            warning.message?.includes('recharts') ||
             warning.message?.includes('Eval')
           ) {
             return;
@@ -237,13 +240,23 @@ export default defineConfig(() => {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
+              if (
+                id.includes('/react/') ||
+                id.includes('/react-dom/') ||
+                id.includes('/react-is/') ||
+                id.includes('/scheduler/')
+              ) {
                 return 'vendor-react';
               }
               if (id.includes('three')) {
                 return 'vendor-three';
               }
-              if (id.includes('recharts') || id.includes('d3-') || id.includes('victory-vendor')) {
+              if (
+                id.includes('recharts') ||
+                id.includes('d3-') ||
+                id.includes('victory-vendor') ||
+                id.includes('react-smooth')
+              ) {
                 return 'vendor-charts';
               }
               if (id.includes('jspdf')) {

@@ -80,24 +80,24 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-[#3B0764]/60 backdrop-blur-xs flex justify-center"
+      className="fixed inset-0 z-50 bg-[#1A052E]/75 backdrop-blur-xs flex justify-center"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[430px] bg-[#FAF8F5] dark:bg-[#120D1D] h-full shadow-2xl border-x border-[#4C1D95]/15 flex flex-col pt-safe overflow-x-hidden"
+        className="w-full max-w-[430px] bg-[#FFFDF7] dark:bg-[#1A052E] h-full shadow-2xl border-x border-[rgba(212,175,55,0.4)] flex flex-col pt-safe overflow-x-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-white/15 flex items-center justify-between bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#5B21B6] text-white">
+        <div className="p-4 border-b border-[rgba(212,175,55,0.4)] flex items-center justify-between bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] text-[#FFFFFF]">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-[14px] bg-[#F5C451] text-[#2A0E4D] flex items-center justify-center shadow-sm">
+            <div className="w-11 h-11 rounded-[14px] bg-[linear-gradient(135deg,#FFE875,#D4AF37)] text-[#240046] flex items-center justify-center shadow-sm">
               <ShoppingCart className="w-5 h-5" strokeWidth={2} />
             </div>
             <div>
-              <h3 className="text-base font-black text-white">
+              <h3 className="text-base font-black text-[#FFFFFF]">
                 {t.cartTitle}
               </h3>
-              <p className="text-xs font-bold text-[#F5C451] tabular-nums" dir="ltr">
+              <p className="text-xs font-bold text-[#FFE875] tabular-nums" dir="ltr">
                 {items.reduce((sum, i) => sum + i.quantity, 0)}{' '}
                 {isRtl ? 'عنصر محفوظ' : 'saved items'}
               </p>
@@ -107,7 +107,7 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[44px] min-w-[44px] text-white hover:text-[#F5C451] flex items-center justify-center cursor-pointer"
+            className="min-h-[44px] min-w-[44px] text-[#FFFFFF] hover:text-[#FFE875] flex items-center justify-center cursor-pointer"
             aria-label={isRtl ? 'إغلاق السلة' : 'Close Cart'}
           >
             <X className="w-5 h-5" />
@@ -236,9 +236,9 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
                 if (onProceedToB2BContract) onProceedToB2BContract();
                 else if (onCheckoutAndInvoice) onCheckoutAndInvoice();
               }}
-              className="w-full min-h-[48px] py-3 px-4 rounded-2xl bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#581C87] hover:brightness-105 text-[#FFD54F] border border-[#FFD54F]/50 font-black text-sm flex items-center justify-center gap-2 shadow-[0_10px_22px_-8px_rgba(59,7,100,0.48)] cursor-pointer transition-transform active:scale-99"
+              className="w-full min-h-[48px] py-3 px-4 rounded-2xl bg-[linear-gradient(135deg,#240046,#4B148C,#5A189A)] hover:brightness-105 text-[#FFE875] border border-[rgba(212,175,55,0.5)] font-black text-sm flex items-center justify-center gap-2 shadow-[0_10px_22px_-8px_rgba(36,0,70,0.48)] cursor-pointer transition-transform active:scale-99"
             >
-              <Building className="w-4 h-4 text-[#FFD54F]" />
+              <Building className="w-4 h-4 text-[#FFE875]" />
               <span>{isRtl ? 'متابعة للتعاقد' : 'Proceed to Contract'}</span>
             </button>
 
@@ -298,7 +298,7 @@ export const Phase1CartDrawer: React.FC<Phase1CartDrawerProps> = ({
                       setAppliedCoupon(couponCode.trim().toUpperCase());
                     }
                   }}
-                  className="min-h-[38px] px-3.5 rounded-xl bg-[#62339A] text-white text-xs font-black cursor-pointer shrink-0"
+                  className="min-h-[44px] px-4 rounded-xl bg-[linear-gradient(135deg,#5A189A,#4B148C)] text-[#FFFFFF] text-xs font-black cursor-pointer shrink-0"
                 >
                   {isRtl ? 'تطبيق' : 'Apply'}
                 </button>

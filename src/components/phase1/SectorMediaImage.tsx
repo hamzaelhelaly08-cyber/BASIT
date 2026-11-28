@@ -37,11 +37,11 @@ export const SectorMediaImage: React.FC<SectorMediaImageProps> = ({
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center gap-2 p-4 bg-gradient-to-br from-[#3B0764] to-[#5B21B6] text-white text-center">
-          <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-[#F5C451]">
+        <div className="w-full h-full flex flex-col items-center justify-center gap-2 p-4 bg-[linear-gradient(135deg,#240046,#4B148C,#5A189A)] text-[#FFFFFF] text-center">
+          <div className="w-11 h-11 rounded-2xl bg-white/10 border border-[rgba(212,175,55,0.4)] flex items-center justify-center text-[#FFE875]">
             <SectorIcon name={iconName} className="w-6 h-6" />
           </div>
-          <span className="text-xs font-bold text-white/90">{fallbackTitle}</span>
+          <span className="text-xs font-bold text-[#FFFDF7]">{fallbackTitle}</span>
         </div>
       )}
     </div>

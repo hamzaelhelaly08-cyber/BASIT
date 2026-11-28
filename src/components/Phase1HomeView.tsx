@@ -56,7 +56,6 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
   const isRtl = lang === 'ar';
   const [showAllMenus, setShowAllMenus] = useState(false);
 
-  // Featured Carousel
   const [slideIdx, setSlideIdx] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -94,7 +93,6 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
   const activeSlide = B2B_HERO_CAROUSEL_SLIDES[slideIdx] || B2B_HERO_CAROUSEL_SLIDES[0];
   const ForwardArrow = isRtl ? ChevronLeft : ChevronRight;
 
-  // 4 Primary Destinations (Zero Clutter, Generous Touch Targets)
   const quickServices = [
     {
       id: 'srv_fresh_world',
@@ -138,8 +136,8 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
   const visibleMenus = showAllMenus ? EIGHT_CATERING_MENUS : EIGHT_CATERING_MENUS.slice(0, 4);
 
   return (
-    <div className="space-y-6 pb-8">
-      {/* 1. Featured Editorial Showcase (Clean 16:9 Photo + Single Clear CTA) */}
+    <div className="space-y-5 pb-2">
+      {/* 1. Featured Editorial Showcase (16:9 Photo + sRGB Card & Single Clear CTA) */}
       <section
         aria-label={isRtl ? 'العروض المميزة' : 'Featured Showcase'}
         onMouseEnter={() => setCarouselPaused(true)}
@@ -160,11 +158,11 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
           touchStartX.current = null;
           setCarouselPaused(false);
         }}
-        className="rounded-3xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-[#C4B5FD]/15 overflow-hidden shadow-[0_10px_28px_-14px_rgba(30,22,51,0.16)]"
+        className="rounded-3xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] overflow-hidden shadow-[0_12px_28px_-14px_rgba(36,0,70,0.2)]"
       >
         <div
           className={`relative aspect-[16/9] w-full overflow-hidden ${
-            activeSlide.isBasitCardSlide ? 'bg-[#16082E]' : 'bg-[#EDE9FE]'
+            activeSlide.isBasitCardSlide ? 'bg-[#1A052E]' : 'bg-[#FFFDF7]'
           }`}
         >
           <img
@@ -174,59 +172,63 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
               activeSlide.isBasitCardSlide ? 'object-contain' : 'object-cover'
             }`}
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1E1633]/75 via-[#1E1633]/15 to-transparent" />
-          <span className="absolute top-3 start-3 px-2.5 py-1 rounded-full bg-[#3B0764]/90 text-[#F5C451] text-[10px] font-black backdrop-blur-xs">
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(26,5,46,0.05)_0%,rgba(26,5,46,0.68)_100%)]" />
+          <span className="absolute top-2.5 start-2.5 px-2.5 py-1 rounded-full bg-[linear-gradient(135deg,#240046,#4B148C)] text-[#FFE875] border border-[rgba(212,175,55,0.45)] text-[10px] font-black shadow-xs">
             {isRtl ? activeSlide.tagAr : activeSlide.tagEn}
           </span>
         </div>
 
-        <div className="p-4 space-y-3">
+        <div className="p-3.5 space-y-3">
           <div className="space-y-1">
-            <h1 className="text-base font-black text-[#1E1633] dark:text-white leading-snug line-clamp-1">
+            <h1 className="text-sm sm:text-base font-black text-[#240046] dark:text-[#FFFDF7] leading-snug line-clamp-2">
               {isRtl ? activeSlide.titleAr : activeSlide.titleEn}
             </h1>
-            <p className="text-xs font-medium text-[#5B5270] dark:text-[#C4B5FD] line-clamp-1">
+            <p className="text-xs font-medium text-[#3B123F] dark:text-[#FFFDF7]/80 line-clamp-2 leading-relaxed">
               {isRtl ? activeSlide.subtitleAr : activeSlide.subtitleEn}
             </p>
           </div>
 
-          <div className="flex items-center justify-between gap-3 pt-1">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
             <button
               type="button"
               onClick={() => handleSlideAction(activeSlide)}
-              className={`min-h-[42px] px-4 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer active:scale-95 transition-transform ${
+              className={`min-h-[44px] px-4 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer active:scale-95 transition-transform ${
                 activeSlide.isBasitCardSlide
                   ? 'basit-glass-btn-yellow'
                   : 'basit-glass-btn-primary'
               }`}
             >
               <span>{isRtl ? activeSlide.ctaAr : activeSlide.ctaEn}</span>
-              <ForwardArrow className="w-4 h-4" />
+              <ForwardArrow className="w-4 h-4 shrink-0" />
             </button>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               {B2B_HERO_CAROUSEL_SLIDES.map((slide, idx) => (
                 <button
                   key={slide.id}
                   type="button"
                   onClick={() => setSlideIdx(idx)}
                   aria-label={`Slide ${idx + 1}`}
-                  className={`h-2 rounded-full transition-all cursor-pointer ${
-                    idx === slideIdx
-                      ? 'w-5 bg-[#4C1D95] dark:bg-[#F5C451]'
-                      : 'w-2 bg-[#4C1D95]/20 dark:bg-white/25'
-                  }`}
-                />
+                  className="min-h-[44px] min-w-[24px] px-1 flex items-center justify-center cursor-pointer"
+                >
+                  <span
+                    className={`h-2 rounded-full transition-all ${
+                      idx === slideIdx
+                        ? 'w-5 bg-[#5A189A] dark:bg-[#FFE875]'
+                        : 'w-2 bg-[#5A189A]/25 dark:bg-white/30'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Quick Destinations (2x2 Airy Ivory Cards with Uniform Outline Icons) */}
-      <section className="space-y-3">
+      {/* 2. Quick Destinations (2x2 Airy Milky Cards with Rich Colored Icons) */}
+      <section className="space-y-2.5">
         <div className="flex items-center justify-between px-0.5">
-          <h2 className="text-sm font-black text-[#1E1633] dark:text-white">
+          <h2 className="text-sm font-black text-[#240046] dark:text-[#FFFDF7]">
             {isRtl ? 'استكشف خدمات باسط' : 'Explore BASIT'}
           </h2>
         </div>
@@ -239,22 +241,22 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
                 key={srv.id}
                 type="button"
                 onClick={srv.action}
-                className="group min-h-[104px] p-3.5 rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/10 dark:border-[#C4B5FD]/15 hover:border-[#4C1D95]/30 text-start flex flex-col justify-between gap-2.5 shadow-2xs transition-all active:scale-[0.98] cursor-pointer"
+                className="group min-h-[112px] p-3 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] hover:border-[#D4AF37] text-start flex flex-col justify-between gap-2 shadow-xs transition-all active:scale-[0.98] cursor-pointer"
               >
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors shrink-0 ${
                     srv.featured
-                      ? 'bg-[#4C1D95] text-[#F5C451]'
-                      : 'bg-[#F5F3FF] dark:bg-[#231938] text-[#4C1D95] dark:text-[#F5C451]'
+                      ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-[#FFE875] border border-[rgba(212,175,55,0.45)]'
+                      : 'bg-[#FFFDF7] dark:bg-[#1A052E] text-[#5A189A] dark:text-[#D4AF37] border border-[rgba(212,175,55,0.35)]'
                   }`}
                 >
-                  <Icon className="w-5 h-5" strokeWidth={1.9} />
+                  <Icon className="w-5 h-5" strokeWidth={2} />
                 </div>
                 <div className="space-y-0.5 min-w-0">
-                  <div className="text-xs font-black text-[#1E1633] dark:text-white leading-snug truncate">
+                  <div className="text-xs font-black text-[#240046] dark:text-[#FFFDF7] leading-snug line-clamp-2">
                     {isRtl ? srv.labelAr : srv.labelEn}
                   </div>
-                  <div className="text-[11px] font-medium text-[#5B5270] dark:text-[#C4B5FD] truncate">
+                  <div className="text-[10.5px] font-medium text-[#3B123F] dark:text-[#FFFDF7]/75 leading-snug line-clamp-2">
                     {isRtl ? srv.subAr : srv.subEn}
                   </div>
                 </div>
@@ -264,12 +266,12 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 3. Signature VIP Offer: BASET Family Benefits (Royal Purple + Luminous Gold Highlight) */}
-      <section className="rounded-3xl bg-gradient-to-br from-[#3B0764] via-[#4C1D95] to-[#5B21B6] p-4 text-white shadow-[0_14px_30px_-12px_rgba(59,7,100,0.45)] space-y-3.5">
+      {/* 3. Signature VIP Offer: BASET Family Benefits (Explicit sRGB Purple + Gold Highlight) */}
+      <section className="rounded-3xl bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] p-4 text-white border border-[rgba(212,175,55,0.45)] shadow-[0_14px_30px_-12px_rgba(36,0,70,0.5)] space-y-3.5">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0 space-y-0.5">
-            <div className="inline-flex items-center gap-1 text-[10px] font-black text-[#F5C451]">
-              <CreditCard className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1 text-[10px] font-black text-[#FFE875]">
+              <CreditCard className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>{isRtl ? 'كارت باسط العائلي' : 'BASET Family Card'}</span>
             </div>
             <h2 className="text-sm font-black text-white leading-snug">
@@ -279,7 +281,7 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
           <button
             type="button"
             onClick={() => onNavigateSection('baset_card')}
-            className="min-h-[40px] px-3.5 rounded-xl basit-glass-btn-yellow text-xs font-black shrink-0 cursor-pointer"
+            className="min-h-[44px] px-3.5 rounded-xl basit-glass-btn-yellow text-xs font-black shrink-0 cursor-pointer"
           >
             {isRtl ? 'تفعيل الكارت' : 'Activate'}
           </button>
@@ -289,9 +291,9 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
           <button
             type="button"
             onClick={() => onNavigateSection('baset_food_benefits')}
-            className="min-h-[54px] p-3 rounded-2xl bg-white/10 hover:bg-white/16 border border-white/15 text-start flex items-center gap-2.5 cursor-pointer transition-colors"
+            className="min-h-[54px] p-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-[rgba(212,175,55,0.35)] text-start flex items-center gap-2 cursor-pointer transition-colors"
           >
-            <UtensilsCrossed className="w-4 h-4 text-[#F5C451] shrink-0" strokeWidth={1.9} />
+            <UtensilsCrossed className="w-4 h-4 text-[#FFE875] shrink-0" strokeWidth={2} />
             <span className="text-xs font-bold text-white leading-tight line-clamp-2">
               {isRtl ? 'وجبات باسط' : 'Food Offers'}
             </span>
@@ -300,9 +302,9 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
           <button
             type="button"
             onClick={() => onNavigateSection('baset_family_entertainment')}
-            className="min-h-[54px] p-3 rounded-2xl bg-white/10 hover:bg-white/16 border border-white/15 text-start flex items-center gap-2.5 cursor-pointer transition-colors"
+            className="min-h-[54px] p-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-[rgba(212,175,55,0.35)] text-start flex items-center gap-2 cursor-pointer transition-colors"
           >
-            <Sparkles className="w-4 h-4 text-[#F5C451] shrink-0" strokeWidth={1.9} />
+            <Sparkles className="w-4 h-4 text-[#FFE875] shrink-0" strokeWidth={2} />
             <span className="text-xs font-bold text-white leading-tight line-clamp-2">
               {isRtl ? 'بسطناها على عيلتك' : 'Family Fun'}
             </span>
@@ -311,15 +313,15 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
       </section>
 
       {/* 4. Catering Menus Grid (Crisp 4:3 Meal Photography Cards) */}
-      <section className="space-y-3">
+      <section className="space-y-2.5">
         <div className="flex items-center justify-between px-0.5">
-          <h2 className="text-sm font-black text-[#1E1633] dark:text-white">
+          <h2 className="text-sm font-black text-[#240046] dark:text-[#FFFDF7]">
             {isRtl ? 'قوائم المنيوهات المعتمدة' : 'Catering Menus'}
           </h2>
           <button
             type="button"
             onClick={() => setShowAllMenus((p) => !p)}
-            className="min-h-[36px] px-2.5 text-xs font-bold text-[#4C1D95] dark:text-[#F5C451] cursor-pointer hover:underline"
+            className="min-h-[44px] px-2.5 text-xs font-black text-[#5A189A] dark:text-[#FFE875] cursor-pointer hover:underline flex items-center"
           >
             {showAllMenus
               ? isRtl ? 'عرض أقل' : 'Show Less'
@@ -333,9 +335,9 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
               key={menu.id}
               type="button"
               onClick={() => onSelectMenu?.(menu)}
-              className="group rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/10 dark:border-[#C4B5FD]/15 overflow-hidden text-start shadow-2xs hover:border-[#4C1D95]/30 transition-all active:scale-[0.98] cursor-pointer flex flex-col"
+              className="group rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] overflow-hidden text-start shadow-xs hover:border-[#D4AF37] transition-all active:scale-[0.98] cursor-pointer flex flex-col"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#EDE9FE]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FFFDF7]">
                 <img
                   src={menu.imageUrl}
                   alt={isRtl ? menu.titleAr : menu.titleEn}
@@ -345,10 +347,10 @@ export const Phase1HomeView: React.FC<Phase1HomeViewProps> = ({
                 />
               </div>
               <div className="p-2.5 flex-1 flex flex-col justify-between gap-1">
-                <div className="text-xs font-black text-[#1E1633] dark:text-white leading-snug line-clamp-2">
+                <div className="text-xs font-black text-[#240046] dark:text-[#FFFDF7] leading-snug line-clamp-2">
                   {isRtl ? menu.titleAr : menu.titleEn}
                 </div>
-                <div className="text-[10px] font-medium text-[#5B5270] dark:text-[#C4B5FD] truncate">
+                <div className="text-[10px] font-medium text-[#3B123F] dark:text-[#FFFDF7]/75 line-clamp-1">
                   {isRtl ? menu.clientTierNoteAr : menu.clientTierNoteEn}
                 </div>
               </div>

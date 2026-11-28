@@ -33,13 +33,13 @@ export const SectorsHubView: React.FC<SectorsHubViewProps> = ({
       : PHASE1_SECTORS.filter((s) => s.categoryGroup === filter);
 
   return (
-    <div className="space-y-6 pb-8">
+    <div className="space-y-5 pb-6">
       <div className="space-y-3">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-[#1E1633] dark:text-white">
+          <h2 className="text-lg font-black text-[#240046] dark:text-[#FFFDF7]">
             قطاعات منصة BASIT | باسط
           </h2>
-          <p className="text-xs sm:text-sm font-medium text-[#5B5270] dark:text-slate-300 mt-1">
+          <p className="text-xs font-medium text-[#3B123F] dark:text-[#FFFDF7]/80 mt-1">
             اختر القطاع للانتقال إلى تجربته المستقلة الكاملة على الهاتف.
           </p>
         </div>
@@ -47,83 +47,85 @@ export const SectorsHubView: React.FC<SectorsHubViewProps> = ({
         <div
           role="group"
           aria-label="تصفية القطاعات"
-          className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-white/10 shadow-2xs"
+          className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] shadow-xs"
         >
           <button
             type="button"
             onClick={() => setFilter('all')}
-            className={`min-h-[44px] px-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap ${
+            className={`min-h-[44px] px-1.5 py-1.5 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
               filter === 'all'
-                ? 'bg-[#3B0764] text-white dark:bg-[#F5C451] dark:text-[#2A0548]'
-                : 'text-[#5B5270] dark:text-slate-300'
+                ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
             }`}
           >
-            الكل (<span className="tabular-nums">6</span>)
+            <span>
+              الكل (<span className="tabular-nums">6</span>)
+            </span>
           </button>
           <button
             type="button"
             onClick={() => setFilter('consumer')}
-            className={`min-h-[44px] px-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap ${
+            className={`min-h-[44px] px-1.5 py-1.5 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
               filter === 'consumer'
-                ? 'bg-[#3B0764] text-white dark:bg-[#F5C451] dark:text-[#2A0548]'
-                : 'text-[#5B5270] dark:text-slate-300'
+                ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
             }`}
           >
-            الأفراد والمزايا
+            <span>الأفراد والمزايا</span>
           </button>
           <button
             type="button"
             onClick={() => setFilter('operations')}
-            className={`min-h-[44px] px-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap ${
+            className={`min-h-[44px] px-1.5 py-1.5 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
               filter === 'operations'
-                ? 'bg-[#3B0764] text-white dark:bg-[#F5C451] dark:text-[#2A0548]'
-                : 'text-[#5B5270] dark:text-slate-300'
+                ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
             }`}
           >
-            الأعمال والمصانع
+            <span>الأعمال والمصانع</span>
           </button>
         </div>
       </div>
 
-      {/* 6 Visual Sector Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* 6 Visual Sector Cards inside 430px Mobile Shell */}
+      <div className="grid grid-cols-1 gap-3.5">
         {visibleSectors.map((sector) => (
           <button
             key={sector.id}
             type="button"
             onClick={() => onNavigate(sector.id)}
-            className="group text-start rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-white/10 shadow-2xs hover:shadow-md overflow-hidden flex flex-col transition-all cursor-pointer active:scale-[0.99]"
+            className="group text-start rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] shadow-xs hover:shadow-md overflow-hidden flex flex-col transition-all cursor-pointer active:scale-[0.99]"
           >
             <SectorMediaImage
               src={sector.imageUrl}
               alt={sector.imageAltAr}
               fallbackTitle={sector.titleAr}
               iconName={sector.iconName}
-              aspectClass="aspect-[4/3]"
+              aspectClass="aspect-[16/9]"
             />
-            <div className="p-4 flex-1 flex flex-col justify-between gap-3 w-full">
+            <div className="p-3.5 flex-1 flex flex-col justify-between gap-2.5 w-full">
               <div className="space-y-1">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-latin text-[11px] font-extrabold tracking-wide text-[#4C1D95] dark:text-[#F5C451]">
+                  <span className="font-latin text-[11px] font-black tracking-wide text-[#5A189A] dark:text-[#FFE875]">
                     {sector.codeEn}
                   </span>
                   <SectorIcon
                     name={sector.iconName}
-                    className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0"
+                    className="w-4 h-4 text-[#D4AF37] shrink-0"
                   />
                 </div>
-                <h3 className="text-base font-black text-[#1E1633] dark:text-white">
+                <h3 className="text-sm font-black text-[#240046] dark:text-[#FFFDF7]">
                   {sector.titleAr}
                 </h3>
-                <p className="text-xs text-[#5B5270] dark:text-slate-300 leading-relaxed line-clamp-2">
+                <p className="text-xs text-[#3B123F] dark:text-[#FFFDF7]/80 leading-relaxed line-clamp-2">
                   {sector.summaryAr}
                 </p>
               </div>
-              <div className="pt-2.5 border-t border-[#4C1D95]/8 dark:border-white/8 flex items-center justify-between text-xs font-extrabold text-[#3B0764] dark:text-[#F5C451]">
+              <div className="pt-2.5 border-t border-[rgba(212,175,55,0.25)] flex items-center justify-between text-xs font-black text-[#5A189A] dark:text-[#FFE875]">
                 <span>{sector.categoryLabelAr}</span>
                 <span className="inline-flex items-center gap-1">
                   <span>فتح القطاع</span>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="w-4 h-4 text-[#D4AF37]" />
                 </span>
               </div>
             </div>
@@ -132,55 +134,55 @@ export const SectorsHubView: React.FC<SectorsHubViewProps> = ({
       </div>
 
       {/* Preserved Ancillary Gateways */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+      <div className="grid grid-cols-1 gap-3 pt-1">
         <button
           type="button"
           onClick={onOpenAlAinWorld}
-          className="min-h-[56px] p-4 rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-white/10 text-start flex items-center justify-between gap-3 hover:border-[#4C1D95]/30 cursor-pointer"
+          className="min-h-[56px] p-3.5 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] text-start flex items-center justify-between gap-3 cursor-pointer transition-all active:scale-[0.99]"
         >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#EDE9FE] dark:bg-[#231938] text-[#4C1D95] dark:text-[#F5C451] flex items-center justify-center shrink-0">
-              <UtensilsCrossed className="w-5 h-5" />
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-11 h-11 rounded-xl bg-[#FFFDF7] dark:bg-[#1A052E] border border-[rgba(212,175,55,0.4)] text-[#5A189A] dark:text-[#FFE875] flex items-center justify-center shrink-0">
+              <UtensilsCrossed className="w-5 h-5 text-[#D4AF37]" />
             </div>
-            <div>
-              <div className="text-xs font-black text-[#1E1633] dark:text-white">
+            <div className="min-w-0">
+              <div className="text-xs font-black text-[#240046] dark:text-[#FFFDF7]">
                 عالم الزوار ومطاعم العين
               </div>
-              <div className="text-[11px] font-medium text-[#5B5270] dark:text-slate-300">
+              <div className="text-[11px] font-medium text-[#3B123F] dark:text-[#FFFDF7]/75">
                 دليل المطاعم، الكوبونات، والمجالس الفاخرة
               </div>
             </div>
           </div>
-          <ArrowLeft className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451] shrink-0" />
+          <ArrowLeft className="w-4 h-4 text-[#D4AF37] shrink-0" />
         </button>
 
         <button
           type="button"
           onClick={onOpenAuthGate}
-          className="min-h-[56px] p-4 rounded-2xl bg-[#3B0764] text-white text-start flex items-center justify-between gap-3 hover:bg-[#4C1D95] cursor-pointer"
+          className="min-h-[56px] p-3.5 rounded-2xl bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] text-white text-start flex items-center justify-between gap-3 border border-[rgba(212,175,55,0.45)] shadow-md cursor-pointer transition-all active:scale-[0.99]"
         >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/12 text-[#F5C451] flex items-center justify-center shrink-0">
-              <KeyRound className="w-5 h-5" />
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-11 h-11 rounded-xl bg-white/12 border border-[rgba(212,175,55,0.4)] text-[#FFE875] flex items-center justify-center shrink-0">
+              <KeyRound className="w-5 h-5 text-[#FFE875]" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="text-xs font-black text-white flex items-center gap-1.5">
                 <span>بوابة الدخول والصلاحيات</span>
-                <ShieldCheck className="w-3.5 h-3.5 text-[#F5C451]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FFE875] shrink-0" />
               </div>
-              <div className="text-[11px] text-[#EDE9FE]/80">
+              <div className="text-[11px] text-[#FFFDF7]/80">
                 حسابات الشركات والمصانع والمالك (محفوظة بالنظام)
               </div>
             </div>
           </div>
-          <ArrowLeft className="w-4 h-4 text-[#F5C451] shrink-0" />
+          <ArrowLeft className="w-4 h-4 text-[#FFE875] shrink-0" />
         </button>
       </div>
 
       {/* About BASIT, Welcome Video Replay & App Installation */}
-      <div className="rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-white/10 p-4 flex flex-wrap items-center justify-between gap-3">
+      <div className="rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] p-4 space-y-3">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-11 h-11 rounded-xl bg-white p-1 border border-[#4C1D95]/15 shrink-0">
+          <div className="w-11 h-11 rounded-xl bg-white p-1 border border-[rgba(212,175,55,0.4)] shrink-0">
             <img
               src={BASIT_OFFICIAL_LOGO_PNG}
               alt="BASIT | باسط"
@@ -188,10 +190,10 @@ export const SectorsHubView: React.FC<SectorsHubViewProps> = ({
             />
           </div>
           <div className="min-w-0">
-            <div className="text-xs font-black text-[#1E1633] dark:text-white">
+            <div className="text-xs font-black text-[#240046] dark:text-[#FFFDF7]">
               عن BASIT | باسط والتثبيت على الهاتف
             </div>
-            <div className="text-[11px] font-medium text-[#5B5270] dark:text-slate-300">
+            <div className="text-[11px] font-medium text-[#3B123F] dark:text-[#FFFDF7]/75">
               إعادة مشاهدة الفيديو الترحيبي أو تثبيت التطبيق
             </div>
           </div>
@@ -200,12 +202,12 @@ export const SectorsHubView: React.FC<SectorsHubViewProps> = ({
           <button
             type="button"
             onClick={onOpenAbout}
-            className="min-h-[40px] px-3.5 py-2 rounded-xl bg-[#FAF8F5] dark:bg-[#241B38] border border-[#4C1D95]/20 text-xs font-extrabold text-[#3B0764] dark:text-[#F5C451] flex items-center gap-1.5 cursor-pointer"
+            className="min-h-[44px] px-3.5 py-2 rounded-xl bg-[#FFFDF7] dark:bg-[#1A052E] border border-[rgba(212,175,55,0.45)] text-xs font-black text-[#5A189A] dark:text-[#FFE875] flex items-center gap-1.5 cursor-pointer"
           >
-            <PlayCircle className="w-4 h-4" />
+            <PlayCircle className="w-4 h-4 text-[#D4AF37]" />
             <span>عن BASIT والفيديو</span>
           </button>
-          <PWAInstallButton isRtl compact className="min-h-[40px]" />
+          <PWAInstallButton isRtl compact className="min-h-[44px]" />
         </div>
       </div>
     </div>

@@ -359,9 +359,9 @@ export const Phase1KitchensView: React.FC<Phase1KitchensViewProps> = ({
                         imageUrl: item.dishImageUrl || activeKitchen.imageUrl,
                       })
                     }
-                    className="min-h-[42px] px-4 py-2 rounded-xl bg-[#4C1D95] hover:bg-[#3B0764] text-white text-xs font-extrabold flex items-center gap-1.5 cursor-pointer transition-colors"
+                    className="min-h-[44px] px-4 py-2 rounded-xl bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] border border-[rgba(212,175,55,0.45)] text-white text-xs font-extrabold flex items-center gap-1.5 cursor-pointer transition-colors"
                   >
-                    <ShoppingCart className="w-3.5 h-3.5 text-[#F5C451]" strokeWidth={1.85} />
+                    <ShoppingCart className="w-3.5 h-3.5 text-[#FFE875]" strokeWidth={1.85} />
                     <span>{item.approvedPrice !== null ? (isRtl ? 'أضف للسلة' : 'Add to Cart') : t.addToCartTest}</span>
                   </button>
                 </div>

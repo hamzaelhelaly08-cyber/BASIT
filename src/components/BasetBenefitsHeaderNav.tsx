@@ -67,33 +67,33 @@ export const BasetBenefitsHeaderNav: React.FC<BasetBenefitsHeaderNavProps> = ({
   return (
     <div className="space-y-3">
       {/* Top Status + Back Bar */}
-      <div className="rounded-2xl bg-gradient-to-r from-[#3B0764] via-[#4C1D95] to-[#5B21B6] p-2.5 shadow-sm flex flex-wrap items-center justify-between gap-2">
+      <div className="rounded-2xl bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] border border-[rgba(212,175,55,0.4)] p-2.5 shadow-md flex flex-wrap items-center justify-between gap-2">
         <button
           type="button"
           onClick={onBackHome}
-          className="min-h-[40px] px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-black flex items-center gap-1.5 cursor-pointer transition-colors"
+          className="min-h-[44px] px-3.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/15 text-[#FFFFFF] text-xs font-black flex items-center gap-1.5 cursor-pointer transition-colors"
         >
-          <BackIcon className="w-4 h-4 text-[#F5C451]" />
+          <BackIcon className="w-4 h-4 text-[#FFE875]" />
           <span>{isRtl ? 'الرئيسية' : 'Home'}</span>
         </button>
 
         <button
           type="button"
           onClick={() => onNavigateTab('baset_card')}
-          className={`min-h-[40px] px-3 py-1.5 rounded-xl text-[11px] font-black flex items-center gap-1.5 cursor-pointer transition-all ${
+          className={`min-h-[44px] px-3.5 py-1.5 rounded-xl text-[11px] font-black flex items-center gap-1.5 cursor-pointer transition-all max-w-full ${
             cardLoading
-              ? 'bg-white/15 text-[#EDE9FE]'
+              ? 'bg-white/15 text-[#FFFDF7]'
               : cardActivated
-                ? 'bg-[#F5C451] text-[#2A0E4D] shadow-xs'
-                : 'bg-[#2A1459] text-[#F5C451] border border-[#F5C451]/50 hover:bg-[#3B0764]'
+                ? 'bg-[linear-gradient(135deg,#FFE875,#FACC15,#D4AF37)] text-[#240046] shadow-xs'
+                : 'bg-[#1A052E] text-[#FFE875] border border-[rgba(212,175,55,0.55)] hover:bg-[#3B123F]'
           }`}
         >
           {cardActivated ? (
-            <ShieldCheck className="w-4 h-4 text-[#2A0E4D] shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-[#240046] shrink-0" />
           ) : (
-            <Lock className="w-3.5 h-3.5 text-[#F5C451] shrink-0" />
+            <Lock className="w-4 h-4 text-[#FFE875] shrink-0" />
           )}
-          <span className="truncate">
+          <span className="leading-tight text-start">
             {cardLoading
               ? isRtl
                 ? 'جاري التحقق من الكارت...'
@@ -109,11 +109,11 @@ export const BasetBenefitsHeaderNav: React.FC<BasetBenefitsHeaderNavProps> = ({
         </button>
       </div>
 
-      {/* 3-Destination Switcher Tabs on Calm Ivory Surface */}
+      {/* 3-Destination Switcher Tabs on Crisp Milky Cream Surface */}
       <div
         role="tablist"
         aria-label={isRtl ? 'وجهات برنامج مزايا كارت باسط العائلي' : 'BASET Family Benefits Destinations'}
-        className="grid grid-cols-3 gap-1.5 p-1.5 rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/15 dark:border-[#C084FC]/20 shadow-xs"
+        className="grid grid-cols-3 gap-1.5 p-1.5 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046]/85 border border-[rgba(212,175,55,0.4)] shadow-xs"
       >
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -125,14 +125,14 @@ export const BasetBenefitsHeaderNav: React.FC<BasetBenefitsHeaderNavProps> = ({
               aria-selected={active}
               type="button"
               onClick={() => onNavigateTab(tab.id)}
-              className={`min-h-[44px] px-2 py-2 rounded-xl text-[11px] font-black flex items-center justify-center gap-1.5 cursor-pointer transition-all min-w-0 ${
+              className={`min-h-[48px] px-1.5 py-2 rounded-xl text-[11px] font-black flex flex-col items-center justify-center gap-1 cursor-pointer transition-all min-w-0 leading-tight text-center ${
                 active
-                  ? 'bg-[#4C1D95] text-white shadow-xs'
-                  : 'text-[#4C1D95] dark:text-[#EDE9FE] hover:bg-[#F5F3FF] dark:hover:bg-[#241B38]'
+                  ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-[#FFFFFF] shadow-sm border border-[rgba(212,175,55,0.45)]'
+                  : 'text-[#3B123F] dark:text-[#FFFDF7] hover:bg-[#FFFDF7] dark:hover:bg-[#1A052E]'
               }`}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-[#F5C451]' : 'text-[#4C1D95] dark:text-[#F5C451]'}`} />
-              <span className="truncate">{isRtl ? tab.labelAr : tab.labelEn}</span>
+              <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-[#FFE875]' : 'text-[#5A189A] dark:text-[#FFE875]'}`} />
+              <span className="leading-tight break-words">{isRtl ? tab.labelAr : tab.labelEn}</span>
             </button>
           );
         })}

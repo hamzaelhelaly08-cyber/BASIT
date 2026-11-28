@@ -58,22 +58,40 @@ import {
   Phase1LoginView,
   type OtpCustomerSession,
 } from './components/Phase1LoginView';
-import { OwnerFinancialDashboard } from './components/OwnerFinancialDashboard';
+const OwnerFinancialDashboard = React.lazy(() =>
+  import('./components/OwnerFinancialDashboard').then((m) => ({
+    default: m.OwnerFinancialDashboard,
+  }))
+);
 
 const STRICT_OWNER_EMAIL = 'hamzaelhelaly08@gmail.com';
 
 const ROUTE_TITLES_AR: Record<ExtendedAppRoute, string> = {
   home: 'BASIT | باسط',
   sectors: 'القطاعات الستة',
-  marketplace: 'BASIT MARKETPLACE',
-  business: 'BASIT BUSINESS',
-  card: 'BASIT CARD',
-  healthy: 'BASIT HEALTHY',
-  factory: 'FACTORY SYSTEM',
-  owner_finance: 'OWNER FINANCIAL',
-  al_ain: 'عالم الزوار والمطاعم',
-  auth_gate: 'بوابة الدخول والصلاحيات',
-  owner_dashboard: 'الإدارة المالية للمالك',
+  marketplace: 'سوق باسط',
+  business: 'قطاع الأعمال',
+  card: 'بطاقة باسط',
+  healthy: 'باسط هيلثي',
+  factory: 'نظام المصانع',
+  owner_finance: 'إدارة المالك',
+  al_ain: 'عالم الزوار',
+  auth_gate: 'بوابة الدخول',
+  owner_dashboard: 'مالية المالك',
+};
+
+const ROUTE_TITLES_EN: Record<ExtendedAppRoute, string> = {
+  home: 'BASIT | باسط',
+  sectors: 'All 6 Sectors',
+  marketplace: 'Marketplace',
+  business: 'Business',
+  card: 'BASIT Card',
+  healthy: 'BASIT Healthy',
+  factory: 'Factory System',
+  owner_finance: 'Owner Finance',
+  al_ain: 'Al Ain World',
+  auth_gate: 'Access Gate',
+  owner_dashboard: 'Owner Treasury',
 };
 
 const WELCOME_VIDEO_SEEN_KEY = 'basit_welcome_video_seen_v1';
@@ -90,7 +108,7 @@ export default function App() {
   const [showSplash, setShowSplash] = useState<boolean>(readWelcomeVideoNeedsShow);
   const [replayingWelcome, setReplayingWelcome] = useState(false);
   const [aboutModalOpen, setAboutModalOpen] = useState(false);
-  const [lang] = useState<LanguageCode>('ar');
+  const [lang, setLang] = useState<LanguageCode>('ar');
   const [country] = useState<CountryCode>('EG');
   const [darkMode, setDarkMode] = useState(false);
 
@@ -147,11 +165,11 @@ export default function App() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.dir = 'rtl';
-    root.lang = 'ar';
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    root.lang = lang;
     if (darkMode) root.classList.add('dark');
     else root.classList.remove('dark');
-  }, [darkMode]);
+  }, [darkMode, lang]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -288,171 +306,175 @@ export default function App() {
   return (
     <OwnerCmsProvider>
       <div
-        dir="rtl"
-        className="min-h-dvh bg-[#FAF8F5] dark:bg-[#120D1D] text-[#1E1633] dark:text-[#FAF8F5] flex flex-col"
+        dir={lang === 'ar' ? 'rtl' : 'ltr'}
+        className="min-h-dvh w-full bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] flex justify-center"
       >
-        <MobileHeader
-          activeRoute={activeRoute}
-          titleAr={ROUTE_TITLES_AR[activeRoute]}
-          cartCount={totalCartCount}
-          darkMode={darkMode}
-          onToggleDarkMode={() => setDarkMode((prev) => !prev)}
-          onOpenCart={() => setCartOpen(true)}
-          onOpenAbout={() => setAboutModalOpen(true)}
-          onBack={activeRoute !== 'home' ? navigateBack : undefined}
-          onNavigate={navigateTo}
-        />
+        <div className="relative w-full max-w-[430px] mx-auto min-h-dvh bg-[#FFFDF7] dark:bg-[#1A052E] text-[#240046] dark:text-[#FFFDF7] flex flex-col shadow-2xl sm:border-x sm:border-[rgba(212,175,55,0.4)] overflow-x-clip">
+          <MobileHeader
+            activeRoute={activeRoute}
+            titleAr={ROUTE_TITLES_AR[activeRoute]}
+            titleEn={ROUTE_TITLES_EN[activeRoute]}
+            lang={lang}
+            cartCount={totalCartCount}
+            darkMode={darkMode}
+            onToggleLanguage={() => setLang((prev) => (prev === 'ar' ? 'en' : 'ar'))}
+            onToggleDarkMode={() => setDarkMode((prev) => !prev)}
+            onOpenCart={() => setCartOpen(true)}
+            onOpenAbout={() => setAboutModalOpen(true)}
+            onBack={activeRoute !== 'home' ? navigateBack : undefined}
+            onNavigate={navigateTo}
+          />
 
-        <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-24 md:pb-10">
-          {/* HOME SCREEN: Real Phase1HomeView + All 6 Sectors Launcher */}
-          {activeRoute === 'home' && (
-            <div className="space-y-8">
-              <Phase1HomeView
-                lang={lang}
-                country={country}
-                customLogoDataUrl={null}
-                onUploadLogo={() => {}}
-                isOwnerAdmin={isOwnerAdmin}
-                isGuestMode={!firebaseUser && !otpSession}
-                onNavigateSection={handleLegacySectionNavigate}
-                onOpenCateringModal={(modal, kitchenName) => {
-                  setPreselectedKitchenName(kitchenName);
-                  setActiveCateringModal(modal);
-                }}
-                onSelectMenu={(menu) => setSelectedMenu(menu)}
-              />
+          <main className="flex-1 w-full px-3.5 pt-4 pb-[calc(5.75rem+env(safe-area-inset-bottom,0px))]">
+            {/* HOME SCREEN: Real Phase1HomeView + All 6 Sectors Launcher */}
+            {activeRoute === 'home' && (
+              <div className="space-y-6">
+                <Phase1HomeView
+                  lang={lang}
+                  country={country}
+                  customLogoDataUrl={null}
+                  onUploadLogo={() => {}}
+                  isOwnerAdmin={isOwnerAdmin}
+                  isGuestMode={!firebaseUser && !otpSession}
+                  onNavigateSection={handleLegacySectionNavigate}
+                  onOpenCateringModal={(modal, kitchenName) => {
+                    setPreselectedKitchenName(kitchenName);
+                    setActiveCateringModal(modal);
+                  }}
+                  onSelectMenu={(menu) => setSelectedMenu(menu)}
+                />
 
-              {/* Direct Visual Launcher to All 6 Independent Sectors */}
-              <section aria-labelledby="six-sectors-grid" className="space-y-3 pb-4">
-                <div className="flex items-center justify-between gap-2">
-                  <div>
-                    <h2
-                      id="six-sectors-grid"
-                      className="text-base sm:text-lg font-black text-[#1E1633] dark:text-white"
+                {/* Direct Visual Launcher to All 6 Independent Sectors */}
+                <section aria-labelledby="six-sectors-grid" className="space-y-3 pb-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <div>
+                      <h2
+                        id="six-sectors-grid"
+                        className="text-sm font-black text-[#240046] dark:text-[#FFFDF7]"
+                      >
+                        {lang === 'ar' ? 'قطاعات منصة BASIT | باسط الستة' : 'BASIT 6 Independent Sectors'}
+                      </h2>
+                      <p className="text-[11px] font-medium text-[#4B148C] dark:text-[#FFFDF7]/75">
+                        {lang === 'ar' ? 'انتقال مباشر إلى الصفحة المستقلة لكل قطاع' : 'Direct access to each standalone sector'}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => navigateTo('sectors')}
+                      className="min-h-[44px] px-3 text-xs font-black text-[#5A189A] dark:text-[#FFE875] hover:underline cursor-pointer shrink-0 flex items-center"
                     >
-                      قطاعات منصة BASIT | باسط الستة
-                    </h2>
-                    <p className="text-xs text-[#5B5270] dark:text-slate-300">
-                      انتقال مباشر إلى الصفحة المستقلة لكل قطاع
-                    </p>
+                      {lang === 'ar' ? 'عرض الدليل' : 'Directory'}
+                    </button>
                   </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    {PHASE1_SECTORS.map((sector) => (
+                      <button
+                        key={sector.id}
+                        type="button"
+                        onClick={() => navigateTo(sector.id as SectorId)}
+                        className="group text-start rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] shadow-xs hover:shadow-md overflow-hidden flex flex-col cursor-pointer transition-all active:scale-[0.98]"
+                      >
+                        <SectorMediaImage
+                          src={sector.imageUrl}
+                          alt={sector.imageAltAr}
+                          fallbackTitle={sector.titleAr}
+                          iconName={sector.iconName}
+                          aspectClass="aspect-[4/3]"
+                        />
+                        <div className="p-2.5 flex-1 flex flex-col justify-between gap-2 w-full">
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between gap-1.5">
+                              <span className="font-latin text-[9.5px] font-black text-[#5A189A] dark:text-[#FFE875] leading-tight">
+                                {sector.codeEn}
+                              </span>
+                              <SectorIcon
+                                name={sector.iconName}
+                                className="w-4 h-4 text-[#D4AF37] shrink-0"
+                              />
+                            </div>
+                            <h3 className="text-xs font-black text-[#240046] dark:text-[#FFFDF7] leading-snug">
+                              {lang === 'ar' ? sector.titleAr : sector.codeEn}
+                            </h3>
+                            <p className="text-[10.5px] text-[#3B123F] dark:text-[#FFFDF7]/80 line-clamp-2 leading-snug">
+                              {sector.subtitleAr}
+                            </p>
+                          </div>
+                          <div className="pt-2 border-t border-[rgba(212,175,55,0.25)] flex items-center justify-between text-[11px] font-black text-[#5A189A] dark:text-[#FFE875]">
+                            <span>{lang === 'ar' ? 'فتح القطاع' : 'Open'}</span>
+                            <ArrowLeft className="w-3.5 h-3.5 text-[#D4AF37]" />
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* SECTORS HUB */}
+            {activeRoute === 'sectors' && (
+              <SectorsHubView
+                onNavigate={navigateTo}
+                onOpenAlAinWorld={() => navigateTo('al_ain')}
+                onOpenAuthGate={() => navigateTo('auth_gate')}
+                onOpenAbout={() => setAboutModalOpen(true)}
+              />
+            )}
+
+            {/* SECTOR 1: BASIT MARKETPLACE */}
+            {activeRoute === 'marketplace' && (
+              <FreshWorldStorefrontView
+                lang={lang}
+                currencyLabel={currencyLabel}
+                cartItems={cartItems}
+                onAddProductWithFly={(item) => handleAddToCart(item)}
+                onOpenCart={() => setCartOpen(true)}
+                onBackHome={() => navigateTo('home')}
+              />
+            )}
+
+            {/* SECTOR 2: BASIT BUSINESS */}
+            {activeRoute === 'business' && (
+              <div className="space-y-5 pb-6">
+                <div className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] shadow-xs">
                   <button
                     type="button"
-                    onClick={() => navigateTo('sectors')}
-                    className="min-h-[40px] px-3 text-xs font-extrabold text-[#4C1D95] dark:text-[#F5C451] hover:underline cursor-pointer shrink-0"
+                    onClick={() => {
+                      setBusinessTab('kitchens');
+                      setSelectedKitchenId(null);
+                    }}
+                    className={`min-h-[44px] px-1.5 py-1.5 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
+                      businessTab === 'kitchens'
+                        ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                        : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
+                    }`}
                   >
-                    عرض الدليل
+                    {lang === 'ar' ? 'المطابخ المركزية' : 'Central Kitchens'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBusinessTab('rfq')}
+                    className={`min-h-[44px] px-1.5 py-1.5 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
+                      businessTab === 'rfq'
+                        ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                        : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
+                    }`}
+                  >
+                    {lang === 'ar' ? 'عروض الأسعار' : 'Quotations'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBusinessTab('al_ain')}
+                    className={`min-h-[44px] px-1.5 py-1.5 rounded-xl text-[11px] leading-tight text-center font-black transition-colors cursor-pointer flex items-center justify-center ${
+                      businessTab === 'al_ain'
+                        ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white shadow-xs'
+                        : 'text-[#3B123F] dark:text-[#FFFDF7]/85'
+                    }`}
+                  >
+                    {lang === 'ar' ? 'مطاعم العين' : 'Al Ain Dining'}
                   </button>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                  {PHASE1_SECTORS.map((sector) => (
-                    <button
-                      key={sector.id}
-                      type="button"
-                      onClick={() => navigateTo(sector.id as SectorId)}
-                      className="group text-start rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-white/10 shadow-2xs hover:shadow-md overflow-hidden flex flex-col cursor-pointer transition-all active:scale-[0.99]"
-                    >
-                      <SectorMediaImage
-                        src={sector.imageUrl}
-                        alt={sector.imageAltAr}
-                        fallbackTitle={sector.titleAr}
-                        iconName={sector.iconName}
-                        aspectClass="aspect-[4/3]"
-                      />
-                      <div className="p-3.5 flex-1 flex flex-col justify-between gap-2 w-full">
-                        <div className="space-y-1">
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="font-latin text-[11px] font-extrabold text-[#4C1D95] dark:text-[#F5C451]">
-                              {sector.codeEn}
-                            </span>
-                            <SectorIcon
-                              name={sector.iconName}
-                              className="w-4 h-4 text-[#4C1D95] dark:text-[#F5C451]"
-                            />
-                          </div>
-                          <h3 className="text-sm font-black text-[#1E1633] dark:text-white">
-                            {sector.titleAr}
-                          </h3>
-                          <p className="text-xs text-[#5B5270] dark:text-slate-300 line-clamp-2">
-                            {sector.subtitleAr}
-                          </p>
-                        </div>
-                        <div className="pt-2 border-t border-[#4C1D95]/8 dark:border-white/8 flex items-center justify-between text-xs font-extrabold text-[#3B0764] dark:text-[#F5C451]">
-                          <span>فتح القطاع</span>
-                          <ArrowLeft className="w-4 h-4" />
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </section>
-            </div>
-          )}
-
-          {/* SECTORS HUB */}
-          {activeRoute === 'sectors' && (
-            <SectorsHubView
-              onNavigate={navigateTo}
-              onOpenAlAinWorld={() => navigateTo('al_ain')}
-              onOpenAuthGate={() => navigateTo('auth_gate')}
-              onOpenAbout={() => setAboutModalOpen(true)}
-            />
-          )}
-
-          {/* SECTOR 1: BASIT MARKETPLACE */}
-          {activeRoute === 'marketplace' && (
-            <FreshWorldStorefrontView
-              lang={lang}
-              currencyLabel={currencyLabel}
-              cartItems={cartItems}
-              onAddProductWithFly={(item) => handleAddToCart(item)}
-              onOpenCart={() => setCartOpen(true)}
-              onBackHome={() => navigateTo('home')}
-            />
-          )}
-
-          {/* SECTOR 2: BASIT BUSINESS */}
-          {activeRoute === 'business' && (
-            <div className="space-y-5 pb-8">
-              <div className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-white dark:bg-[#1B132B] border border-[#4C1D95]/12 dark:border-white/10 shadow-2xs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setBusinessTab('kitchens');
-                    setSelectedKitchenId(null);
-                  }}
-                  className={`min-h-[44px] px-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap ${
-                    businessTab === 'kitchens'
-                      ? 'bg-[#3B0764] text-white dark:bg-[#F5C451] dark:text-[#2A0548]'
-                      : 'text-[#5B5270] dark:text-slate-300'
-                  }`}
-                >
-                  المطابخ المركزية
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBusinessTab('rfq')}
-                  className={`min-h-[44px] px-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap ${
-                    businessTab === 'rfq'
-                      ? 'bg-[#3B0764] text-white dark:bg-[#F5C451] dark:text-[#2A0548]'
-                      : 'text-[#5B5270] dark:text-slate-300'
-                  }`}
-                >
-                  عروض الأسعار
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBusinessTab('al_ain')}
-                  className={`min-h-[44px] px-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap ${
-                    businessTab === 'al_ain'
-                      ? 'bg-[#3B0764] text-white dark:bg-[#F5C451] dark:text-[#2A0548]'
-                      : 'text-[#5B5270] dark:text-slate-300'
-                  }`}
-                >
-                  مطاعم العين
-                </button>
-              </div>
 
               {businessTab === 'kitchens' && (
                 <Phase1KitchensView
@@ -657,14 +679,22 @@ export default function App() {
           {/* OWNER FINANCIAL DASHBOARD (Strictly locked behind verified isOwnerAdmin) */}
           {activeRoute === 'owner_dashboard' && (
             isOwnerAdmin ? (
-              <OwnerFinancialDashboard
-                isRtl
-                isStrictAppOwner={isOwnerAdmin}
-                ownerEmail={firebaseUser?.email || otpSession?.email || STRICT_OWNER_EMAIL}
-                rfqSubmissions={rfqSubmissions}
-                onBackHome={() => navigateTo('owner_finance')}
-                onShowToast={showToast}
-              />
+              <React.Suspense
+                fallback={
+                  <div className="min-h-[40vh] flex items-center justify-center text-sm font-bold text-[#4C1D95] dark:text-[#F5C451]">
+                    جاري تحميل لوحة الإدارة المالية...
+                  </div>
+                }
+              >
+                <OwnerFinancialDashboard
+                  isRtl
+                  isStrictAppOwner={isOwnerAdmin}
+                  ownerEmail={firebaseUser?.email || otpSession?.email || STRICT_OWNER_EMAIL}
+                  rfqSubmissions={rfqSubmissions}
+                  onBackHome={() => navigateTo('owner_finance')}
+                  onShowToast={showToast}
+                />
+              </React.Suspense>
             ) : (
               <OwnerFinanceSectorGateView
                 lang={lang}
@@ -716,25 +746,24 @@ export default function App() {
           onShowToast={showToast}
         />
 
-        {/* Toast Notification */}
-        {toastMsg && (
-          <div className="fixed bottom-20 md:bottom-6 inset-x-4 sm:inset-x-auto sm:start-6 z-50 max-w-sm rounded-2xl bg-[#3B0764] text-white px-4 py-3 shadow-xl border border-[#F5C451]/40 flex items-center gap-2.5 text-xs font-bold">
-            <CheckCircle2 className="w-4 h-4 text-[#F5C451] shrink-0" />
-            <span>{toastMsg}</span>
-          </div>
-        )}
+          {/* Toast Notification (Positioned safely below header inside 430px shell) */}
+          {toastMsg && (
+            <div className="fixed top-[calc(4rem+env(safe-area-inset-top,0px))] inset-x-0 mx-auto max-w-[406px] px-3 z-50 pointer-events-none">
+              <div className="pointer-events-auto rounded-2xl bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] text-white px-4 py-3 shadow-2xl border border-[rgba(212,175,55,0.55)] flex items-center gap-2.5 text-xs font-bold">
+                <CheckCircle2 className="w-4 h-4 text-[#FFE875] shrink-0" />
+                <span>{toastMsg}</span>
+              </div>
+            </div>
+          )}
 
-        <footer className="hidden md:block border-t border-[#4C1D95]/10 dark:border-white/10 py-5 px-6 text-center text-xs font-semibold text-[#5B5270] dark:text-slate-400">
-          {getSectorById('marketplace').codeEn.split(' ')[0]} | باسط — الشركة الوطنية اللوجستية · المرحلة الأولى
-        </footer>
+          <BottomNavBar activeRoute={activeRoute} lang={lang} onNavigate={navigateTo} />
 
-        <BottomNavBar activeRoute={activeRoute} onNavigate={navigateTo} />
-
-        <AboutBasitModal
-          isOpen={aboutModalOpen}
-          onClose={() => setAboutModalOpen(false)}
-          onReplayWelcomeVideo={() => setReplayingWelcome(true)}
-        />
+          <AboutBasitModal
+            isOpen={aboutModalOpen}
+            onClose={() => setAboutModalOpen(false)}
+            onReplayWelcomeVideo={() => setReplayingWelcome(true)}
+          />
+        </div>
       </div>
     </OwnerCmsProvider>
   );

@@ -205,12 +205,12 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
     <>
       {/* 1) Operational Action Sheet Modal */}
       {activeModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
-          <div className="w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-t-[28px] sm:rounded-[28px] bg-white dark:bg-[#160F24] border border-[#62339A]/25 shadow-2xl">
+        <div className="fixed inset-0 z-50 bg-[#1A052E]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-2.5">
+          <div className="w-full max-w-[406px] max-h-[90vh] overflow-y-auto rounded-[28px] bg-[#FFFDF7] dark:bg-[#240046] border border-[rgba(212,175,55,0.45)] shadow-2xl">
             {/* Header */}
-            <div className="sticky top-0 z-10 px-4 py-3.5 bg-gradient-to-r from-[#2D0E4E] via-[#4A2378] to-[#62339A] text-white flex items-center justify-between gap-2">
+            <div className="sticky top-0 z-10 px-4 py-3.5 bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] border-b border-[rgba(212,175,55,0.4)] text-[#FFFFFF] flex items-center justify-between gap-2">
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-[#FFC928] text-[#22093A] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[linear-gradient(135deg,#FFE875,#D4AF37)] text-[#240046] flex items-center justify-center shrink-0">
                   {activeModal === 'events_conference_quote' ? (
                     <PartyPopper className="w-5 h-5" />
                   ) : activeModal === 'courier_apply' ? (
@@ -224,10 +224,10 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
                   )}
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-xs sm:text-sm font-black text-white leading-snug">
+                  <h3 className="text-xs font-black text-[#FFFFFF] leading-snug">
                     {modalTitle}
                   </h3>
-                  <p className="text-[10px] font-bold text-[#FFE066]">
+                  <p className="text-[10px] font-bold text-[#FFE875]">
                     {activeModal === 'kitchen_partner_apply'
                       ? isRtl
                         ? 'مراجعة واعتماد الإدارة العليا: hamzaelhelaly08@gmail.com'
@@ -242,9 +242,9 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
                 type="button"
                 onClick={onCloseModal}
                 aria-label={isRtl ? 'إغلاق' : 'Close'}
-                className="min-h-[44px] min-w-[44px] rounded-xl bg-white/15 hover:bg-white/25 flex items-center justify-center cursor-pointer shrink-0"
+                className="min-h-[44px] min-w-[44px] rounded-xl bg-white/15 hover:bg-white/25 border border-white/15 flex items-center justify-center cursor-pointer shrink-0"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 text-[#FFFFFF]" />
               </button>
             </div>
 
@@ -284,13 +284,13 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
               ) : (
                 <form onSubmit={handleSubmitModal} className="space-y-3 text-xs">
                   {activeModal === 'kitchen_partner_apply' && (
-                    <div className="p-3 rounded-2xl bg-gradient-to-r from-[#2D0E4E] to-[#4A2378] text-white flex items-center justify-between gap-2">
+                    <div className="p-3 rounded-2xl bg-[linear-gradient(135deg,#240046,#4B148C)] border border-[rgba(212,175,55,0.45)] text-[#FFFFFF] flex items-center justify-between gap-2">
                       <div className="space-y-0.5">
-                        <div className="text-[11px] font-black text-[#FFC928] flex items-center gap-1.5">
-                          <ShieldCheck className="w-4 h-4" />
+                        <div className="text-[11px] font-black text-[#FFE875] flex items-center gap-1.5">
+                          <ShieldCheck className="w-4 h-4 text-[#FFE875]" />
                           <span>{isRtl ? 'قناة اعتماد المطابخ المركزية' : 'Central Kitchen Approval Channel'}</span>
                         </div>
-                        <p className="text-[10px] font-bold text-white/90" dir="ltr">
+                        <p className="text-[10px] font-bold text-[#FFFDF7]/90" dir="ltr">
                           hamzaelhelaly08@gmail.com
                         </p>
                       </div>
@@ -566,9 +566,9 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
 
                   <button
                     type="submit"
-                    className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[#FFDF66] via-[#FFC928] to-[#D97706] text-[#22093A] text-sm font-black shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                    className="min-h-[48px] w-full rounded-2xl bg-[linear-gradient(135deg,#FFE875,#FACC15,#D4AF37)] text-[#240046] text-sm font-black shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
                   >
-                    <Sparkles className="w-4 h-4" />
+                    <Sparkles className="w-4 h-4 text-[#240046]" />
                     <span>{isRtl ? 'إرسال الطلب الآن' : 'Submit Request'}</span>
                   </button>
                 </form>
@@ -580,39 +580,39 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
 
       {/* 2) Menu Detail Sheet (Strictly hides meal prices when isGuestMode === true) */}
       {selectedMenu && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
-          <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-t-[28px] sm:rounded-[28px] bg-white dark:bg-[#160F24] border border-[#62339A]/25 shadow-2xl">
-            <div className="relative h-44 w-full overflow-hidden bg-[#22093A]">
+        <div className="fixed inset-0 z-50 bg-[#1A052E]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-2.5">
+          <div className="w-full max-w-[406px] max-h-[90vh] overflow-y-auto rounded-[28px] bg-[#FFFDF7] dark:bg-[#240046] border border-[rgba(212,175,55,0.45)] shadow-2xl">
+            <div className="relative h-44 w-full overflow-hidden bg-[#1A052E]">
               <img
                 src={selectedMenu.imageUrl}
                 alt={isRtl ? selectedMenu.titleAr : selectedMenu.titleEn}
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#160F24] via-black/40 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,#1A052E,rgba(26,5,46,0.45),transparent)]" />
               <button
                 type="button"
                 onClick={onCloseMenu}
                 aria-label={isRtl ? 'إغلاق المنيو' : 'Close menu'}
-                className="absolute top-3 end-3 min-h-[44px] min-w-[44px] rounded-full bg-black/50 text-white flex items-center justify-center cursor-pointer"
+                className="absolute top-3 end-3 min-h-[44px] min-w-[44px] rounded-full bg-[#1A052E]/70 border border-[rgba(212,175,55,0.45)] text-[#FFFFFF] flex items-center justify-center cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
-              <div className="absolute bottom-3 inset-x-4 text-white">
-                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#FFC928] text-[#22093A] text-[10px] font-black mb-1">
+              <div className="absolute bottom-3 inset-x-4 text-[#FFFFFF]">
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[linear-gradient(135deg,#FFE875,#D4AF37)] text-[#240046] text-[10px] font-black mb-1">
                   #{selectedMenu.order} · {isRtl ? selectedMenu.clientTierNoteAr : selectedMenu.clientTierNoteEn}
                 </span>
-                <h3 className="text-base sm:text-lg font-black">
+                <h3 className="text-base font-black text-[#FFFFFF]">
                   {isRtl ? selectedMenu.titleAr : selectedMenu.titleEn}
                 </h3>
               </div>
             </div>
 
-            <div className="p-4 sm:p-5 space-y-4">
+            <div className="p-4 space-y-4">
               {isGuestMode && (
-                <div className="p-3 rounded-2xl bg-[#FAF8F5] dark:bg-[#1B132B] border border-[#E6E0F5] dark:border-[#3B0764]/50 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 text-xs font-black text-[#3B0764] dark:text-[#F5C451]">
-                    <Lock className="w-4 h-4 shrink-0" />
+                <div className="p-3 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#1A052E] border border-[rgba(212,175,55,0.4)] flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 text-xs font-black text-[#5A189A] dark:text-[#FFE875]">
+                    <Lock className="w-4 h-4 text-[#D4AF37] shrink-0" />
                     <span>
                       {isRtl
                         ? 'الأسعار مخفية للزوار — سجّل أو اطلب عرض سعر مخصص'
@@ -626,7 +626,7 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
                         onCloseMenu();
                         onOpenAuthGate();
                       }}
-                      className="min-h-[36px] px-3 py-1 rounded-xl bg-[#62339A] text-white text-[10px] font-black shrink-0 cursor-pointer"
+                      className="min-h-[44px] px-3 py-1.5 rounded-xl bg-[linear-gradient(135deg,#5A189A,#4B148C)] text-[#FFFFFF] text-[11px] font-black shrink-0 cursor-pointer"
                     >
                       {isRtl ? 'تسجيل' : 'Register'}
                     </button>
@@ -635,21 +635,21 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
               )}
 
               <div className="space-y-2">
-                <h4 className="text-xs font-black text-[#62339A] dark:text-[#FFC928]">
+                <h4 className="text-xs font-black text-[#5A189A] dark:text-[#FFE875]">
                   {isRtl ? 'مكونات وبنود المنيو المعتمدة:' : 'Approved Menu Highlights:'}
                 </h4>
                 {(isRtl ? selectedMenu.sampleDishesAr : selectedMenu.sampleDishesEn).map((dish, idx) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-2xl bg-[#F7F5FA] dark:bg-[#221836] border border-[#E6E0F5] dark:border-[#62339A]/30 flex items-center justify-between gap-2"
+                    className="p-3 rounded-2xl bg-[rgba(255,255,255,0.95)] dark:bg-[#1A052E] border border-[rgba(212,175,55,0.35)] flex items-center justify-between gap-2"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <UtensilsCrossed className="w-4 h-4 text-[#62339A] dark:text-[#FFC928] shrink-0" />
-                      <span className="text-xs font-extrabold text-[#292333] dark:text-white leading-snug">
+                      <UtensilsCrossed className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                      <span className="text-xs font-extrabold text-[#240046] dark:text-[#FFFFFF] leading-snug">
                         {dish}
                       </span>
                     </div>
-                    <span className="shrink-0 px-2.5 py-1 rounded-lg bg-white dark:bg-[#140D22] text-[10px] font-black text-[#62339A] dark:text-[#FFC928] border border-[#62339A]/20">
+                    <span className="shrink-0 px-2.5 py-1 rounded-lg bg-[#FFFDF7] dark:bg-[#240046] text-[10px] font-black text-[#5A189A] dark:text-[#FFE875] border border-[rgba(212,175,55,0.35)]">
                       {isGuestMode
                         ? isRtl
                           ? 'اطلب عرض سعر'
@@ -662,7 +662,7 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
                 ))}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-2 gap-2 pt-1">
                 <button
                   type="button"
                   onClick={() => {
@@ -674,15 +674,15 @@ export const AndroidCateringModals: React.FC<AndroidCateringModalsProps> = ({
                         : `Selected "${selectedMenu.titleEn}" for quotation.`
                     );
                   }}
-                  className="min-h-[46px] px-4 rounded-2xl bg-gradient-to-r from-[#FFDF66] to-[#FFC928] text-[#22093A] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="min-h-[46px] px-3 rounded-2xl bg-[linear-gradient(135deg,#FFE875,#FACC15,#D4AF37)] text-[#240046] text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <FileText className="w-4 h-4" />
-                  <span>{isRtl ? 'اختيار وطلب عرض سعر' : 'Select for Quote'}</span>
+                  <FileText className="w-4 h-4 shrink-0" />
+                  <span>{isRtl ? 'طلب عرض سعر' : 'Select for Quote'}</span>
                 </button>
                 <button
                   type="button"
                   onClick={onCloseMenu}
-                  className="min-h-[46px] px-4 rounded-2xl bg-[#F7F5FA] dark:bg-[#221836] text-[#292333] dark:text-white border border-[#E6E0F5] dark:border-[#62339A]/35 text-xs font-black cursor-pointer"
+                  className="min-h-[46px] px-3 rounded-2xl bg-[#FFFFFF] dark:bg-[#1A052E] text-[#240046] dark:text-[#FFFDF7] border border-[rgba(212,175,55,0.4)] text-xs font-black cursor-pointer"
                 >
                   {isRtl ? 'إغلاق' : 'Close'}
                 </button>

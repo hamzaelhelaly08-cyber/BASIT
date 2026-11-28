@@ -168,7 +168,7 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
   };
 
   const renderEmployee10Card = () => (
-    <div className="rounded-[28px] bg-gradient-to-br from-[#62339A]/95 via-[#4A2378]/95 to-[#1E293B]/95 backdrop-blur-xl text-white p-5 sm:p-6 border border-white/30 shadow-2xl shadow-[#62339A]/25 space-y-4">
+    <div className="rounded-[24px] bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] text-white p-4 sm:p-5 border border-[rgba(212,175,55,0.45)] shadow-xl space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-2xl basit-glass-btn-yellow flex items-center justify-center shrink-0">
@@ -329,9 +329,9 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
               ? onNavigateSection('al_ain_restaurants')
               : onNavigateSection('home')
           }
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full basit-glass-pill hover:border-[#62339A] text-xs font-extrabold text-[#292333] dark:text-white cursor-pointer whitespace-nowrap"
+          className="min-h-[44px] inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.45)] hover:border-[#D4AF37] text-xs font-extrabold text-[#240046] dark:text-[#FFFDF7] cursor-pointer whitespace-nowrap"
         >
-          <BackIcon className="w-4 h-4 text-[#62339A] dark:text-[#FFC928]" />
+          <BackIcon className="w-4 h-4 text-[#5A189A] dark:text-[#FFE875]" />
           <span>
             {activeRestaurant
               ? isRtl
@@ -341,13 +341,13 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
           </span>
         </button>
 
-        <div className="text-xs font-bold text-[#292333] dark:text-[#FFC928] basit-glass-pill px-4 py-2 rounded-full">
+        <div className="min-h-[44px] inline-flex items-center text-xs font-bold text-[#240046] dark:text-[#FFE875] bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] border border-[rgba(212,175,55,0.4)] px-3.5 py-2 rounded-full">
           {isRtl ? EXPERIMENTAL_TAG_AR : EXPERIMENTAL_TAG_EN}
         </div>
       </div>
 
-      {/* Horizontal Navigation */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1.5">
+      {/* Wrapped Sub-Navigation (Zero Off-Screen Clipping inside 430px Shell) */}
+      <div className="flex flex-wrap items-center gap-1.5 pb-1">
         {subTabs.map((tab) => {
           const selected =
             activeSection === tab.id ||
@@ -357,10 +357,10 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
               key={tab.id}
               type="button"
               onClick={() => onNavigateSection(tab.id)}
-              className={`px-4 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer ${
+              className={`min-h-[44px] px-3 py-2 rounded-xl text-[11px] font-black leading-tight text-center transition-all cursor-pointer flex items-center justify-center ${
                 selected
-                  ? 'basit-glass-btn-primary text-white'
-                  : 'basit-glass-pill text-[#292333] dark:text-[#E2E8F0] hover:border-[#62339A]'
+                  ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white border border-[rgba(212,175,55,0.45)] shadow-xs'
+                  : 'bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] text-[#240046] dark:text-[#FFFDF7] border border-[rgba(212,175,55,0.4)] hover:border-[#D4AF37]'
               }`}
             >
               {isRtl ? tab.ar : tab.en}
@@ -903,7 +903,7 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
           </div>
 
           {/* Restaurant Filter Chips */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          <div className="flex flex-wrap items-center gap-1.5 pb-1">
             {(
               [
                 ['all', isRtl ? `كل المطاعم (${AL_AIN_RESTAURANTS.length})` : `All Dining (${AL_AIN_RESTAURANTS.length})`],
@@ -915,10 +915,10 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
                 key={key}
                 type="button"
                 onClick={() => setRestaurantFilter(key)}
-                className={`min-h-[40px] px-4 py-1.5 rounded-full text-xs font-extrabold whitespace-nowrap cursor-pointer transition-all ${
+                className={`min-h-[44px] px-3 py-2 rounded-xl text-[11px] font-black cursor-pointer transition-all flex items-center justify-center ${
                   restaurantFilter === key
-                    ? 'basit-glass-btn-primary text-white'
-                    : 'basit-glass-pill text-[#292333] dark:text-[#F7F5FA] hover:border-[#62339A]'
+                    ? 'bg-[linear-gradient(135deg,#5A189A,#4B148C,#240046)] text-white border border-[rgba(212,175,55,0.45)] shadow-xs'
+                    : 'bg-[rgba(255,255,255,0.95)] dark:bg-[#240046] text-[#240046] dark:text-[#FFFDF7] border border-[rgba(212,175,55,0.4)] hover:border-[#D4AF37]'
                 }`}
               >
                 {label}
@@ -966,10 +966,10 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
                           targetSection: `al_ain_restaurant:${r.id}`,
                         });
                       }}
-                      className="absolute top-3 end-3 z-10 min-w-[40px] min-h-[40px] rounded-full bg-white/95 dark:bg-[#1F172F]/95 text-[#62339A] dark:text-[#FFC928] shadow-md flex items-center justify-center cursor-pointer transition-transform active:scale-90"
+                      className="absolute top-3 end-3 z-10 min-w-[44px] min-h-[44px] rounded-full bg-white/95 dark:bg-[#1A052E]/95 text-[#5A189A] dark:text-[#FFE875] border border-[rgba(212,175,55,0.45)] shadow-md flex items-center justify-center cursor-pointer transition-transform active:scale-90"
                       aria-label={isRtl ? 'حفظ في المفضلة' : 'Toggle Favorite'}
                     >
-                      <Heart className={`w-4 h-4 ${isFav ? 'fill-[#62339A] dark:fill-[#FFC928]' : ''}`} />
+                      <Heart className={`w-4 h-4 ${isFav ? 'fill-[#5A189A] dark:fill-[#FFE875]' : ''}`} />
                     </button>
                   )}
 
@@ -1470,7 +1470,7 @@ export const AlAinVisitorWorldView: React.FC<AlAinVisitorWorldViewProps> = ({
       {/* 8) DISCOUNT VOUCHERS SYSTEM (9 CATEGORIES) */}
       {activeSection === 'al_ain_coupons' && (
         <div className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-[28px] bg-gradient-to-r from-[#4A2378]/95 via-[#62339A]/95 to-[#1F172F]/95 backdrop-blur-xl text-white border border-white/25 shadow-xl space-y-2">
+          <div className="p-5 sm:p-6 rounded-[24px] bg-[linear-gradient(135deg,#240046,#4B148C,#1A052E)] text-white border border-[rgba(212,175,55,0.45)] shadow-xl space-y-2">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-4">
                 <Service3DIcon iconKey="coupon" size="md" />

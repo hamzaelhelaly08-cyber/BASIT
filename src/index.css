@@ -4,20 +4,28 @@
 :root {
   --font-arabic: 'Cairo', system-ui, sans-serif;
   --font-latin: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --basit-purple-deep: #3B0764;
-  --basit-purple: #4C1D95;
-  --basit-purple-royal: #5B21B6;
-  --basit-purple-light: #C4B5FD;
-  --basit-purple-soft: #EDE9FE;
-  --basit-purple-mist: #F5F3FF;
-  --basit-gold-bright: #F5C451;
+
+  /* Royal Purple & Neon sRGB Palette */
+  --basit-purple-neon: #A855F7;
+  --basit-purple-vivid: #852BEB;
+  --basit-purple: #5A189A;
+  --basit-purple-dark: #4B148C;
+  --basit-purple-deep: #240046;
+  --basit-purple-edge: #1A052E;
+  --basit-purple-icon: #3B123F;
+
+  /* Luxury Gold sRGB Palette */
+  --basit-gold-bright: #FFE875;
+  --basit-gold-yellow: #FACC15;
   --basit-gold: #EAB308;
-  --basit-gold-rich: #D97706;
-  --basit-ivory: #FAF8F5;
-  --basit-ivory-card: #FFFFFF;
-  --basit-ink: #1E1633;
-  --basit-muted: #5B5270;
-  --basit-border: rgba(76, 29, 149, 0.12);
+  --basit-gold-classic: #D4AF37;
+
+  /* Pure & Milky White sRGB Palette */
+  --basit-white: #FFFFFF;
+  --basit-ivory: #FFFDF7;
+  --basit-ink: #240046;
+  --basit-muted: #4B148C;
+  --basit-border: rgba(212, 175, 55, 0.4);
 }
 
 html {
@@ -28,15 +36,15 @@ html {
 
 body {
   font-family: var(--font-arabic);
-  background-color: var(--basit-ivory);
-  color: var(--basit-ink);
+  background-color: #FFFDF7;
+  color: #240046;
   overflow-x: clip;
   min-height: 100dvh;
 }
 
 .dark body {
-  background-color: #120D1D;
-  color: #FAF8F5;
+  background-color: #1A052E;
+  color: #FFFDF7;
 }
 
 .font-latin,
@@ -61,69 +69,69 @@ a,
 }
 
 /* =========================================================
-   BASIT | باسط — IVORY WHITE, ROYAL PURPLE & SELECTIVE GOLD
+   BASIT | باسط — EXPLICIT sRGB SURFACES & GOLD BORDERS
    ========================================================= */
 .basit-liquid-glass,
 .basit-glass-card,
 .basit-porcelain-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(76, 29, 149, 0.12);
-  box-shadow: 0 8px 24px -12px rgba(30, 22, 51, 0.12);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 26px -12px rgba(36, 0, 70, 0.14);
 }
 
 .dark .basit-liquid-glass,
 .dark .basit-glass-card,
 .dark .basit-porcelain-card {
-  background: #1B132B;
-  border: 1px solid rgba(196, 181, 253, 0.18);
-  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.55);
+  background: rgba(36, 0, 70, 0.92);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.6);
 }
 
 .basit-glass-tile {
-  background: #FFFFFF;
-  border: 1px solid rgba(76, 29, 149, 0.11);
-  box-shadow: 0 4px 16px -8px rgba(30, 22, 51, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(90, 24, 154, 0.14);
+  box-shadow: 0 4px 16px -8px rgba(36, 0, 70, 0.12);
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .basit-glass-tile:hover {
   transform: translateY(-1px);
-  border-color: rgba(76, 29, 149, 0.28);
-  box-shadow: 0 10px 24px -10px rgba(76, 29, 149, 0.18);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 10px 24px -10px rgba(90, 24, 154, 0.2);
 }
 
 .dark .basit-glass-tile {
-  background: #1B132B;
-  border: 1px solid rgba(196, 181, 253, 0.16);
-  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.5);
+  background: rgba(36, 0, 70, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.55);
 }
 
 .basit-glass-pill {
-  background: #FAF8F5;
-  border: 1px solid rgba(76, 29, 149, 0.16);
-  box-shadow: 0 2px 8px -4px rgba(30, 22, 51, 0.08);
+  background: #FFFDF7;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 2px 8px -4px rgba(36, 0, 70, 0.1);
 }
 
 .dark .basit-glass-pill {
-  background: #231938;
-  border: 1px solid rgba(196, 181, 253, 0.22);
+  background: #240046;
+  border: 1px solid rgba(212, 175, 55, 0.45);
 }
 
 .basit-glass-search {
   background: #FFFFFF;
-  border: 1.5px solid rgba(76, 29, 149, 0.2);
-  box-shadow: 0 4px 14px -6px rgba(30, 22, 51, 0.08);
+  border: 1.5px solid rgba(90, 24, 154, 0.25);
+  box-shadow: 0 4px 14px -6px rgba(36, 0, 70, 0.1);
 }
 
 .dark .basit-glass-search {
-  background: #1B132B;
-  border: 1.5px solid rgba(196, 181, 253, 0.25);
+  background: #240046;
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
 }
 
 .basit-glass-btn-primary {
-  background: linear-gradient(135deg, #5B21B6 0%, #4C1D95 55%, #3B0764 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 8px 18px -6px rgba(59, 7, 100, 0.36);
+  background: linear-gradient(135deg, #5A189A 0%, #4B148C 55%, #240046 100%);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 18px -6px rgba(36, 0, 70, 0.42);
   color: #FFFFFF;
   transition: filter 0.18s ease, transform 0.18s ease;
 }
@@ -133,10 +141,10 @@ a,
 }
 
 .basit-glass-btn-yellow {
-  background: linear-gradient(135deg, #F5C451 0%, #EAB308 100%);
-  border: 1px solid rgba(217, 119, 6, 0.28);
-  box-shadow: 0 8px 20px -8px rgba(217, 119, 6, 0.42);
-  color: #2A1459;
+  background: linear-gradient(135deg, #FFE875 0%, #FACC15 55%, #D4AF37 100%);
+  border: 1px solid rgba(212, 175, 55, 0.75);
+  box-shadow: 0 8px 20px -8px rgba(212, 175, 55, 0.5);
+  color: #240046;
   transition: filter 0.18s ease, transform 0.18s ease;
 }
 
@@ -145,14 +153,14 @@ a,
 }
 
 .basit-glass-icon-halo {
-  background: #FAF8F5;
-  border: 1px solid rgba(76, 29, 149, 0.14);
-  box-shadow: 0 4px 12px -4px rgba(30, 22, 51, 0.1);
+  background: #FFFDF7;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 12px -4px rgba(36, 0, 70, 0.12);
 }
 
 .dark .basit-glass-icon-halo {
-  background: #231938;
-  border: 1px solid rgba(196, 181, 253, 0.22);
+  background: #240046;
+  border: 1px solid rgba(212, 175, 55, 0.45);
 }
 
 .pt-safe {
@@ -181,20 +189,20 @@ a,
   width: 20px;
   height: 20px;
   border-radius: 9999px;
-  background-color: #FAF8F5;
+  background-color: #FFFDF7;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
 }
 .dark .ce-coupon-notch::before,
 .dark .ce-coupon-notch::after {
-  background-color: #120D1D;
+  background-color: #1A052E;
 }
 .ce-coupon-notch::before {
-  left: -10px;
+  inset-inline-start: -10px;
 }
 .ce-coupon-notch::after {
-  right: -10px;
+  inset-inline-end: -10px;
 }
 
 @media (prefers-reduced-motion: reduce) {
