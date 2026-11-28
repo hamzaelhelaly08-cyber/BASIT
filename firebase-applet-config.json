@@ -3,6 +3,7 @@
   "appId": "1:154986224148:web:e5ca5cac8a9db5e29b2501",
   "apiKey": "AIzaSyD0wEg0PGhTNk4j2ttO7V-DCWD3NCV7WFQ",
   "authDomain": "velvety-network-514317-n3.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-fe2daff7-60da-40ed-a593-a5f97707f883",
   "storageBucket": "velvety-network-514317-n3.firebasestorage.app",
   "messagingSenderId": "154986224148",
   "measurementId": "",

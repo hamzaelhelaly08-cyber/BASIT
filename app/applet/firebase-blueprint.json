@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "RfqSubmission": {
+      "description": "Customer and corporate RFQ submissions for catering, central kitchens, and seasonal boxes",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "type": { "type": "string", "maxLength": 32 },
+        "organizationOrKitchenName": { "type": "string", "maxLength": 150 },
+        "contactName": { "type": "string", "maxLength": 100 },
+        "country": { "type": "string", "maxLength": 10 },
+        "dialCode": { "type": "string", "maxLength": 8 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 150 },
+        "serviceCategory": { "type": "string", "maxLength": 100 },
+        "targetKitchen": { "type": "string", "maxLength": 100 },
+        "estimatedMealsPerDay": { "type": "string", "maxLength": 30 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "type", "contactName", "phone"]
+    },
+    "BasetCardRecord": {
+      "description": "BASIT Card loyalty and employee 10% discount card record",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "cardHolderName": { "type": "string", "maxLength": 100 },
+        "employeeCode": { "type": "string", "maxLength": 50 },
+        "employerName": { "type": "string", "maxLength": 100 },
+        "activated": { "type": "boolean" },
+        "tier": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "cardHolderName", "activated"]
+    },
+    "BasetRedemption": {
+      "description": "Redemption history for BASIT Card discounts and benefits",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "cardId": { "type": "string", "maxLength": 64 },
+        "merchantName": { "type": "string", "maxLength": 100 },
+        "discountAmount": { "type": "number" },
+        "redeemedAt": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "cardId", "merchantName"]
+    },
+    "User": {
+      "description": "Platform user profiles and roles",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "paths": {
+      "/rfqSubmissions/{rfqId}": {
+        "schema": "RfqSubmission",
+        "description": "RFQs and quotation requests submitted by users and corporate clients"
+      },
+      "/basetCards/{cardId}": {
+        "schema": "BasetCardRecord",
+        "description": "BASIT Card activation and profile records"
+      },
+      "/redemptions/{redemptionId}": {
+        "schema": "BasetRedemption",
+        "description": "Card benefit and discount redemptions"
+      },
+      "/users/{userId}": {
+        "schema": "User",
+        "description": "Registered user accounts and roles"
+      }
+    }
+  }
+}

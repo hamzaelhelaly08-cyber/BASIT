@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions for auth & roles
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner() {
+      return isAuthenticated() && 
+        (request.auth.token.email == 'hamzaelhelaly08@gmail.com' || request.auth.uid == 'hamzaelhelaly08@gmail.com');
+    }
+
+    // Test connection probe
+    match /test/connection {
+      allow read, write: if true;
+    }
+
+    // RFQ Submissions collection
+    match /rfqSubmissions/{rfqId} {
+      allow read: if isAuthenticated();
+      allow create: if request.resource.data.id is string
+                    && request.resource.data.contactName is string
+                    && request.resource.data.phone is string
+                    && request.resource.data.id.size() <= 64
+                    && request.resource.data.contactName.size() <= 100
+                    && request.resource.data.phone.size() <= 30;
+      allow update, delete: if isOwner();
+    }
+
+    // Baset Cards collection
+    match /basetCards/{cardId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && 
+        (request.resource.data.cardHolderName is string && request.resource.data.cardHolderName.size() <= 100);
+      allow delete: if isOwner();
+    }
+
+    // Redemptions collection
+    match /redemptions/{redemptionId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.cardId is string;
+      allow update, delete: if isOwner();
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read, write: if isAuthenticated() && (request.auth.uid == userId || isOwner());
+    }
+  }
+}
